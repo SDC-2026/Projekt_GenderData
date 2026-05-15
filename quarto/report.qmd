@@ -1,0 +1,400 @@
+---
+title: "LGBTQ+ Representation in Television Series"
+author:
+  - Arina Rukina
+  - Leila Osman
+  - Nadja Saleh
+  - Renata Figueroa
+format:
+  html:
+    toc: true
+    theme: cosmo
+execute:
+  echo: true
+  warning: false
+  message: false
+jupyter: python3
+---
+
+# Introduction
+
+LGBTQ+ representation in television and streaming media has become increasingly visible in recent years. Television series not only reflect social developments but also influence public perception of gender and sexuality. Because of this, analyzing LGBTQ+ representation in media is relevant for understanding broader cultural trends.
+
+This project investigates LGBTQ+ characters in dramatic television series from the 2020s. The project combines automated data extraction, data cleaning, keyword-based label detection, and manual review in order to build a structured dataset of LGBTQ+ television characters.
+
+The project also demonstrates how computational methods and reproducible data pipelines can be used for media and gender studies research.
+
+# Research Question
+
+The central research question of this project is:
+
+> Which LGBTQ+ identities are represented most frequently in dramatic television series of the 2020s?
+
+Additional questions include:
+
+- Which identities appear most often?
+
+- Which identities are underrepresented?
+
+- How effective is automatic identity classification using text-based methods?
+
+# Data Source
+
+The dataset is based on the following Wikipedia page:
+
+https://en.wikipedia.org/wiki/List_of_dramatic_television_series_with_LGBTQ_characters:_2020s
+
+The table from Wikipedia was transformed into a structured CSV dataset containing the following columns:
+
+- Year
+
+- Series
+
+- Network
+
+- Character
+
+- Actor
+
+- Notes
+
+The Notes column contains textual descriptions of the characters and their relationships, which were later used for automatic label detection.
+
+# Project Structure
+
+The project repository is organized as follows:
+
+```text
+
+Projekt_GenderData/
+
+│
+
+├── data/
+
+│   ├── raw/
+
+│   └── processed/
+
+│
+
+├── scripts/
+
+│   ├── data_extraction.py
+
+│   ├── data_enrichment_plus.py
+
+│   ├── merge_final_data.py
+
+│   └── visualize_labels.py
+
+│
+
+├── quarto/
+
+│   └── report.qmd
+
+│
+
+├── requirements.txt
+
+└── README.md
+```
+
+# Data Collection
+
+The first step of the project involved collecting data from Wikipedia.
+
+The dataset was based on the Wikipedia page:
+
+https://en.wikipedia.org/wiki/List_of_dramatic_television_series_with_LGBTQ_characters:_2020s
+
+The table from this page contains LGBTQ+ characters from dramatic television series released during the 2020s.
+
+The table was extracted and transformed into a structured CSV file using Python.
+
+The resulting dataset included the following columns:
+
+- Year
+- Series
+- Network
+- Character
+- Actor
+- Notes
+
+The raw dataset was saved as:
+
+```text
+lgbtq_series_wiki_table.csv
+``` 
+
+# Data Cleaning
+
+Before the analysis could begin, the dataset needed to be cleaned and standardized.
+
+The raw Wikipedia table contained several formatting inconsistencies, citation markers, and additional text elements that were not useful for the analysis.
+
+The following preprocessing steps were performed:
+
+- Removal of Wikipedia citation markers such as `[1]`
+- Removal of bracketed information such as `(season 2)`
+- Cleaning and normalization of character names
+- Standardization of text formatting
+- Removal of unnecessary whitespace
+
+For example, the following character name:
+
+```text
+TK Strand[1] (season 2)
+```
+
+# Data Enrichment
+
+After cleaning the dataset, the next step involved enriching the data with LGBTQ+ identity labels.
+
+The project used a rule-based text classification approach implemented in Python.
+
+The script analyzed the content of the `Notes` column and searched for keywords and relationship descriptions associated with LGBTQ+ identities.
+
+Regular expressions (regex) were used to detect patterns such as:
+
+- gay
+- lesbian
+- bisexual
+- transgender
+- queer
+- non-binary
+- pansexual
+- asexual
+
+For example, descriptions such as:
+
+```text
+Rachel and Dana are in a romantic relationship.
+X and Y are lovers.
+```
+
+# Manual Review
+
+Although many LGBTQ+ identities could be detected automatically, some character descriptions remained ambiguous or incomplete.
+
+In these cases, the automatic classification system assigned the label:
+
+```text
+[MANUAL_REVIEW_REQUIRED]
+```
+
+# Load Final Dataset
+
+After completing the automatic labeling and manual review process, the final dataset was loaded for analysis and visualization.
+
+The dataset used for the final analysis was:
+
+```text
+final_labeled_data.csv
+````
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv(
+    "../data/processed/final_labeled_data.csv",
+    sep=None,
+    engine="python"
+)
+
+df.head()
+```
+
+# Dataset Overview
+
+After the data cleaning, enrichment, and manual review process, the final dataset was prepared for analysis.
+
+The dataset contains LGBTQ+ characters from dramatic television series released during the 2020s. Each row in the dataset represents a single television character together with contextual information about the series and the detected LGBTQ+ identity label.
+
+The final dataset includes the following columns:
+
+- Year
+- Series
+- Network
+- Character
+- Actor
+- Notes
+- Final_Label
+
+The `Final_Label` column contains the automatically or manually assigned LGBTQ+ identity categories.
+
+The dataset combines both automatically classified entries and manually reviewed entries in order to improve overall accuracy and completeness.
+
+The following Python code provides a basic overview of the dataset structure.
+
+```{python}
+print("Rows:", len(df))
+print("Columns:", len(df.columns))
+
+df.columns
+````
+
+# Distribution of LGBTQ+ Identities
+
+The following visualization shows the distribution of LGBTQ+ identity labels within the final dataset.
+
+Because some characters were associated with multiple identity labels, the labels were separated and counted individually in the analysis.
+
+This approach provides a clearer overview of how frequently different LGBTQ+ identities appear across the television series included in the dataset.
+
+The following code splits multiple labels, removes unresolved entries, and calculates the total frequency of each identity category.
+
+```{python}
+labels = (
+    df["Final_Label"]
+    .dropna()
+    .astype(str)
+    .str.split(";")
+    .explode()
+    .str.strip()
+)
+
+labels = labels[
+    labels != "[MANUAL_REVIEW_REQUIRED]"
+]
+
+counts = labels.value_counts()
+
+counts
+```
+
+# Treemap / Overview
+
+![](../visualizations/identity_distribution_overview.png)
+
+# LGBTQ+ Representation Over Time
+
+![](../visualizations/identity_representation_over_time_stacked.png)
+
+# Development Across Years
+
+![](../visualizations/identity_development_over_years.png)
+
+# Interpretation of Results
+
+The visualization shows that gay and lesbian characters represent the largest proportion of LGBTQ+ identities within the dataset.
+
+This suggests that television series in the 2020s continue to focus primarily on gay and lesbian representation, while other LGBTQ+ identities appear less frequently.
+
+Identities such as:
+
+- non-binary
+- intersex
+- genderfluid
+- asexual
+
+appear significantly less often in comparison.
+
+One possible explanation is that mainstream television productions may still rely more heavily on identities that are already more socially visible and widely represented in media culture.
+
+The dataset also indicates that streaming platforms such as Netflix, HBO, Hulu, and Amazon Prime Video contribute strongly to LGBTQ+ representation in television series.
+
+Many of the analyzed series originated from streaming services rather than traditional television networks.
+
+Another important observation is that several characters were associated with multiple identity categories, demonstrating that LGBTQ+ identities are often complex and cannot always be reduced to a single label.
+
+Overall, the analysis suggests that LGBTQ+ visibility in television has increased during the 2020s, but representation remains uneven across different identity groups.
+
+# Methodological Reflection
+
+This project used a rule-based classification approach instead of machine learning methods.
+
+The main reason for choosing this method was transparency and reproducibility. Rule-based systems allow the classification logic to remain understandable and easy to verify.
+
+The enrichment process relied primarily on:
+
+- keyword matching
+- regular expressions (regex)
+- relationship inference
+- manual validation
+
+One advantage of this approach is that the classification process can be reproduced consistently across the dataset.
+
+In addition, the method does not require large training datasets or complex machine learning models.
+
+However, the approach also has several weaknesses.
+
+Keyword-based systems depend heavily on the wording used in the Notes column. If identities or relationships are described indirectly, the system may fail to classify the character correctly.
+
+For example, descriptions such as:
+
+```text
+"They are romantically involved."
+```
+
+# Limitations
+
+Several limitations affected the quality and scope of this project.
+
+## Dependence on Wikipedia
+
+The dataset was based entirely on information collected from Wikipedia.
+
+Because Wikipedia is community-generated, the data may contain inconsistencies, incomplete entries, or outdated information.
+
+Some television characters also had very limited descriptions, which made automatic classification more difficult.
+
+## Ambiguous Character Descriptions
+
+Many entries in the Notes column described relationships indirectly without explicitly mentioning LGBTQ+ identities.
+
+For example, descriptions such as:
+
+```text
+"X and Y are in a relationship."
+# Reproducibility
+```
+
+# Conclusion
+
+This project explored LGBTQ+ representation in dramatic television series from the 2020s using computational data analysis methods.
+
+The project combined multiple stages of data processing, including:
+
+- data extraction
+- data cleaning
+- automated label detection
+- relationship inference
+- manual review
+- data visualization
+
+The results showed that gay and lesbian characters are represented more frequently than other LGBTQ+ identities such as non-binary, intersex, genderfluid, or asexual characters.
+
+The analysis also demonstrated the important role of streaming platforms in increasing LGBTQ+ visibility within contemporary television media.
+
+At the same time, the project highlighted several methodological challenges, including ambiguous descriptions, incomplete source data, and the limitations of automated identity classification.
+
+By combining automated methods with manual validation, the project achieved a more reliable and reproducible dataset.
+
+Overall, the project demonstrates how computational approaches can be applied to questions in media studies and gender studies while also emphasizing the importance of critical reflection when working with social and cultural data.
+
+# References
+
+- Wikipedia contributors. *List of dramatic television series with LGBTQ characters: 2020s.* Wikipedia.  
+  https://en.wikipedia.org/wiki/List_of_dramatic_television_series_with_LGBTQ_characters:_2020s
+
+- Wikidata contributors. *Wikidata.*  
+  https://www.wikidata.org/
+
+- pandas documentation.  
+  https://pandas.pydata.org/
+
+- matplotlib documentation.  
+  https://matplotlib.org/
+
+- Quarto documentation.  
+  https://quarto.org/
+
+- gender-guesser documentation.  
+  https://pypi.org/project/gender-guesser/
+
+- Python Software Foundation. *Python Programming Language.*  
+  https://www.python.org/
+

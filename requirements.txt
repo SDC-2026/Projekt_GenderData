@@ -1,3 +1,10 @@
 pandas
 requests
 gender-guesser
+squarify
+plotly
+
+python scripts/data_extraction.py
+python scripts/data_enrichment_plus.py
+python scripts/merge_final_data.py
+python scripts/visualize_labels.py
