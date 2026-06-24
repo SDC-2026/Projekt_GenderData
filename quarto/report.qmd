@@ -1,5 +1,8 @@
 ---
-title: ""
+title: "LGBTQ+ Representation in Television Series"
+
+website:
+  title: "LGBTQ+ Representation in Television Series"
 
 format:
   html:

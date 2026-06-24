@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>report</title>
+<title>LGBTQ+ Representation in Television Series</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -85,7 +85,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">LGBTQ+ Representation in Television Series</h1>
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <p><a href="#top" class="back-to-top"> <img src="assets/up-arrow.png" alt="Back to top"> </a></p>
@@ -329,7 +345,7 @@ For example:
 <p>
 became:
 </p>
-<div id="db0df5ed" class="cell" data-execution_count="1">
+<div id="00d9585a" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -413,7 +429,7 @@ X and Y are lovers.</code></pre>
 The character is bisexual.
 The character identifies as non-binary.</code></pre>
 <p>could be automatically assigned to the corresponding category.</p>
-<div id="ee74424a" class="cell" data-execution_count="2">
+<div id="7cdf0879" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -445,7 +461,7 @@ Character A and Character B are lovers.
 
 Character X is dating Character Y.</code></pre>
 <p>Using the detected names and gender information, the script inferred potential LGBTQ+ identities based on the relationship context.</p>
-<div id="e7eb6899" class="cell" data-execution_count="3">
+<div id="89a269e6" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
@@ -470,7 +486,7 @@ The relationship inference process was particularly useful for descriptions that
 <div class="manual-review-card">
 <p>Despite the automated classification process, some character descriptions remained ambiguous or lacked sufficient information for reliable labeling.</p>
 <p>When the system could not confidently assign a label, the character was marked as:</p>
-<div id="d5e8398e" class="cell" data-execution_count="4">
+<div id="75e8522d" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
@@ -507,7 +523,7 @@ Dataset used for the final analysis:
 <p>
 The table below shows the first rows of the dataset used throughout the analysis.
 </p>
-<div id="eea74be2" class="cell" data-execution_count="5">
+<div id="2c1783f7" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -521,7 +537,7 @@ The table below shows the first rows of the dataset used throughout the analysis
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
 
@@ -641,7 +657,7 @@ The <code>Final_Label</code> column contains automatically or manually assigned 
 <p>
 The following Python code provides a basic overview of the dataset structure.
 </p>
-<div id="c6759259" class="cell" data-execution_count="6">
+<div id="c4c5fe07" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -674,7 +690,7 @@ Multiple identity labels were split into individual categories and counted separ
 <p>Because some characters were associated with multiple identity labels, the labels were separated and counted individually in the analysis.</p>
 <p>This approach provides a clearer overview of how frequently different LGBTQ+ identities appear across the television series included in the dataset.</p>
 <p>The following code splits multiple labels, removes unresolved entries, and calculates the total frequency of each identity category.</p>
-<div id="814b57aa" class="cell" data-execution_count="7">
+<div id="9396befb" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
@@ -703,7 +719,7 @@ Multiple identity labels were split into individual categories and counted separ
 <span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>counts_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
 
