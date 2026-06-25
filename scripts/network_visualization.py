@@ -231,20 +231,23 @@ def generate_sankey():
                 break
         link_colors.append(hex_to_rgba(base_color, alpha=0.35))
 
-    # Build interactive Sankey visualization in Plotly
+   # Build interactive Sankey visualization in Plotly
     fig = go.Figure(data=[go.Sankey(
+        valueformat="d", # Erzwingt Ganzzahlen überall
         node=dict(
             pad=18,
             thickness=20,
             line=dict(color="black", width=0.5),
             label=all_nodes,
-            color=node_colors
+            color=node_colors,
+            hovertemplate='Kategorie: %{label}<br>Gesamtverbindungen: %{value}<extra></extra>' # Hover für Blöcke
         ),
         link=dict(
             source=sources,
             target=targets,
             value=values,
-            color=link_colors  # Apply generated colored paths
+            color=link_colors,
+            hovertemplate='Strom: %{source.label} → %{target.label}<br>Anzahl: %{value}<extra></extra>' # Hover für Ströme
         )
     )])
 
