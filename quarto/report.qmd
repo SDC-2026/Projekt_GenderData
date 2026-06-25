@@ -585,11 +585,23 @@ counts_df
 ```
 </div>
 
-# Treemap / Overview {#treemap-overview}
+# Distribution of LGBTQ+ Identities {#distribution-of-lgbtq-identities-chart}
 
 <div class="viz-card">
 
-![](../visualizations/identity_distribution_overview.png)
+<h3>Distribution of LGBTQ+ Identities</h3>
+
+<p class="viz-description">
+The interactive grouped bar chart shows the absolute number of characters assigned to each LGBTQ+ identity in the final dataset.
+</p>
+
+<div class="chart-frame">
+  <iframe
+    src="../plots/absolute_identities_bar.html"
+    loading="lazy"
+    allowfullscreen>
+  </iframe>
+</div>
 
 </div>
 
@@ -619,6 +631,27 @@ through networks to the represented LGBTQ+ identities.
 <div class="viz-card">
 
 ![](../visualizations/identity_development_over_years.png)
+
+</div>
+
+# Identity Co-occurrence Network {#identity-cooccurrence}
+
+<div class="viz-card">
+
+<p>
+Some television characters are associated with multiple LGBTQ+ identities. To better understand these relationships, an interactive co-occurrence network was created.
+</p>
+
+<blockquote>
+The visualization highlights how different LGBTQ+ identities overlap within individual characters. Thicker connections indicate more frequent co-occurrences, while isolated loops represent characters assigned to only one identity.
+</blockquote>
+
+<div class="chart-frame">
+  <iframe
+    src="../plots/identity_intersection_chord.html"
+    loading="lazy">
+  </iframe>
+</div>
 
 </div>
 
