@@ -1,3 +1,16 @@
 .DS_Store
 __pycache__/
 *.pyc
+/.quarto/
+**/*.quarto_ipynb
+
+# Quarto temporary files
+quarto/report.quarto_ipynb_*
+quarto/report_files/
+quarto/_quarto_internal_scss_error.scss
+
+# Rendered html (optional)
+quarto/report.html
+
+# macOS
+.DS_Store

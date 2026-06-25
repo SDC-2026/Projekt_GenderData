@@ -1,77 +1,234 @@
 /*-- scss:defaults --*/
-$body-bg: #f8f9fa;
-$body-color: #000000;
+$body-bg: #f6f2eb;
+$body-color: #111111;
 
 /*-- scss:rules --*/
 
-// 1. GLOBAL BACKGROUND & TEXT (Erzwingt den hellen Magazin-Hintergrund)
-body, 
+/* ==========================================================================
+   GLOBAL LAYOUT
+   ========================================================================== */
+
 html,
-.quarto-container, 
-#quarto-content, 
-main, 
-.page-columns,
-#quarto-margin-sidebar,
-.sidebar {
-  background-color: #f8f9fa !important;
-  color: #000000 !important;
+body {
+  background-color: $body-bg;
+  color: $body-color;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-// =========================================================================
-// TITLE BLOCK (Helvetica Neue Black / Ultra Bold Look)
-// =========================================================================
-.title {
-  font-family: "Helvetica Neue", Helvetica, "Arial Black", sans-serif !important;
-  font-weight: 900 !important; 
-  text-transform: uppercase !important;
-  font-size: 3.5rem !important;
-  line-height: 0.95 !important;
-  letter-spacing: -0.03em !important; 
-  color: #ffffff !important;
-  background-color: #D65f93 !important; 
-  padding: 20px !important;
-  border: 4px solid #000000 !important;
-  box-shadow: 8px 8px 0px #000000 !important;
-  margin-bottom: 2rem !important;
+#quarto-content,
+#quarto-document-content,
+.quarto-container,
+main,
+.page-columns {
+  background: transparent;
 }
 
-// =========================================================================
-// AUTHORS & SUBTITLE BLOCK (Helvetica Neue Bold / Medium)
-// =========================================================================
-.quarto-title-meta {
-  display: block !important;
-  background-color: #ffffff !important;
-  border: 3px solid #000000 !important;
-  box-shadow: 6px 6px 0px #000000 !important;
-  padding: 20px !important;
-  margin-top: 3rem !important;
-  margin-bottom: 4rem !important;
-  max-width: fit-content; 
+#quarto-document-content {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1em;
+}
 
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-  font-weight: 700 !important; 
-  text-transform: uppercase !important;
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero-card {
+  background: linear-gradient(
+    90deg,
+    #f5a4cf,
+    #efb4d8
+  );
 
-  .quarto-title-meta-heading {
-    display: none !important; 
-  }
-  
-  .quarto-title-meta-contents {
-    font-size: 1.1rem !important;
-    color: #000000 !important;
-    letter-spacing: -0.01em;
-    
-    p {
-      display: inline !important;
-      margin: 0 !important;
-    }
-    
-    p:not(:last-child)::after {
-      content: " • "; 
-      color: #D65f93; 
-      padding: 0 10px;
-    }
-  }
+  border: 4px solid #000;
+  box-shadow: 10px 10px 0 #000;
+  border-radius: 8px;
+  padding: 4rem;
+  margin-bottom: 2rem;
+}
+
+.hero-rainbow {
+  position: absolute;
+  top: -60px;
+  left: -120px;
+
+  width: 170px;
+  height: auto;
+
+  z-index: 10;
+}
+
+.hero-card h1 {
+  margin: 0;
+  color: #000;
+  font-family: "Arial Black", "Helvetica Neue", sans-serif;
+  font-weight: 900;
+  font-size: 5rem;
+  line-height: 0.85;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+  max-width: 900px;
+}
+
+.authors-card {
+  width: fit-content;
+  white-space: nowrap;
+  background: white;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  padding: 1rem 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+}
+
+.authors-card span {
+  color: #e98dbd;
+}
+
+.outline-text {
+  color: transparent;
+
+  -webkit-text-stroke: 3px #000;
+
+  text-stroke: 3px #000;
+}
+/* ==========================================================================
+   TOP NAVIGATION
+   ========================================================================== */
+
+.section-nav {
+  position: fixed;
+
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 1000;
+
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+
+  width: calc(100% - 60px);
+  max-width: 1600px;
+
+  gap: 1rem;
+  padding: 1rem 2rem;
+
+  background: rgba(246, 242, 235, 0.95);
+  backdrop-filter: blur(8px);
+
+  border: 2px solid #000;
+  border-radius: 20px;
+  box-shadow: 6px 6px 0 #000;
+
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 120px;
+}
+
+.section-nav > * {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+}
+
+.section-nav a {
+  display: flex !important;
+  flex: 1 1 0 !important;
+  height: 70px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 #000;
+  background: white !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.section-nav a.active {
+  transform: translateY(-2px);
+}
+
+.section-nav a[href="#introduction"].active {
+  background: #E40303 !important;
+  color: white !important;
+}
+
+.section-nav a[href="#research-question"].active {
+  background: #FF8C00 !important;
+  color: white !important;
+}
+
+.section-nav a[href="#pipeline-overview"].active {
+  background: #FFED00 !important;
+  color: black !important;
+}
+
+.section-nav a[href="#dataset-overview"].active {
+  background: #008026 !important;
+  color: white !important;
+}
+
+.section-nav a[href="#key-findings"].active {
+  background: #004CFF !important;
+  color: white !important;
+}
+
+.section-nav a[href="#conclusion"].active {
+  background: #732982 !important;
+  color: white !important;
+}
+
+.section-nav a:hover {
+  transform: rotate(-1deg) translate(-4px, -4px);
+  box-shadow: 8px 8px 0 #000;
+}
+
+.section-nav p {
+  display: contents !important;
+}
+
+/* Pride Navigation Colors */
+
+.section-nav a:nth-of-type(1):hover {
+  background: #E40303 !important;
+  color: white !important;
+}
+
+.section-nav a:nth-of-type(2):hover {
+  background: #FF8C00 !important;
+  color: white !important;
+}
+
+.section-nav a:nth-of-type(3):hover {
+  background: #FFED00 !important;
+  color: black !important;
+}
+
+.section-nav a:nth-of-type(4):hover {
+  background: #008026 !important;
+  color: white !important;
+}
+
+.section-nav a:nth-of-type(5):hover {
+  background: #004CFF !important;
+  color: white !important;
+}
+
+.section-nav a:nth-of-type(6):hover {
+  background: #732982 !important;
+  color: white !important;
 }
 
 // =========================================================================
@@ -85,19 +242,41 @@ h1, h2, h3 {
 }
 
 h1 {
+  display: inline-block;
+  background: white;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 #000;
+  padding: 12px 24px;
   font-weight: 900 !important;
-  font-size: 2.2rem !important;
-  border-bottom: 3px solid #000000 !important;
-  padding-bottom: 8px !important;
-  margin-top: 3rem !important;
-  margin-bottom: 1.5rem !important;
+  font-size: 2rem !important;
+  margin-top: 5rem !important;
+  margin-bottom: 2rem !important;
+  margin-left: -300px !important;
+}
+
+.hero-card h1 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+  font-size: 4rem !important;
+  line-height: 0.82 !important;
 }
 
 h2 {
+  display: inline-block;
+  background: #ffffff;
+  border: 3px solid #000;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 #000;
+  padding: 8px 16px;
   font-weight: 800 !important;
-  font-size: 1.6rem !important;
-  margin-top: 2.5rem !important;
-  margin-bottom: 1.2rem !important;
+  font-size: 1.2rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
 }
 
 h3 {
@@ -110,9 +289,10 @@ h3 {
 
 // 6. MAIN TEXT
 p {
-  font-size: 1.15rem !important;
-  line-height: 1.6 !important;
-  color: #1a202c !important; // Sattes, gut lesbares Dunkelgrau
+  font-size: 1.15rem;
+  line-height: 1.8;
+  max-width: 120ch;
+  color: #222;
 }
 
 // 1. ZITATE / CALLOUT BOXEN (Für wichtige Thesen oder Zitate)
@@ -152,7 +332,7 @@ table, .table {
 }
 
 // 3. CODE-BLÖCKE (Falls du Code im Report anzeigst)
-div.sourceCode, pre {
+div.sourceCode {
   border: 3px solid #000000 !important;
   box-shadow: 4px 4px 0px #000000 !important;
   background-color: #ffffff !important;
@@ -167,190 +347,11 @@ mark, .highlight {
 }
 
 // =========================================================================
-// BRUTALIST TOC - FULL REPLACEMENT (ALIGNED LINE & ULTRA STABLE SHADOWS)
-// =========================================================================
-
-// Reset default Quarto wrappers Safely
-#quarto-margin-sidebar,
-.quarto-margin-sidebar,
-.sidebar,
-#TOC nav {
-  background: transparent !important;
-  background-image: none !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-// 1. THE MAIN CONTAINER: Lowered to align with the pink main title block
-#quarto-margin-sidebar {
-  position: sticky !important;
-  top: 75px !important; 
-  width: 290px !important;       
-  padding: 0 0 20px 0 !important; 
-}
-
-// 2. THE ACTUAL TOC WRAPPER: Aligns the vertical line exactly with the header
-#TOC {
-  border-left: 3px solid #000000 !important; 
-  padding-left: 25px !important; 
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-// Table of Contents Header
-#quarto-margin-sidebar h2, 
-.sidebar h2, 
-#TOC .toc-title {
-  font-family: "Helvetica Neue", Helvetica, "Arial Black", sans-serif !important;
-  font-weight: 900 !important;
-  text-transform: uppercase !important;
-  font-size: 1.1rem !important;
-  color: #000000 !important;
-  border-bottom: 4px solid #000000 !important; 
-  padding-bottom: 8px !important;
-  margin-bottom: 25px !important;
-  margin-top: 0 !important; 
-  text-align: left !important;
-}
-
-// List Configuration
-#quarto-margin-sidebar nav ul, 
-.sidebar nav ul, 
-#TOC ul {
-  list-style: none !important;
-  padding-left: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 18px !important; 
-}
-
-// List Items Isolation
-#quarto-margin-sidebar nav ul li, 
-.sidebar nav ul li, 
-#TOC ul li {
-  display: block !important;
-  width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-}
-
-// Base Links - Clean Text Only (Editorial Gray)
-#quarto-margin-sidebar nav ul li a, 
-.sidebar nav ul li a, 
-#TOC ul li a {
-  display: block !important;
-  width: 100% !important;
-  font-family: "Helvetica Neue", Helvetica, "Arial Black", sans-serif !important;
-  font-weight: 900 !important;
-  text-transform: uppercase !important;
-  font-size: 0.8rem !important; 
-  letter-spacing: 0.05em !important;
-  line-height: 1.2 !important;
-  padding: 12px 14px !important; 
-  text-align: left !important; 
-  text-decoration: none !important;
-  
-  background-color: transparent !important;
-  color: #a0a0a0 !important; 
-  border: 3px solid transparent !important; 
-  box-shadow: none !important;
-  filter: none !important;
-  transition: all 0.15s ease-in-out !important;
-}
-
-// Shared Box Blueprint for both Hover and Active States
-#quarto-margin-sidebar nav ul li a:hover, 
-#quarto-margin-sidebar nav ul li a.active,
-#TOC ul li a:hover,
-#TOC ul li a.active {
-  color: #ffffff !important;
-  border: 3px solid #000000 !important; 
-  box-shadow: none !important; 
-  
-  // High-performance hardware accelerated flat shadow without distortion
-  filter: drop-shadow(5px 5px 0px #000000) !important;
-  
-  backface-visibility: hidden !important;
-  -webkit-font-smoothing: subpixel-antialiased !important;
-}
-
-// =========================================================================
-// SEQUENTIAL SYSTEM - 10 COLORS (RAINBOW FIRST, THEN PROGRESS)
-// =========================================================================
-
-// --- PART 1: THE TRADITIONAL RAINBOW ---
-
-// 1. Red (Rainbow)
-#quarto-margin-sidebar nav ul li:nth-child(10n+1) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+1) a.active,
-#TOC ul li:nth-child(10n+1) a:hover, #TOC ul li:nth-child(10n+1) a.active { 
-  background-color: #E40303 !important; transform: rotate(-1.2deg) !important; 
-} 
-
-// 2. Orange (Rainbow)
-#quarto-margin-sidebar nav ul li:nth-child(10n+2) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+2) a.active,
-#TOC ul li:nth-child(10n+2) a:hover, #TOC ul li:nth-child(10n+2) a.active { 
-  background-color: #FF8C00 !important; transform: rotate(1deg) !important; 
-} 
-
-// 3. Yellow (Rainbow) - Black text for readability
-#quarto-margin-sidebar nav ul li:nth-child(10n+3) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+3) a.active,
-#TOC ul li:nth-child(10n+3) a:hover, #TOC ul li:nth-child(10n+3) a.active { 
-  background-color: #FFED00 !important; color: #000000 !important; transform: rotate(-0.8deg) !important; 
-} 
-
-// 4. Green (Rainbow)
-#quarto-margin-sidebar nav ul li:nth-child(10n+4) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+4) a.active,
-#TOC ul li:nth-child(10n+4) a:hover, #TOC ul li:nth-child(10n+4) a.active { 
-  background-color: #008026 !important; transform: rotate(1.4deg) !important; 
-} 
-
-// 5. Blue (Rainbow)
-#quarto-margin-sidebar nav ul li:nth-child(10n+5) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+5) a.active,
-#TOC ul li:nth-child(10n+5) a:hover, #TOC ul li:nth-child(10n+5) a.active { 
-  background-color: #004CFF !important; transform: rotate(-1deg) !important; 
-} 
-
-// 6. Purple (Rainbow)
-#quarto-margin-sidebar nav ul li:nth-child(10n+6) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+6) a.active,
-#TOC ul li:nth-child(10n+6) a:hover, #TOC ul li:nth-child(10n+6) a.active { 
-  background-color: #732982 !important; transform: rotate(1.2deg) !important; 
-} 
-
-// --- PART 2: THE PROGRESS EXTENSIONS ---
-
-// 7. Light Blue (Trans) - Black text for readability
-#quarto-margin-sidebar nav ul li:nth-child(10n+7) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+7) a.active,
-#TOC ul li:nth-child(10n+7) a:hover, #TOC ul li:nth-child(10n+7) a.active { 
-  background-color: #55CDFC !important; color: #000000 !important; transform: rotate(-1.5deg) !important; 
-} 
-
-// 8. Light Pink (Trans) - Black text for readability
-#quarto-margin-sidebar nav ul li:nth-child(10n+8) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+8) a.active,
-#TOC ul li:nth-child(10n+8) a:hover, #TOC ul li:nth-child(10n+8) a.active { 
-  background-color: #F7A8B8 !important; color: #000000 !important; transform: rotate(0.8deg) !important; 
-} 
-
-// 9. Brown (BIPOC)
-#quarto-margin-sidebar nav ul li:nth-child(10n+9) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+9) a.active,
-#TOC ul li:nth-child(10n+9) a:hover, #TOC ul li:nth-child(10n+9) a.active { 
-  background-color: #613915 !important; transform: rotate(-1.1deg) !important; 
-} 
-
-// 10. Black (BIPOC)
-#quarto-margin-sidebar nav ul li:nth-child(10n+10) a:hover, #quarto-margin-sidebar nav ul li:nth-child(10n+10) a.active,
-#TOC ul li:nth-child(10n+10) a:hover, #TOC ul li:nth-child(10n+10) a.active { 
-  background-color: #000000 !important; transform: rotate(0.3deg) !important; 
-}
-
-// =========================================================================
 // UNIFIED BRUTALIST SHADOW SYSTEM (Tables, Outputs & Callout Boxes)
 // =========================================================================
 
 #quarto-document-content {
   // Target tables, code outputs, callouts, and blockquotes to look 100% identical
-  .cell-output > pre,
-  .cell-output-display pre,
   .dataframe,
   table,
   .callout,
@@ -389,4 +390,945 @@ mark, .highlight {
   div:empty {
     display: none !important;
   }
+}
+body {
+  background-image:
+    radial-gradient(#d8d8d8 1px, transparent 1px);
+
+  background-size: 24px 24px;
+}
+
+// Hide default Quarto title block
+
+#title-block-header {
+  display: none !important;
+}
+
+/* ==========================================================================
+   INTRODUCTION LAYOUT
+   ========================================================================== */
+
+.intro-layout {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 3rem;
+
+  width: calc(100% + 300px);
+  margin-left: -180px;
+
+  align-items: start;
+}
+
+.intro-text {
+  background: #f5f5f5;
+  border: 3px solid #000;
+  border-radius: 16px;
+  box-shadow: 10px 10px 0 #000;
+
+  padding: 3.5rem;
+  width: 100%;
+}
+
+.intro-image {
+  display: flex;
+  justify-content: center;
+}
+
+.intro-image img {
+  width: 280px;
+  height: 100%;
+  object-fit: cover;
+
+  border: 3px solid #000;
+  border-radius: 20px;   /* Runde Ecken */
+  box-shadow: 8px 8px 0 #000;
+}
+
+/* ==========================================================================
+   RESEARCH QUESTION
+   ========================================================================== */
+
+.research-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+
+  background: #f5f5f5;
+  border: 3px solid #000;
+  border-radius: 20px;   /* Runde Ecken */
+  box-shadow: 10px 10px 0 #000;
+  padding: 3rem;
+}
+
+.research-card h2 {
+  display: inline-block;
+  background: #ff8c00;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 #000;
+  padding: 10px 24px;
+  margin-top: -5rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.research-main {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.research-card ul {
+  margin-left: 1.5rem;
+}
+
+.research-card li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+.research-card blockquote {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.2;
+  background: #ffffff;
+  border: 3px solid #000;
+  border-radius: 20px;   /* Runde Ecken */
+  box-shadow: 8px 8px 0 #000;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   DATA SOURCE
+   ========================================================================== */
+
+.data-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+
+  width: calc(100% + 300px);
+  margin-left: -150px;
+}
+
+.data-source-card,
+.data-collection-card {
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+  padding: 3rem;
+  height: fit-content;
+}
+
+.source-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #666;
+  margin: 1.5rem 0 0.4rem 0;
+}
+
+.source-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+.source-value a {
+  color: #000;
+  text-decoration: none;
+  border-bottom: 3px solid #FFED00;
+}
+
+.source-value a:hover {
+  color: #004CFF;
+  border-bottom-color: #004CFF;
+}
+
+.data-source-card ul {
+  margin-top: 1rem;
+}
+
+.data-source-card li {
+  margin-bottom: 0.5rem;
+}
+/* ==========================================================================
+   PROJECT STRUCTURE
+   ========================================================================== */
+
+.structure-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+  padding: 3rem;
+}
+
+.structure-card blockquote {
+  font-size: 1rem;
+  font-weight: 900;
+  border-radius: 10px;
+  background: white;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   PIPELINE OVERVIEW
+   ========================================================================== */
+
+.pipeline-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.pipeline-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem; /*Absatand*/
+
+  margin: 3rem 0;
+}
+
+.pipeline-step {
+  width: 380px;
+
+  padding: 1rem 2rem;
+
+  border: 3px solid #000;
+  border-radius: 20px;
+
+  box-shadow: 6px 6px 0 #000;
+
+  font-weight: 800;
+  font-size: 1.2rem;
+
+  text-align: center;
+  color: white !important; /* Schrift weiß */
+}
+
+.pipeline-step p {
+  color: white !important;
+  margin: 0;
+  text-align: center;
+}
+
+.pipeline-arrow {
+  font-size: 2rem;
+  font-weight: 900;
+
+  line-height: 1;
+  margin: -0.2rem 0; /* Pfeile näher an die Boxen */
+}
+
+.red {
+  background: #E40303;
+  color: white;
+}
+
+.orange {
+  background: #FF8C00;
+  color: white;
+}
+
+.yellow {
+  background: #FFED00;
+  color: white;
+}
+
+.green {
+  background: #008026;
+  color: white;
+}
+
+.blue {
+  background: #004CFF;
+  color: white;
+}
+
+.purple {
+  background: #732982;
+  color: white;
+}
+
+.pipeline-card blockquote {
+  font-size: 1.4rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   DATA CLEANING + ENRICHMENT + REVIEW
+   ========================================================================== */
+
+.cleaning-card,
+.enrichment-card,
+.review-card {
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+  padding: 3rem;
+}
+
+.cleaning-card blockquote,
+.enrichment-card blockquote,
+.review-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.pipeline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+
+  width: calc(100% + 300px);
+  margin-left: -150px;
+  margin-bottom: 5rem;
+
+  align-items: start;
+}
+
+/* ==========================================================================
+   IDENTITY DETECTION
+   ========================================================================== */
+
+.identity-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.identity-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   RELATIONSHIP INFERENCE
+   ========================================================================== */
+
+.relationship-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.relationship-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   MANUAL REVIEW
+   ========================================================================== */
+
+.manual-review-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.manual-review-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   LOAD FINAL DATASET
+   ========================================================================== */
+
+.dataset-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.dataset-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   DATAFRAMES / TABLES
+   ========================================================================== */
+
+.table {
+  border: 4px solid #000 !important;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 10px 10px 0 #000;
+}
+
+.table thead th {
+  background: #d35f99 !important;
+  color: white !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-bottom: 4px solid #000 !important;
+}
+
+.table td,
+.table th {
+  border: 2px solid #000 !important;
+  padding: 1rem !important;
+}
+
+pre code {
+  background: transparent;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+details {
+  margin: 1rem 0 2rem 0;
+}
+
+summary {
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   DATASET OVERVIEW
+   ========================================================================== */
+
+.overview-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.overview-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   DATASET STATS
+   ========================================================================== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto 4rem auto;
+}
+
+.stat-card {
+  background: white;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 8px 8px 0 #000;
+  padding: 2rem;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.stat-value {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+
+  color: #000;
+}
+
+/* ==========================================================================
+   DISTRIBUTION OF LGBTQ+ IDENTITIES
+   ========================================================================== */
+
+.distribution-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.distribution-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   VISUALIZATION CARD
+   ========================================================================== */
+
+.viz-card {
+  max-width: 1400px;
+  margin: 3rem auto 5rem auto;
+  background: white;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 8px 8px 0 #000;
+  padding: 2rem;
+}
+
+.viz-card img {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* ==========================================================================
+   KEY FINDINGS
+   ========================================================================== */
+
+.findings-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.findings-card h3 {
+  margin-top: 2rem;
+  font-weight: 800;
+}
+
+.findings-card blockquote {
+  font-size: 1.4rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   INTERPRETATION OF RESULTS
+   ========================================================================== */
+
+.interpretation-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.interpretation-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   METHODOLOGICAL REFLECTION
+   ========================================================================== */
+
+.reflection-card {
+  width: calc(100% + 300px);
+  margin-left: -150px;
+
+  margin-left: -180px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.reflection-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+  border-radius: 10px;
+  background: white;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   METHODOLOGICAL REFLECTION
+   ========================================================================== */
+
+.reflection-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.reflection-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+/* ==========================================================================
+   LIMITATIONS
+   ========================================================================== */
+
+.limitations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+
+  width: calc(100% + 300px);
+  margin-left: -150px;
+  margin-bottom: 5rem;
+
+  align-items: start;
+}
+
+.limitation-card {
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.limitation-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+/* ==========================================================================
+   CONCLUSION
+   ========================================================================== */
+
+.conclusion-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.conclusion-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   REPRODUCIBILITY
+   ========================================================================== */
+
+.reproducibility-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+
+.reproducibility-card blockquote {
+  font-size: 1.5rem;
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   REFERENCES
+   ========================================================================== */
+
+.references-card {
+  width: calc(100% + 300px);
+  max-width: none;
+
+  margin-left: -150px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: 3rem;
+}
+/* ==========================================================================
+   BACK TO TOP BUTTON
+   ========================================================================== */
+
+.back-to-top {
+  position: fixed;
+
+  right: 30px;
+  bottom: 30px;
+
+  z-index: 9999;
+
+  text-decoration: none;
+}
+
+.back-to-top img {
+  width: 80px;
+  height: auto;
+
+  transition: transform 0.2s ease;
+}
+
+.back-to-top:hover img {
+  transform: translateY(-6px);
 }
