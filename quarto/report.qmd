@@ -222,31 +222,31 @@ IDENTITY DETECTION
 
 <div class="pipeline-arrow">↓</div>
 
-<div class="pipeline-step blue">
+<div class="pipeline-step purple">
 RELATIONSHIP INFERENCE
 </div>
 
 <div class="pipeline-arrow">↓</div>
 
-<div class="pipeline-step purple">
+<div class="pipeline-step brown">
 MANUAL REVIEW
 </div>
 
 <div class="pipeline-arrow">↓</div>
 
-<div class="pipeline-step red">
+<div class="pipeline-step light-blue">
 FINAL DATASET
 </div>
 
 <div class="pipeline-arrow">↓</div>
 
-<div class="pipeline-step orange">
+<div class="pipeline-step pink">
 VISUALIZATIONS
 </div>
 
 <div class="pipeline-arrow">↓</div>
 
-<div class="pipeline-step blue">
+<div class="pipeline-step intersex-yellow">
 QUARTO REPORT
 </div>
 
