@@ -1029,19 +1029,41 @@ summary {
    ========================================================================== */
 
 .viz-card {
-  max-width: 1400px;
-  margin: 3rem auto 5rem auto;
+  width: calc(100% + 800px);
+  max-width: none;
+
+  margin-left: -400px;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
   background: white;
   border: 3px solid #000;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
-  padding: 2rem;
+
+  padding: 3rem;
 }
 
 .viz-card img {
   display: block;
   width: 100%;
   border-radius: 10px;
+}
+
+/* Interaktive Plotly-Diagramme */
+
+.chart-frame {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.chart-frame iframe {
+  display: block;
+  width: 100%;
+  height: 750px;   
+  border: none;
 }
 
 /* ==========================================================================
