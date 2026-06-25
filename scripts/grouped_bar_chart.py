@@ -6,56 +6,32 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) if '__file__' in locals() else '.'
 INPUT_FILE = os.path.join(BASE_DIR, 'data', 'processed', 'final_labeled_data.csv')
 OUTPUT_DIR = os.path.join(BASE_DIR, 'plots')
-OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'relative_identities_bar.html')
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'absolute_identities_bar.html')
 
 # Check if the input file exists in the current directory as a fallback
 if not os.path.exists(INPUT_FILE):
     INPUT_FILE = 'final_labeled_data.csv'
 
-# Color palette restored to the exact vibrant tones of the previous visualization
+# Updated High-Contrast Pride Colors Map
 PRIDE_COLORS = {
-    'Lesbian': '#ea580c',               # Warm orange-red (lesbian flag)
-    'Gay': '#059669',                   # Emerald green (classic pride flag subset)
-    'Bisexual & Pansexual': '#d946ef',  # Vibrant fuchsia (bisexual/pansexual flags)
-    'Trans & Non-Binary': '#38bdf8',    # Light blue (transgender flag)
-    'Asexual': '#7c3aed',               # Violet (asexual flag)
-    'Queer / Questioning': '#ec4899',   # Pink queer color
-    'Other / Unknown': '#94a3b8'        # Gray for other categories
+    'Gay': '#008026',          # Rainbow Green
+    'Lesbian': '#d62900',      # Lesbian Orange
+    'Bisexual': '#0038a8',     # Bi Flag Dark Blue
+    'Transgender': '#5bcefa',  # Trans Light Blue
+    'Non-binary': '#fcf434',   # Non-binary Bright Yellow
+    'Pansexual': '#ff1b8d',    # Pansexual Hot Pink
+    'Genderfluid': '#FF76A4',  # Genderfluid Pink/Rose
+    'Intersex': '#ffd800',     # Intersex Gold
+    'Asexual': '#7400b8',      # Asexual Purple
+    'Queer': '#4d004d',        # Queer Dark Violet
+    'Questioning': '#78716c'   # Neutral Gray
 }
-
-def simplify_identity(label):
-    """
-    Aggregates complex, overlapping, and rare identities into standardized 
-    categories to ensure clean and readable statistical charts.
-    """
-    if pd.isna(label):
-        return 'Other / Unknown'
-    
-    label_clean = str(label).strip().lower()
-    
-    # 1. Prioritize Gender Identity (transgender, non-binary)
-    if any(x in label_clean for x in ['transgender', 'trans', 'non-binary', 'genderfluid', 'intersex']):
-        return 'Trans & Non-Binary'
-        
-    # 2. Check keywords for sexual orientation
-    if any(x in label_clean for x in ['bisexual', 'pansexual', 'demisexual', 'fluid']):
-        return 'Bisexual & Pansexual'
-    elif 'lesbian' in label_clean:
-        return 'Lesbian'
-    elif 'gay' in label_clean:
-        return 'Gay'
-    elif 'asexual' in label_clean:
-        return 'Asexual'
-    elif 'queer' in label_clean or 'questioning' in label_clean:
-        return 'Queer / Questioning'
-        
-    return 'Other / Unknown'
 
 def generate_chart():
     """
     Main execution pipeline: loads data, cleans year of release, 
-    explodes multi-identity labels, and builds a single overall relative bar chart 
-    showing the percentage share of each identity (2020–2025).
+    explodes multi-identity labels, and builds a single overall absolute bar chart 
+    showing the exact character count for each separate identity (2020–2025).
     """
     print("=== Starting Overall Identity Bar Chart Generation ===")
     
@@ -85,52 +61,44 @@ def generate_chart():
     # 4. Restricting the analysis to 2020-2025 release years
     min_year, max_year = 2020, 2025
     df_labels = df_labels[(df_labels["Year_Clean"] >= min_year) & (df_labels["Year_Clean"] <= max_year)]
-    
-    # Apply identity simplification to reduce category fragmentation
-    df_labels['Simplified_Label'] = df_labels['Final_Label'].apply(simplify_identity)
     print(f"Filtered {len(df_labels)} exploded records for visualization within range [{min_year}-{max_year}].")
 
     # Create output directory if it does not exist
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     # ==========================================
-    # DATA PREPARATION FOR OVERALL PERCENTAGE CHART
+    # DATA PREPARATION FOR ABSOLUTE COUNT CHART
     # ==========================================
-    # Compute overall total count of characters in the filtered sample
-    total_count = len(df_labels)
+    # Compute absolute count per separate identity
+    df_plot = df_labels.groupby('Final_Label').size().reset_index(name='Count')
     
-    # Compute count per identity
-    df_plot = df_labels.groupby('Simplified_Label').size().reset_index(name='Count')
-    
-    # Compute overall relative percentages
-    df_plot['Percentage'] = (df_plot['Count'] / total_count) * 100
+    # Filter to only include identities that are defined in our color map
+    df_plot = df_plot[df_plot['Final_Label'].isin(PRIDE_COLORS.keys())]
 
-    # Sort values descending by percentage for better visualization layout
-    df_plot = df_plot.sort_values(by='Percentage', ascending=False)
+    # Sort values descending by absolute count for better visualization layout
+    df_plot = df_plot.sort_values(by='Count', ascending=False)
 
     # ==========================================
     # BAR CHART VISUALIZATION
     # ==========================================
     fig = px.bar(
         df_plot,
-        x='Simplified_Label',
-        y='Percentage',
-        color='Simplified_Label',
-        title='Relative Share of LGBTQ+ Identities in TV Series (2020–2025)',
+        x='Final_Label',
+        y='Count',
+        color='Final_Label',
+        title='Absolute Count of LGBTQ+ Identities in TV Series (2020–2025)',
         labels={
-            'Simplified_Label': 'Identity', 
-            'Percentage': 'Percentage Share (%)'
+            'Final_Label': 'Identity', 
+            'Count': 'Absolute Count'
         },
-        color_discrete_map=PRIDE_COLORS,
-        custom_data=['Simplified_Label', 'Count']
+        color_discrete_map=PRIDE_COLORS
     )
 
-    # Customizing the hover tooltip to display only identity, percentage, and absolute count
+    # Customizing the hover tooltip to display clean English text without extra tags
     fig.update_traces(
         hovertemplate=(
-            "<b>%{customdata[0]}</b><br>"
-            "Percentage Share: %{y:.1f}%<br>"
-            "Absolute Count: %{customdata[1]} characters<extra></extra>"
+            "<b>Identity: %{x}</b><br>"
+            "Absolute Count: %{y} characters<extra></extra>"
         )
     )
 
@@ -140,8 +108,8 @@ def generate_chart():
             title_text='LGBTQ+ Identity'
         ),
         yaxis=dict(
-            ticksuffix="%",
-            range=[0, max(df_plot['Percentage'].max() + 5, 50)]  # Adjust ceiling dynamically
+            title_text='Number of Characters',
+            range=[0, df_plot['Count'].max() + 5]  # Adjust ceiling dynamically
         ),
         height=600,
         margin=dict(l=50, r=50, t=80, b=50),

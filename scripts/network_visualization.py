@@ -44,12 +44,12 @@ COLOR_MAP = {
     'Other Networks': '#a1a1aa',        # Warm neutral gray for remaining networks
 
     # Identity Categories (Pride flag colors)
-    'Lesbian': '#ea580c',               # Warm orange-red (lesbian flag)
-    'Gay': '#059669',                   # Emerald green (classic pride flag subset)
-    'Bisexual & Pansexual': '#d946ef',  # Vibrant fuchsia (bisexual/pansexual flags)
-    'Trans & Non-Binary': '#38bdf8',    # Sky blue (transgender flag)
-    'Asexual': '#7c3aed',               # Violet (asexual flag)
-    'Queer / Questioning': '#ec4899',    # Pink queer color
+    'Lesbian': '#d62900',      # Lesbian Orange
+    'Gay': '#008026',          # Rainbow Green
+    'Bisexual & Pansexual': '#ff1b8d',    # Pansexual Hot Pink
+    'Trans & Non-Binary': '#5bcefa',  # Trans Light Blue
+    'Asexual': '#7400b8',      # Asexual Purple
+    'Queer / Questioning': '#4d004d',   # Queer Dark Violet
     'Unlabeled / Pending': '#cbd5e1',   # Light slate gray
     'Other / Unknown': '#94a3b8'        # Mid slate gray
 }

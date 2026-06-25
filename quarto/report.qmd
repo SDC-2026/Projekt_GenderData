@@ -593,11 +593,24 @@ counts_df
 
 </div>
 
-# LGBTQ+ Representation Over Time {#lgbtq-representation-over-time}
+# Representation Flow {#representation-flow}
 
 <div class="viz-card">
 
-![](../visualizations/identity_representation_over_time_stacked.png)
+<h3>Representation Flow: From Distributor to Queer Identity</h3>
+
+<p class="viz-description">
+This Sankey diagram shows how television content flows from different distribution platforms
+through networks to the represented LGBTQ+ identities.
+</p>
+
+<div class="chart-frame">
+  <iframe
+    src="../visualizations/sankey_year_to_identity.html"
+    loading="lazy"
+    allowfullscreen>
+  </iframe>
+</div>
 
 </div>
 
