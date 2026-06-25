@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="report_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="report_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="report_files/libs/bootstrap/bootstrap-7c726ba4b552559abab891cdc00597c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="report_files/libs/bootstrap/bootstrap-2aa03da68cbd84bc4eccf4f4236487a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><a href="#top" class="back-to-top"> <img src="assets/up-arrow.png" alt="Back to top"> </a></p>
+<p><a href="#" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;"> <img src="assets/up-arrow.png" alt="Back to top"> </a></p>
 <div class="section-nav">
 <p><a href="#introduction">Intro</a> <a href="#research-question">Question</a> <a href="#pipeline-overview">Pipeline</a> <a href="#dataset-overview">Analysis</a> <a href="#key-findings">Findings</a> <a href="#conclusion">Conclusion</a></p>
 </div>
@@ -345,7 +345,7 @@ For example:
 <p>
 became:
 </p>
-<div id="64a24276" class="cell" data-execution_count="1">
+<div id="552e8dde" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -429,7 +429,7 @@ X and Y are lovers.</code></pre>
 The character is bisexual.
 The character identifies as non-binary.</code></pre>
 <p>could be automatically assigned to the corresponding category.</p>
-<div id="d4c6ff66" class="cell" data-execution_count="2">
+<div id="a080be3c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -461,7 +461,7 @@ Character A and Character B are lovers.
 
 Character X is dating Character Y.</code></pre>
 <p>Using the detected names and gender information, the script inferred potential LGBTQ+ identities based on the relationship context.</p>
-<div id="0815bdd4" class="cell" data-execution_count="3">
+<div id="0ca7de62" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
@@ -486,7 +486,7 @@ The relationship inference process was particularly useful for descriptions that
 <div class="manual-review-card">
 <p>Despite the automated classification process, some character descriptions remained ambiguous or lacked sufficient information for reliable labeling.</p>
 <p>When the system could not confidently assign a label, the character was marked as:</p>
-<div id="cc806984" class="cell" data-execution_count="4">
+<div id="1486c2de" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
@@ -523,7 +523,7 @@ Dataset used for the final analysis:
 <p>
 The table below shows the first rows of the dataset used throughout the analysis.
 </p>
-<div id="3729d2a2" class="cell" data-execution_count="5">
+<div id="e694c771" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -657,7 +657,7 @@ The <code>Final_Label</code> column contains automatically or manually assigned 
 <p>
 The following Python code provides a basic overview of the dataset structure.
 </p>
-<div id="eb7d62d8" class="cell" data-execution_count="6">
+<div id="afb85d30" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -690,7 +690,7 @@ Multiple identity labels were split into individual categories and counted separ
 <p>Because some characters were associated with multiple identity labels, the labels were separated and counted individually in the analysis.</p>
 <p>This approach provides a clearer overview of how frequently different LGBTQ+ identities appear across the television series included in the dataset.</p>
 <p>The following code splits multiple labels, removes unresolved entries, and calculates the total frequency of each identity category.</p>
-<div id="b0d4abe7" class="cell" data-execution_count="7">
+<div id="9aaf6142" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
@@ -1128,6 +1128,7 @@ Additional Libraries
 <a href="https://www.python.org/" target="_blank"> Python Programming Language ↗ </a>
 </p>
 </div>
+<script src="scrollspy.js"></script>
 </section>
 </section></section></main></div>
 
