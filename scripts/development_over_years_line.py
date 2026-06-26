@@ -12,32 +12,26 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'relative_identities_line.html')
 if not os.path.exists(INPUT_FILE):
     INPUT_FILE = 'final_labeled_data.csv'
 
-# Color palette restored to the exact vibrant tones of the previous visualization
+# Color palette updated to 85% opacity RGBA values matching the neobrutalist theme
 PRIDE_COLORS = {
-    'Lesbian': '#ea580c',               # Warm orange-red (lesbian flag)
-    'Gay': '#059669',                   # Emerald green (classic pride flag subset)
-    'Bisexual & Pansexual': '#d946ef',  # Vibrant fuchsia (bisexual/pansexual flags)
-    'Trans & Non-Binary': '#38bdf8',    # Light blue (transgender flag)
-    'Asexual': '#7c3aed',               # Violet (asexual flag)
-    'Queer / Questioning': '#ec4899',   # Pink queer color
-    'Other / Unknown': '#94a3b8'        # Gray for other categories
+    'Lesbian': 'rgba(234, 88, 12, 0.85)',               # Warm orange-red
+    'Gay': 'rgba(5, 150, 105, 0.85)',                   # Emerald green
+    'Bisexual & Pansexual': 'rgba(217, 70, 239, 0.85)',  # Vibrant fuchsia
+    'Trans & Non-Binary': 'rgba(56, 189, 248, 0.85)',    # Light blue
+    'Asexual': 'rgba(124, 58, 237, 0.85)',               # Violet
+    'Queer / Questioning': 'rgba(236, 72, 153, 0.85)',   # Pink
+    'Other / Unknown': 'rgba(148, 163, 184, 0.85)'        # Gray
 }
 
 def simplify_identity(label):
-    """
-    Aggregates complex, overlapping, and rare identities into standardized 
-    categories to ensure clean and readable statistical charts.
-    """
     if pd.isna(label):
         return 'Other / Unknown'
     
     label_clean = str(label).strip().lower()
     
-    # 1. Prioritize Gender Identity (transgender, non-binary)
     if any(x in label_clean for x in ['transgender', 'trans', 'non-binary', 'genderfluid', 'intersex']):
         return 'Trans & Non-Binary'
         
-    # 2. Check keywords for sexual orientation
     if any(x in label_clean for x in ['bisexual', 'pansexual', 'demisexual', 'fluid']):
         return 'Bisexual & Pansexual'
     elif 'lesbian' in label_clean:
@@ -52,11 +46,6 @@ def simplify_identity(label):
     return 'Other / Unknown'
 
 def generate_chart():
-    """
-    Main execution pipeline: loads data, cleans year of release, 
-    explodes multi-identity labels, and builds a single relative line chart 
-    showing the percentage share of each identity over the years.
-    """
     print("=== Starting Line Chart Generation ===")
     
     if not os.path.exists(INPUT_FILE):
@@ -67,11 +56,11 @@ def generate_chart():
     df = pd.read_csv(INPUT_FILE)
     print(f"Successfully loaded {len(df)} raw records.")
 
-    # 1. Chronological cleaning (extracting first 4 digits of the year)
+    # 1. Chronological cleaning
     df["Year_Clean"] = df["Year"].astype(str).str.extract(r"(\d{4})")
     df["Year_Clean"] = pd.to_numeric(df["Year_Clean"], errors="coerce")
 
-    # 2. Exploding multiple identity labels into separate rows
+    # 2. Exploding multiple identity labels
     df_labels = df.copy()
     df_labels["Final_Label"] = df_labels["Final_Label"].astype(str).str.split(";")
     df_labels = df_labels.explode("Final_Label")
@@ -86,74 +75,115 @@ def generate_chart():
     min_year, max_year = 2020, 2025
     df_labels = df_labels[(df_labels["Year_Clean"] >= min_year) & (df_labels["Year_Clean"] <= max_year)]
     
-    # Apply identity simplification to reduce category fragmentation
     df_labels['Simplified_Label'] = df_labels['Final_Label'].apply(simplify_identity)
-    print(f"Filtered {len(df_labels)} exploded records for visualization within range [{min_year}-{max_year}].")
+    print(f"Filtered {len(df_labels)} exploded records within range [{min_year}-{max_year}].")
 
-    # Create output directory if it does not exist
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    # ==========================================
-    # DATA PREPARATION FOR PERCENTAGE LINE CHART
-    # ==========================================
-    # Compute total characters per release year
+    # Data preparation
     df_totals = df_labels.groupby('Year_Clean').size().reset_index(name='Total_Count')
-    
-    # Compute count per identity per year
     df_counts = df_labels.groupby(['Year_Clean', 'Simplified_Label']).size().reset_index(name='Count')
     
-    # Merge datasets to compute precise relative percentages
     df_plot = pd.merge(df_counts, df_totals, on='Year_Clean')
     df_plot['Percentage'] = (df_plot['Count'] / df_plot['Total_Count']) * 100
-
-    # Ensure consistent ordering of years
     df_plot = df_plot.sort_values(by=['Year_Clean', 'Simplified_Label'])
 
-    # ==========================================
-    # LINE CHART VISUALIZATION
-    # ==========================================
+    # Base chart creation
     fig = px.line(
         df_plot,
         x='Year_Clean',
         y='Percentage',
         color='Simplified_Label',
-        title='Relative Share of LGBTQ+ Identities by Release Year (2020–2025)',
+        title='RELATIVE SHARE OF LGBTQ+ IDENTITIES BY RELEASE YEAR (2020–2025)',
         labels={
-            'Year_Clean': 'Year of Release', 
-            'Percentage': 'Percentage Share (%)', 
-            'Simplified_Label': 'Identity'
+            'Year_Clean': 'YEAR OF RELEASE', 
+            'Percentage': 'PERCENTAGE SHARE (%)', 
+            'Simplified_Label': 'IDENTITY'
         },
         color_discrete_map=PRIDE_COLORS,
         markers=True,
-        custom_data=['Simplified_Label', 'Count']
+        custom_data=['Count']
     )
 
-    # Customizing the hover tooltip to display only identity, percentage, and absolute count
+    # UNIFIED HOVER TOOLTIP & BRUTALIST STYLING FOR LINES AND MARKERS
     fig.update_traces(
+        line=dict(width=4),                      # Thicker, bolder lines
+        marker=dict(
+            symbol='square',                     # Harsh brutalist square markers
+            size=10,
+            line=dict(color='#000000', width=2)  # High-contrast black outlines
+        ),
+        # Fixed: Removed the Identity line completely, keeping only full ALL-CAPS metric data
         hovertemplate=(
-            "<b>%{customdata[0]}</b><br>"
-            "Percentage Share: %{y:.1f}%<br>"
-            "Absolute Count: %{customdata[1]} characters<extra></extra>"
+            "<b>PERCENTAGE: %{y:.1f}%</b><br>"
+            "<b>TOTAL CHARACTERS: %{customdata[0]}</b><extra></extra>"
         )
     )
 
-    # Configure axes and layout
+    # NEO-BRUTALIST WEB DESIGN COHESION
     fig.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        
+        font=dict(
+            family='"Helvetica Neue", Helvetica, Arial, sans-serif',
+            size=13,
+            color='#000000'
+        ),
+        
+        title=dict(
+            font=dict(size=18, color='#000000', weight=900),
+            x=0.02,
+            y=0.95
+        ),
+        
         xaxis=dict(
+            title=dict(text='YEAR OF RELEASE', font=dict(weight='bold', size=14)),
             tickvals=list(range(min_year, max_year + 1)),
-            tickmode='array'
+            tickmode='array',
+            showgrid=False,
+            showline=True,
+            linecolor='#000000',
+            linewidth=3,
+            tickfont=dict(weight='bold', size=12)
         ),
+        
         yaxis=dict(
+            title=dict(text='PERCENTAGE SHARE', font=dict(weight='bold', size=14)),
             ticksuffix="%",
-            range=[0, max(df_plot['Percentage'].max() + 5, 50)]  # Adjust ceiling dynamically
+            range=[0, max(df_plot['Percentage'].max() + 5, 50)],
+            showgrid=False,
+            showline=True,
+            linecolor='#000000',
+            linewidth=3,
+            tickfont=dict(weight='bold', size=12)
         ),
+        
+        hoverlabel=dict(
+            bgcolor='#ffffff',
+            bordercolor='#000000',
+            font=dict(
+                family='"Helvetica Neue", Helvetica, Arial, sans-serif',
+                size=13,
+                color='#000000',
+                weight='bold'
+            )
+        ),
+        
+        legend=dict(
+            title=dict(text='IDENTITY', font=dict(weight='bold')),
+            font=dict(weight='bold', size=11),
+            bgcolor='rgba(256,256,256,0.9)',
+            bordercolor='#000000',
+            borderwidth=2
+        ),
+        
         height=600,
-        margin=dict(l=50, r=50, t=80, b=50),
-        legend_title='Identity'
+        margin=dict(l=65, r=50, t=90, b=60)
     )
 
     # Save and preview chart
-    fig.write_html(OUTPUT_FILE)
+    fig.write_html(OUTPUT_FILE, config={'displayModeBar': False})
     print(f"Line chart successfully saved to: {os.path.abspath(OUTPUT_FILE)}")
     fig.show()
 

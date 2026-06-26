@@ -98,8 +98,9 @@ def generate_chart():
         marker=dict(
             line=dict(color='#000000', width=2)
         ),
+        # Fixed: Removed IDENTITY line entirely, showing only the segment specific character count
         hovertemplate=(
-            "<b>COUNT: %{x} characters</b><extra></extra>"
+            "<b>CHARACTERS: %{x}</b><extra></extra>"
         )
     )
 
@@ -165,7 +166,6 @@ def generate_chart():
     )
 
     # Add total sum text at the end of each stacked horizontal bar
-    # (Plotly does not support stacked totals automatically out-of-the-box via text_auto, so we use annotations)
     for series in series_totals:
         total_sum = df_plot[df_plot[series_col] == series]['Count'].sum()
         fig.add_annotation(
