@@ -653,34 +653,60 @@ body {
   margin: -0.2rem 0; /* Pfeile näher an die Boxen */
 }
 
+/* Classic Pride Flag */
+
 .red {
-  background: #E40303;
+  background: #E50000;
   color: white;
 }
 
 .orange {
-  background: #FF8C00;
+  background: #FF8D00;
   color: white;
 }
 
-.yellow {
-  background: #FFED00;
-  color: white;
+.yellow,
+.yellow p {
+  background: #FFEE00;
+  color: black !important;
 }
 
 .green {
-  background: #008026;
-  color: white;
-}
-
-.blue {
-  background: #004CFF;
+  background: #008121;
   color: white;
 }
 
 .purple {
-  background: #732982;
+  background: #7F0081;
   color: white;
+}
+
+/* Progress Pride Flag */
+
+.brown {
+  background: #613923;
+  color: white;
+}
+
+.light-blue {
+  background: #5BCEFA;
+  color: black;
+}
+
+.pink {
+  background: #F5A9B8;
+  color: black;
+}
+
+.white {
+  background: #FFFFFF;
+  color: black;
+}
+
+.intersex-yellow,
+.intersex-yellow p {
+  background: #FFD800;
+  color: black !important;
 }
 
 .pipeline-card blockquote {
@@ -1029,10 +1055,10 @@ summary {
    ========================================================================== */
 
 .viz-card {
-  width: calc(100% + 800px);
+  width: calc(100% + 600px);
   max-width: none;
 
-  margin-left: -400px;
+  margin-left: -300px;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
