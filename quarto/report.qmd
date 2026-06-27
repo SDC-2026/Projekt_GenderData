@@ -43,15 +43,7 @@ In Television Series
 
 </div>
 
-<div class="authors-card">
-ARINA RUKINA
-<span>•</span>
-LEILA OSMAN
-<span>•</span>
-NADJA SALEH
-<span>•</span>
-RENATA FIGUEROA
-</div>
+<div class="authors-card"><div class="author-item"><img src="../images/icons/arina_icon.png" alt="" class="author-icon"><span>Arina Rukina</span></div><div class="author-item"><img src="../images/icons/leila_icon.jpg" alt="" class="author-icon"><span>Leila Osman</span></div><div class="author-item"><img src="../images/icons/nadja_icon.jpg" alt="" class="author-icon"><span>Nadja Saleh</span></div><div class="author-item"><img src="../images/icons/renata_icon.jpg" alt="" class="author-icon"><span>Renata Figueroa</span></div></div>
 
 
 # Introduction {#introduction}
@@ -1008,6 +1000,14 @@ gender-guesser ↗
 <p class="source-value">
 <a href="https://www.python.org/" target="_blank">
 Python Programming Language ↗
+</a>
+</p>
+
+<p class="source-label">Visual Assets</p>
+
+<p class="source-value">
+<a href="https://picrew.me/en/image_maker/2127217/" target="_blank">
+Picrew Avatar Maker by bittelizard ↗
 </a>
 </p>
 
