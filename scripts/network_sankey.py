@@ -210,19 +210,15 @@ def generate_sankey():
             value=values,
             color=link_colors,
             line=dict(color="rgba(0,0,0,0.1)", width=1),  # Discrete separating border
-            # Fixed: Kept the exact dynamic arrow syntax and renamed metric line to TOTAL CHARACTERS:
             hovertemplate='<b>FLOW: %{source.label} → %{target.label}</b><br>TOTAL CHARACTERS: %{value}<extra></extra>'
         )
     )])
 
     # Configure layout with transparent background and crisp fonts
     fig.update_layout(
-        title=dict(
-            text="REPRESENTATION FLOW: FROM DISTRIBUTOR TO QUEER IDENTITY",
-            font=dict(size=18, color='#000000', weight=900),
-            x=0.02,
-            y=0.95
-        ),
+        # Removed text but kept original padding and height to restore proportions
+        title=None,
+        
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         font=dict(

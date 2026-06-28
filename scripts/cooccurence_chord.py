@@ -180,12 +180,9 @@ fig.add_trace(go.Scatter(
 
 # 10. Layout settings with strict canvas centering and squaring
 fig.update_layout(
-    title=dict(
-        text="INTERSECTIONAL IDENTITY NETWORK",
-        font=dict(family='"Helvetica Neue", Helvetica, Arial, sans-serif', size=18, color='#000000', weight=900),
-        x=0.5,           
-        xanchor='center' 
-    ),
+    # Removed the title text to prevent duplication with Quarto header
+    title=None, 
+    
     width=900,
     height=900,
     xaxis=dict(
@@ -216,7 +213,8 @@ fig.update_layout(
             weight='bold'
         )
     ),
-    margin=dict(l=0, r=0, t=80, b=0), 
+    # Reduced top margin from 80 to 10 since the title space is no longer needed
+    margin=dict(l=0, r=0, t=10, b=0), 
     autosize=False
 )
 

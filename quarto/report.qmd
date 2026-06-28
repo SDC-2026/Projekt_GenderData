@@ -214,19 +214,20 @@ IDENTITY DETECTION
 
 <div class="pipeline-arrow">↓</div>
 
-<div class="pipeline-step purple">
+<!-- Просто красим этот белый бокс в синий цвет -->
+<div class="pipeline-step blue">
 RELATIONSHIP INFERENCE
 </div>
 
 <div class="pipeline-arrow">↓</div>
 
-<div class="pipeline-step brown">
+<div class="pipeline-step purple">
 MANUAL REVIEW
 </div>
 
 <div class="pipeline-arrow">↓</div>
 
-<div class="pipeline-step light-blue">
+<div class="pipeline-step brown">
 FINAL DATASET
 </div>
 
@@ -238,7 +239,7 @@ VISUALIZATIONS
 
 <div class="pipeline-arrow">↓</div>
 
-<div class="pipeline-step intersex-yellow">
+<div class="pipeline-step light-blue">
 QUARTO REPORT
 </div>
 
@@ -579,69 +580,94 @@ counts_df
 
 # Distribution of LGBTQ+ Identities {#distribution-of-lgbtq-identities-chart}
 
-<div class="viz-card">
-
-<h3>Distribution of LGBTQ+ Identities</h3>
-
-<p class="viz-description">
-The interactive grouped bar chart shows the absolute number of characters assigned to each LGBTQ+ identity in the final dataset.
-</p>
-
-<div class="chart-frame">
+<div class="viz-card" style="height: auto !important; min-height: 750px; padding-bottom: 20px;">
+  <p class="viz-description">
+    This **pictogram bar chart** displays the absolute number of unique characters documented within the dataset over the last five years. Because an individual character may possess multiple intersecting identities (e.g., both Transgender and Lesbian), each specific label is counted independently toward the total volume of its respective category. The individual columns are organized in descending order to illustrate the overall frequency of tracked classifications across the entire sample.
+  </p>
   <iframe
-    src="../plots/absolute_identities_bar.html"
+    src="../plots/identity_pictogram_v2.html"
     loading="lazy"
-    allowfullscreen>
+    allowfullscreen
+    scrolling="no"
+    style="width: 100%; height: 600px; border: none; display: block;">
   </iframe>
 </div>
 
-</div>
 
-# Representation Flow {#representation-flow}
+# Top 5 TV Series with Most Characters {#top-5-tv-series-chart}
 
-<div class="viz-card">
-
-<h3>Representation Flow: From Distributor to Queer Identity</h3>
-
-<p class="viz-description">
-This Sankey diagram shows how television content flows from different distribution platforms
-through networks to the represented LGBTQ+ identities.
-</p>
-
-<div class="chart-frame">
+<div class="viz-card" style="height: auto !important; min-height: 650px; padding-bottom: 20px;">
+  <p class="viz-description">
+    This **stacked bar chart** highlights the top five television series with the highest volume of LGBTQ+ characters, broken down by specific identity labels. Because characters with intersecting identities are counted across multiple relevant categories, this visualization reflects the internal diversity and distribution of specific representations within each prominent title.
+  </p>
   <iframe
-    src="../visualizations/sankey_year_to_identity.html"
+    src="../plots/top_5_series_stacked.html"
     loading="lazy"
-    allowfullscreen>
+    allowfullscreen
+    scrolling="no"
+    style="width: 100%; height: 500px; border: none; display: block;">
   </iframe>
 </div>
 
-</div>
 
 # Development Across Years {#development-across-years}
 
+<div class="viz-card" style="height: auto !important; min-height: 750px; padding-bottom: 20px;">
+  <p class="viz-description">
+    This visualization tracks the annual percentage share of identity groups from 2020 to 2025 based on the character's **year of release**. The trend lines illustrate how the internal proportions of represented identities shift within the overall media landscape over consecutive production cycles.
+  </p>
+  <iframe
+    src="../plots/relative_identities_line.html"
+    loading="lazy"
+    allowfullscreen
+    scrolling="no"
+    style="width: 100%; height: 600px; border: none; display: block;">
+  </iframe>
+</div>
+
+
+# Representation Flow: From Distributor to Queer Identity {#representation-flow}
+
 <div class="viz-card">
 
-![](../visualizations/identity_development_over_years.png)
+<p class="viz-description">
+This **Sankey diagram** maps the structural distribution channels of LGBTQ+ representation across contemporary media ecosystems. By tracing the flow from primary distribution models through specific networks and platforms, the visualization reveals which distribution corridors funnel the highest volume of diverse character identities into the final dataset.
+</p>
+
+<div class="chart-frame">
+  <iframe
+    src="../plots/sankey_diagram.html"
+    loading="lazy"
+    allowfullscreen
+    style="width: 100%; height: 750px; border: none;">
+  </iframe>
+</div>
 
 </div>
+
 
 # Identity Co-occurrence Network {#identity-cooccurrence}
 
 <div class="viz-card">
 
-<p>
-Some television characters are associated with multiple LGBTQ+ identities. To better understand these relationships, an interactive co-occurrence network was created.
+<p class="viz-description">
+  This **intersectional chord diagram** maps the multi-layered overlaps of LGBTQ+ identity classifications within individual characters. To decode the complexity of these overlapping data points, the visualization uses three distinct structural mechanisms:
+  
 </p>
 
-<blockquote>
-The visualization highlights how different LGBTQ+ identities overlap within individual characters. Thicker connections indicate more frequent co-occurrences, while isolated loops represent characters assigned to only one identity.
-</blockquote>
+<ul class="viz-description" style="margin-top: -10px; margin-bottom: 15px;">
+  <li><strong>Circular loops:</strong> Represent characters who carry only a single identity category, where the flow returns directly to its node of origin.</li>
+  <li><strong>Connecting lines:</strong> Represent dual-identity combinations, establishing a direct link between exactly two distinct labels.</li>
+  <li><strong>Internal dots:</strong> Denote complex intersectionality, tracking characters who simultaneously possess three or more concurrent identity classifications.</li>
+</ul>
 
-<div class="chart-frame">
+<div class="chart-frame" style="overflow: hidden; width: 100%; display: flex; justify-content: center;">
   <iframe
-    src="../plots/identity_intersection_chord.html"
-    loading="lazy">
+    src="../plots/intersectional_identity_network.html"
+    loading="lazy"
+    allowfullscreen
+    scrolling="no"
+    style="width: 920px; height: 900px; border: none; overflow: hidden; display: block;">
   </iframe>
 </div>
 

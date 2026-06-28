@@ -29,6 +29,8 @@ PRIDE_COLORS = {
 
 def hex_to_rgba(hex_str, alpha=0.85):
     hex_str = hex_str.lstrip('#')
+    if len(hex_str) == 3:
+        hex_str = ''.join([c*2 for c in hex_str])
     r = int(hex_str[0:2], 16)
     g = int(hex_str[2:4], 16)
     b = int(hex_str[4:6], 16)
@@ -66,7 +68,7 @@ def generate_chart():
 
     fig = go.Figure()
 
-    # Grid configuration
+    # Original correct spacing values
     ITEMS_PER_ROW = 5  
     VERTICAL_STEP = 1.9  
 
@@ -91,10 +93,11 @@ def generate_chart():
             x_body.append(base_x)
             y_body.append(base_y)
             
+            # FIXED: Removed the duplicate append line that caused double heads
             x_head.append(base_x)
             y_head.append(base_y + 1.35)
 
-        # 1. DRAW BODIES (Triangle-Up)
+        # 1. DRAW BODIES
         fig.add_trace(go.Scatter(
             x=x_body,
             y=y_body,
@@ -107,11 +110,11 @@ def generate_chart():
                 line=dict(color='#000000', width=1.5)
             ),
             hoverinfo='text',
-            hovertext=[f"<b>IDENTITY: {label.upper()}</b><br>TOTAL CHARACTERS: {count}"] * len(x_body),
+            hovertext=[f"TOTAL CHARACTERS: {count}"] * len(x_body),
             showlegend=False
         ))
 
-        # 2. DRAW HEADS (Circle)
+        # 2. DRAW HEADS
         fig.add_trace(go.Scatter(
             x=x_head,
             y=y_head,
@@ -124,22 +127,16 @@ def generate_chart():
                 line=dict(color='#000000', width=1.5)
             ),
             hoverinfo='text',
-            hovertext=[f"<b>IDENTITY: {label.upper()}</b><br>TOTAL CHARACTERS: {count}"] * len(x_head),
+            hovertext=[f"TOTAL CHARACTERS: {count}"] * len(x_head),
             showlegend=False
         ))
 
-    # Calculate max rows for Y-axis scaling
     max_count = df_plot['Count'].max()
     max_y_val = (max_count // ITEMS_PER_ROW) * VERTICAL_STEP
 
     # Layout configuration
     fig.update_layout(
-        title=dict(
-            text="ABSOLUTE COUNT OF LGBTQ+ IDENTITIES",
-            font=dict(family='"Helvetica Neue", Helvetica, Arial, sans-serif', size=18, color='#000000', weight=900),
-            x=0.02,
-            y=0.95
-        ),
+        title=None,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         
@@ -172,8 +169,8 @@ def generate_chart():
             bordercolor='#000000',
             font=dict(family='"Helvetica Neue", Helvetica, Arial, sans-serif', size=13, color='#000000', weight='bold')
         ),
-        height=750,
-        margin=dict(l=65, r=50, t=90, b=60)
+        height=620,
+        margin=dict(l=65, r=50, t=25, b=60)
     )
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)

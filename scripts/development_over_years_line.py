@@ -88,13 +88,13 @@ def generate_chart():
     df_plot['Percentage'] = (df_plot['Count'] / df_plot['Total_Count']) * 100
     df_plot = df_plot.sort_values(by=['Year_Clean', 'Simplified_Label'])
 
-    # Base chart creation
+    # Base chart creation (title stripped for Quarto embedding)
     fig = px.line(
         df_plot,
         x='Year_Clean',
         y='Percentage',
         color='Simplified_Label',
-        title='RELATIVE SHARE OF LGBTQ+ IDENTITIES BY RELEASE YEAR (2020–2025)',
+        title=None,
         labels={
             'Year_Clean': 'YEAR OF RELEASE', 
             'Percentage': 'PERCENTAGE SHARE (%)', 
@@ -113,7 +113,6 @@ def generate_chart():
             size=10,
             line=dict(color='#000000', width=2)  # High-contrast black outlines
         ),
-        # Fixed: Removed the Identity line completely, keeping only full ALL-CAPS metric data
         hovertemplate=(
             "<b>PERCENTAGE: %{y:.1f}%</b><br>"
             "<b>TOTAL CHARACTERS: %{customdata[0]}</b><extra></extra>"
@@ -129,12 +128,6 @@ def generate_chart():
             family='"Helvetica Neue", Helvetica, Arial, sans-serif',
             size=13,
             color='#000000'
-        ),
-        
-        title=dict(
-            font=dict(size=18, color='#000000', weight=900),
-            x=0.02,
-            y=0.95
         ),
         
         xaxis=dict(
@@ -179,7 +172,8 @@ def generate_chart():
         ),
         
         height=600,
-        margin=dict(l=65, r=50, t=90, b=60)
+        # Reduced top margin from 90 to 25 to match other headless plots
+        margin=dict(l=65, r=50, t=25, b=60)
     )
 
     # Save and preview chart

@@ -77,14 +77,14 @@ def generate_chart():
     # Sort series order based on the total count so the largest bar is at the top
     series_totals = df_plot.groupby(series_col)['Count'].sum().sort_values(ascending=True).index
     
-    # Base chart creation (Horizontal Stacked Bar)
+    # Base chart creation (Title stripped for Quarto embedding)
     fig = px.bar(
         df_plot,
         y=series_col,
         x='Count',
         color='Final_Label',
         orientation='h',
-        title='TOP 5 TV SERIES WITH THE MOST LGBTQ+ CHARACTERS',
+        title=None,
         labels={series_col: 'TV SERIES', 'Count': 'NUMBER OF CHARACTERS', 'Final_Label': 'IDENTITY'},
         color_discrete_map=PRIDE_COLORS,
         category_orders={
@@ -98,7 +98,6 @@ def generate_chart():
         marker=dict(
             line=dict(color='#000000', width=2)
         ),
-        # Fixed: Removed IDENTITY line entirely, showing only the segment specific character count
         hovertemplate=(
             "<b>CHARACTERS: %{x}</b><extra></extra>"
         )
@@ -115,12 +114,6 @@ def generate_chart():
             color='#000000'
         ),
         
-        title=dict(
-            font=dict(size=18, color='#000000', weight=900),
-            x=0.02,
-            y=0.95
-        ),
-        
         xaxis=dict(
             title=dict(text='NUMBER OF CHARACTERS', font=dict(weight='bold', size=14)),
             showgrid=False,
@@ -128,7 +121,6 @@ def generate_chart():
             linecolor='#000000',
             linewidth=3,
             tickfont=dict(weight='bold', size=12),
-            # Add extra padding on the right side so the total label fits perfectly without clipping
             range=[0, df_plot.groupby(series_col)['Count'].sum().max() + 2]
         ),
         
@@ -161,7 +153,8 @@ def generate_chart():
         ),
         
         height=500,
-        margin=dict(l=150, r=40, t=90, b=60),
+        # Reduced top margin from 90 to 25
+        margin=dict(l=150, r=40, t=25, b=60),
         barmode='stack'
     )
 
@@ -174,7 +167,7 @@ def generate_chart():
             text=f"<b>{total_sum}</b>",
             showarrow=False,
             xanchor='left',
-            xshift=10,  # Shifts the number slightly to the right outside the bar border
+            xshift=10,
             font=dict(
                 family='"Helvetica Neue", Helvetica, Arial, sans-serif',
                 size=14,
