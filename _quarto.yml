@@ -1,5 +1,20 @@
 project:
-  type: default
+  type: website
+  output-dir: docs
+
+website:
+  title: "LGBTQ+ Representation in Television Series"
+
+format:
+  html:
+    theme: quarto/custom.scss
+    toc: false
+    code-fold: true
+    code-summary: "Code anzeigen"
 
 resources:
+  - assets/**
+  - images/**
   - visualizations/**
+  - plots/**
+  - scrollspy.js
