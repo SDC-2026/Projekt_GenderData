@@ -10,12 +10,13 @@ format:
     theme:
       - custom.scss
     code-fold: true
-    code-summary: "Code anzeigen"
+    code-summary: "Show Code"
 
 execute:
   echo: true
   warning: false
   message: false
+  eval: false
 
 jupyter: python3
 ---
@@ -652,7 +653,7 @@ This **Sankey diagram** maps the structural distribution channels of LGBTQ+ repr
 
 <p class="viz-description">
   This **intersectional chord diagram** maps the multi-layered overlaps of LGBTQ+ identity classifications within individual characters. To decode the complexity of these overlapping data points, the visualization uses three distinct structural mechanisms:
-  
+
 </p>
 
 <ul class="viz-description" style="margin-top: -10px; margin-bottom: 15px;">
