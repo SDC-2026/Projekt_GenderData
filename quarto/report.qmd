@@ -34,6 +34,8 @@ jupyter: python3
   <a href="#conclusion">Conclusion</a>
 </div>
 
+<div style="margin-top: 180px;">
+
 <div id="top" class="hero-card">
 
 <h1>
