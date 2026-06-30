@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -73,7 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-1e4276b228c5d64612fd4b99c80cb8fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -104,9 +104,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -145,6 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="section-nav">
 <p><a href="#introduction">Intro</a> <a href="#research-question">Question</a> <a href="#pipeline-overview">Pipeline</a> <a href="#dataset-overview">Analysis</a> <a href="#key-findings">Findings</a> <a href="#conclusion">Conclusion</a></p>
 </div>
+<div style="margin-top: 180px;">
 <div id="top" class="hero-card">
 <h1>
 LGBTQ+<br> <span class="outline-text">Representation</span><br> In Television Series
@@ -320,19 +318,20 @@ From raw data collection to final visualization, each step of the workflow was i
 <div class="pipeline-arrow">
 ↓
 </div>
-<div class="pipeline-step purple">
+<!-- Просто красим этот белый бокс в синий цвет -->
+<div class="pipeline-step blue">
 <p>RELATIONSHIP INFERENCE</p>
 </div>
 <div class="pipeline-arrow">
 ↓
 </div>
-<div class="pipeline-step brown">
+<div class="pipeline-step purple">
 <p>MANUAL REVIEW</p>
 </div>
 <div class="pipeline-arrow">
 ↓
 </div>
-<div class="pipeline-step light-blue">
+<div class="pipeline-step brown">
 <p>FINAL DATASET</p>
 </div>
 <div class="pipeline-arrow">
@@ -344,7 +343,7 @@ From raw data collection to final visualization, each step of the workflow was i
 <div class="pipeline-arrow">
 ↓
 </div>
-<div class="pipeline-step intersex-yellow">
+<div class="pipeline-step light-blue">
 <p>QUARTO REPORT</p>
 </div>
 </div>
@@ -393,9 +392,9 @@ For example:
 <p>
 became:
 </p>
-<div id="29ed76fb" class="cell" data-execution_count="1">
+<div id="649b5ca6" class="cell" data-execution_count="1">
 <details class="code-fold">
-<summary>Code anzeigen</summary>
+<summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"TK Strand[1] (season 2)"</span></span>
@@ -405,9 +404,6 @@ became:
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>TK Strand </code></pre>
-</div>
 </div>
 </div>
 <div class="enrichment-card">
@@ -477,19 +473,16 @@ X and Y are lovers.</code></pre>
 The character is bisexual.
 The character identifies as non-binary.</code></pre>
 <p>could be automatically assigned to the corresponding category.</p>
-<div id="a4a85405" class="cell" data-execution_count="2">
+<div id="6109ec19" class="cell" data-execution_count="2">
 <details class="code-fold">
-<summary>Code anzeigen</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"The character is bisexual."</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> re.search(<span class="vs">r"</span><span class="dv">\b</span><span class="vs">bisexual</span><span class="dv">\b</span><span class="vs">"</span>, text.lower()):</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Bisexual"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<summary>Show Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"The character is bisexual."</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> re.search(<span class="vs">r"</span><span class="dv">\b</span><span class="vs">bisexual</span><span class="dv">\b</span><span class="vs">"</span>, text.lower()):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Bisexual"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Bisexual</code></pre>
-</div>
 </div>
 <blockquote class="blockquote">
 The detection process was implemented through predefined keyword patterns and regular expressions. This approach allowed a large portion of the dataset to be classified automatically before manual review became necessary.
@@ -509,18 +502,15 @@ Character A and Character B are lovers.
 
 Character X is dating Character Y.</code></pre>
 <p>Using the detected names and gender information, the script inferred potential LGBTQ+ identities based on the relationship context.</p>
-<div id="eed06ff2" class="cell" data-execution_count="3">
+<div id="942288c9" class="cell" data-execution_count="3">
 <details class="code-fold">
-<summary>Code anzeigen</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>partner_genders <span class="op">=</span> [<span class="st">"female"</span>]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> character_gender <span class="op">==</span> <span class="st">"female"</span> <span class="kw">and</span> <span class="st">"female"</span> <span class="kw">in</span> partner_genders:</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Lesbian"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<summary>Show Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>partner_genders <span class="op">=</span> [<span class="st">"female"</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> character_gender <span class="op">==</span> <span class="st">"female"</span> <span class="kw">and</span> <span class="st">"female"</span> <span class="kw">in</span> partner_genders:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Lesbian"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Lesbian</code></pre>
-</div>
 </div>
 <p>For example, when two female characters were identified as being romantically involved, the system could infer a Lesbian label. Similarly, relationships between two male characters could contribute to a Gay classification.</p>
 <p>This additional inference step increased the number of automatically classified characters and reduced the number of entries that required manual review.</p>
@@ -534,17 +524,14 @@ The relationship inference process was particularly useful for descriptions that
 <div class="manual-review-card">
 <p>Despite the automated classification process, some character descriptions remained ambiguous or lacked sufficient information for reliable labeling.</p>
 <p>When the system could not confidently assign a label, the character was marked as:</p>
-<div id="ad6aa620" class="cell" data-execution_count="4">
+<div id="028ff2a0" class="cell" data-execution_count="4">
 <details class="code-fold">
-<summary>Code anzeigen</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> found_labels:</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"[MANUAL_REVIEW_REQUIRED]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<summary>Show Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> found_labels:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"[MANUAL_REVIEW_REQUIRED]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[MANUAL_REVIEW_REQUIRED]</code></pre>
-</div>
 </div>
 <p>These entries were exported into a separate review file and manually inspected.</p>
 <p>During this step, additional information from the original source material was used to assign the most appropriate LGBTQ+ identity label.</p>
@@ -571,93 +558,20 @@ Dataset used for the final analysis:
 <p>
 The table below shows the first rows of the dataset used throughout the analysis.
 </p>
-<div id="4fb49f2c" class="cell" data-execution_count="5">
+<div id="fbcbd992" class="cell" data-execution_count="5">
 <details class="code-fold">
-<summary>Code anzeigen</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/processed/final_labeled_data.csv"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    engine<span class="op">=</span><span class="st">"python"</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<summary>Show Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/processed/final_labeled_data.csv"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    engine<span class="op">=</span><span class="st">"python"</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">﻿Year</th>
-<th data-quarto-table-cell-role="th">Series</th>
-<th data-quarto-table-cell-role="th">Network</th>
-<th data-quarto-table-cell-role="th">Character</th>
-<th data-quarto-table-cell-role="th">Actor</th>
-<th data-quarto-table-cell-role="th">Notes</th>
-<th data-quarto-table-cell-role="th">Final_Label</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>2020–2025</td>
-<td>9-1-1: Lone Star</td>
-<td>Fox</td>
-<td>TK Strand</td>
-<td>Ronen Rubinstein</td>
-<td>TK is a gay paramedic who was formerly a firef...</td>
-<td>Gay</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>2020–2025</td>
-<td>9-1-1: Lone Star</td>
-<td>Fox</td>
-<td>Carlos Reyes</td>
-<td>Rafael L. Silva</td>
-<td>Carlos is gay and a policeman. He is married t...</td>
-<td>Gay</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>2020–2025</td>
-<td>9-1-1: Lone Star</td>
-<td>Fox</td>
-<td>Paul Strickland</td>
-<td>Brian Michael Smith</td>
-<td>Paul is a trans man and a firefighter.[3]</td>
-<td>Transgender</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>2020–2025</td>
-<td>9-1-1: Lone Star</td>
-<td>Fox</td>
-<td>Nancy Gillian</td>
-<td>Brianna Baker</td>
-<td>Nancy is a bisexual woman and a paramedic.</td>
-<td>Bisexual</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>2020–</td>
-<td>Alice in Borderland</td>
-<td>Netflix</td>
-<td>Hikari Kuina</td>
-<td>Aya Asahina</td>
-<td>Kuina is a transgender woman and skilled fight...</td>
-<td>Transgender</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
 </div>
 </div>
 </section>
@@ -705,26 +619,15 @@ The <code>Final_Label</code> column contains automatically or manually assigned 
 <p>
 The following Python code provides a basic overview of the dataset structure.
 </p>
-<div id="e70c04ff" class="cell" data-execution_count="6">
+<div id="17e9696a" class="cell" data-execution_count="6">
 <details class="code-fold">
-<summary>Code anzeigen</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columns: </span><span class="sc">{</span><span class="bu">len</span>(df.columns)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> df.columns:</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"•"</span>, col)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<summary>Show Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columns: </span><span class="sc">{</span><span class="bu">len</span>(df.columns)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> df.columns:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"•"</span>, col)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 568
-Columns: 7
-• ﻿Year
-• Series
-• Network
-• Character
-• Actor
-• Notes
-• Final_Label</code></pre>
-</div>
 </div>
 </div>
 </section>
@@ -738,156 +641,95 @@ Multiple identity labels were split into individual categories and counted separ
 <p>Because some characters were associated with multiple identity labels, the labels were separated and counted individually in the analysis.</p>
 <p>This approach provides a clearer overview of how frequently different LGBTQ+ identities appear across the television series included in the dataset.</p>
 <p>The following code splits multiple labels, removes unresolved entries, and calculates the total frequency of each identity category.</p>
-<div id="3c551557" class="cell" data-execution_count="7">
+<div id="c499db4c" class="cell" data-execution_count="7">
 <details class="code-fold">
-<summary>Code anzeigen</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Final_Label"</span>]</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    .dropna()</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    .astype(<span class="bu">str</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">str</span>.split(<span class="st">";"</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    .explode()</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">str</span>.strip()</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> labels[</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">!=</span> <span class="st">"[MANUAL_REVIEW_REQUIRED]"</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> labels.value_counts()</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>counts_df <span class="op">=</span> (</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    counts</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"index"</span>: <span class="st">"Identity"</span>,</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Final_Label"</span>: <span class="st">"Count"</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>counts_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<summary>Show Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Final_Label"</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    .dropna()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    .astype(<span class="bu">str</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">str</span>.split(<span class="st">";"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    .explode()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">str</span>.strip()</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> labels[</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">!=</span> <span class="st">"[MANUAL_REVIEW_REQUIRED]"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> labels.value_counts()</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>counts_df <span class="op">=</span> (</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    counts</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"index"</span>: <span class="st">"Identity"</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Final_Label"</span>: <span class="st">"Count"</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>counts_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Count</th>
-<th data-quarto-table-cell-role="th">count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>Gay</td>
-<td>287</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>Lesbian</td>
-<td>164</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>Bisexual</td>
-<td>69</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>Queer</td>
-<td>56</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>Transgender</td>
-<td>27</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">5</th>
-<td>Pansexual</td>
-<td>18</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">6</th>
-<td>Non-binary</td>
-<td>15</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">7</th>
-<td>Genderfluid</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">8</th>
-<td>Asexual</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">9</th>
-<td>Questioning</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">10</th>
-<td>Intersex</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
 </div>
 </div>
 </section>
 <section id="distribution-of-lgbtq-identities-chart" class="level1">
 <h1>Distribution of LGBTQ+ Identities</h1>
-<div class="viz-card">
-<h3 class="anchored" data-anchor-id="distribution-of-lgbtq-identities-chart">
-Distribution of LGBTQ+ Identities
-</h3>
+<div class="viz-card" style="height: auto !important; min-height: 750px; padding-bottom: 20px;">
 <p class="viz-description">
-The interactive grouped bar chart shows the absolute number of characters assigned to each LGBTQ+ identity in the final dataset.
+This <strong>pictogram bar chart</strong> displays the absolute number of unique characters documented within the dataset over the last five years. Because an individual character may possess multiple intersecting identities (e.g., both Transgender and Lesbian), each specific label is counted independently toward the total volume of its respective category. The individual columns are organized in descending order to illustrate the overall frequency of tracked classifications across the entire sample.
 </p>
-<div class="chart-frame">
-<p><iframe src="plots/absolute_identities_bar.html" loading="lazy" allowfullscreen=""> </iframe></p>
-</div>
+<p><iframe src="plots/identity_pictogram_v2.html" loading="lazy" allowfullscreen="" scrolling="no" style="width: 100%; height: 600px; border: none; display: block;"> </iframe></p>
 </div>
 </section>
-<section id="representation-flow" class="level1">
-<h1>Representation Flow</h1>
-<div class="viz-card">
-<h3 class="anchored" data-anchor-id="representation-flow">
-Representation Flow: From Distributor to Queer Identity
-</h3>
+<section id="top-5-tv-series-chart" class="level1">
+<h1>Top 5 TV Series with Most Characters</h1>
+<div class="viz-card" style="height: auto !important; min-height: 650px; padding-bottom: 20px;">
 <p class="viz-description">
-This Sankey diagram shows how television content flows from different distribution platforms through networks to the represented LGBTQ+ identities.
+This <strong>stacked bar chart</strong> highlights the top five television series with the highest volume of LGBTQ+ characters, broken down by specific identity labels. Because characters with intersecting identities are counted across multiple relevant categories, this visualization reflects the internal diversity and distribution of specific representations within each prominent title.
 </p>
-<div class="chart-frame">
-<p><iframe src="visualizations/sankey_year_to_identity.html" loading="lazy" allowfullscreen=""> </iframe></p>
-</div>
+<p><iframe src="plots/top_5_series_stacked.html" loading="lazy" allowfullscreen="" scrolling="no" style="width: 100%; height: 500px; border: none; display: block;"> </iframe></p>
 </div>
 </section>
 <section id="development-across-years" class="level1">
 <h1>Development Across Years</h1>
+<div class="viz-card" style="height: auto !important; min-height: 750px; padding-bottom: 20px;">
+<p class="viz-description">
+This visualization tracks the annual percentage share of identity groups from 2020 to 2025 based on the character’s <strong>year of release</strong>. The trend lines illustrate how the internal proportions of represented identities shift within the overall media landscape over consecutive production cycles.
+</p>
+<p><iframe src="plots/relative_identities_line.html" loading="lazy" allowfullscreen="" scrolling="no" style="width: 100%; height: 600px; border: none; display: block;"> </iframe></p>
+</div>
+</section>
+<section id="representation-flow" class="level1">
+<h1>Representation Flow: From Distributor to Queer Identity</h1>
 <div class="viz-card">
-<p><img src="visualizations/identity_development_over_years.png" class="img-fluid"></p>
+<p class="viz-description">
+This <strong>Sankey diagram</strong> maps the structural distribution channels of LGBTQ+ representation across contemporary media ecosystems. By tracing the flow from primary distribution models through specific networks and platforms, the visualization reveals which distribution corridors funnel the highest volume of diverse character identities into the final dataset.
+</p>
+<div class="chart-frame">
+<p><iframe src="plots/sankey_diagram.html" loading="lazy" allowfullscreen="" style="width: 100%; height: 750px; border: none;"> </iframe></p>
+</div>
 </div>
 </section>
 <section id="identity-cooccurrence" class="level1">
 <h1>Identity Co-occurrence Network</h1>
 <div class="viz-card">
-<p>
-Some television characters are associated with multiple LGBTQ+ identities. To better understand these relationships, an interactive co-occurrence network was created.
-</p>
-<blockquote class="blockquote">
-The visualization highlights how different LGBTQ+ identities overlap within individual characters. Thicker connections indicate more frequent co-occurrences, while isolated loops represent characters assigned to only one identity.
-</blockquote>
-<div class="chart-frame">
-<p><iframe src="plots/identity_intersection_chord.html" loading="lazy"> </iframe></p>
+<p class="viz-description">
+</p><p>This <strong>intersectional chord diagram</strong> maps the multi-layered overlaps of LGBTQ+ identity classifications within individual characters. To decode the complexity of these overlapping data points, the visualization uses three distinct structural mechanisms:</p>
+<p></p>
+<ul class="viz-description" style="margin-top: -10px; margin-bottom: 15px;">
+<li>
+<strong>Circular loops:</strong> Represent characters who carry only a single identity category, where the flow returns directly to its node of origin.
+</li>
+<li>
+<strong>Connecting lines:</strong> Represent dual-identity combinations, establishing a direct link between exactly two distinct labels.
+</li>
+<li>
+<strong>Internal dots:</strong> Denote complex intersectionality, tracking characters who simultaneously possess three or more concurrent identity classifications.
+</li>
+</ul>
+<div class="chart-frame" style="overflow: hidden; width: 100%; display: flex; justify-content: center;">
+<p><iframe src="plots/intersectional_identity_network.html" loading="lazy" allowfullscreen="" scrolling="no" style="width: 920px; height: 900px; border: none; overflow: hidden; display: block;"> </iframe></p>
 </div>
 </div>
 </section>
@@ -1216,8 +1058,9 @@ Visual Assets
 
 
 </section>
-</section></section></main></div>
+</section></section></div>
 
+</main></div>
 
 
 
