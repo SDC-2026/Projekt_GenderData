@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1e4276b228c5d64612fd4b99c80cb8fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c603b45e2b06cd6a82bc2a59a86b700a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -392,7 +392,7 @@ For example:
 <p>
 became:
 </p>
-<div id="649b5ca6" class="cell" data-execution_count="1">
+<div id="8e1100a5" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -473,7 +473,7 @@ X and Y are lovers.</code></pre>
 The character is bisexual.
 The character identifies as non-binary.</code></pre>
 <p>could be automatically assigned to the corresponding category.</p>
-<div id="6109ec19" class="cell" data-execution_count="2">
+<div id="dd6139a3" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -502,7 +502,7 @@ Character A and Character B are lovers.
 
 Character X is dating Character Y.</code></pre>
 <p>Using the detected names and gender information, the script inferred potential LGBTQ+ identities based on the relationship context.</p>
-<div id="942288c9" class="cell" data-execution_count="3">
+<div id="dc98c46f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
@@ -524,7 +524,7 @@ The relationship inference process was particularly useful for descriptions that
 <div class="manual-review-card">
 <p>Despite the automated classification process, some character descriptions remained ambiguous or lacked sufficient information for reliable labeling.</p>
 <p>When the system could not confidently assign a label, the character was marked as:</p>
-<div id="028ff2a0" class="cell" data-execution_count="4">
+<div id="95e065c9" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
@@ -558,7 +558,7 @@ Dataset used for the final analysis:
 <p>
 The table below shows the first rows of the dataset used throughout the analysis.
 </p>
-<div id="fbcbd992" class="cell" data-execution_count="5">
+<div id="745893d3" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -619,7 +619,7 @@ The <code>Final_Label</code> column contains automatically or manually assigned 
 <p>
 The following Python code provides a basic overview of the dataset structure.
 </p>
-<div id="17e9696a" class="cell" data-execution_count="6">
+<div id="9fa54e2c" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -641,7 +641,7 @@ Multiple identity labels were split into individual categories and counted separ
 <p>Because some characters were associated with multiple identity labels, the labels were separated and counted individually in the analysis.</p>
 <p>This approach provides a clearer overview of how frequently different LGBTQ+ identities appear across the television series included in the dataset.</p>
 <p>The following code splits multiple labels, removes unresolved entries, and calculates the total frequency of each identity category.</p>
-<div id="c499db4c" class="cell" data-execution_count="7">
+<div id="f450ab43" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>

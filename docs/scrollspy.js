@@ -1,71 +1,1501 @@
-document.addEventListener("DOMContentLoaded", () => {
+/*-- scss:defaults --*/
+$body-bg: #f6f2eb;
+$body-color: #111111;
 
-  const navLinks = document.querySelectorAll(".section-nav a");
+/*-- scss:rules --*/
 
-  // Zuordnung deiner Navigation zu den Abschnitten
-  const sections = [
-    { id: "introduction", nav: "introduction" },
-    { id: "research-question", nav: "research-question" },
+/* ==========================================================================
+   GLOBAL LAYOUT
+   ========================================================================== */
 
-    // Alles hiervon gehört zu "Pipeline"
-    { id: "pipeline-overview", nav: "pipeline-overview" },
-    { id: "data-cleaning", nav: "pipeline-overview" },
-    { id: "identity-detection", nav: "pipeline-overview" },
-    { id: "relationship-inference", nav: "pipeline-overview" },
-    { id: "manual-review", nav: "pipeline-overview" },
-    { id: "load-final-dataset", nav: "pipeline-overview" },
+html,
+body {
+  background-color: $body-bg;
+  color: $body-color;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
-    // Alles hiervon gehört zu "Analysis"
-    { id: "dataset-overview", nav: "dataset-overview" },
-    { id: "distribution-of-lgbtq-identities", nav: "dataset-overview" },
-    { id: "treemap-overview", nav: "dataset-overview" },
-    { id: "lgbtq-representation-over-time", nav: "dataset-overview" },
-    { id: "development-across-years", nav: "dataset-overview" },
+#quarto-content,
+#quarto-document-content,
+.quarto-container,
+main,
+.page-columns {
+  background: transparent;
+}
 
-    // Findings
-    { id: "key-findings", nav: "key-findings" },
-    { id: "interpretation-of-results", nav: "key-findings" },
-    { id: "methodological-reflection", nav: "key-findings" },
-    { id: "limitations", nav: "key-findings" },
+/* Override Quarto's default grid system so content spans the full width
+   instead of being trapped in the narrow "body" column */
+.page-columns {
+  grid-template-columns: minmax(1em, 1fr) [body-start] minmax(0, 1300px) [body-end] minmax(1em, 1fr) !important;
+}
 
-    // Conclusion
-    { id: "conclusion", nav: "conclusion" },
-    { id: "reproducibility", nav: "conclusion" },
-    { id: "references", nav: "conclusion" }
-  ];
+.page-columns > * {
+  grid-column: body !important;
+}
 
-  const sectionElements = sections
-    .map(s => ({
-      nav: s.nav,
-      element: document.getElementById(s.id)
-    }))
-    .filter(s => s.element);
+#quarto-document-content {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1em;
+}
 
-  function updateActiveSection() {
+/* Forces all boxes to include padding and borders in their total width */
+.hero-card, .authors-card {
+  box-sizing: border-box !important;
+}
 
-    let current = sectionElements[0];
+/* ==========================================================================
+   QUARTO GLOBAL LAYOUT OVERRIDE
+   ========================================================================== */
+/* Force the global Quarto container to expand its max page grid limits */
 
-    sectionElements.forEach(section => {
+/* ==========================================================================
+   SYNCHRONIZED CARD LAYOUT (HERO + AUTHORS)
+   ========================================================================== */
+/* Apply identical increased width and strict centering to BOTH boxes */
+.hero-card,
+.authors-card {
+  box-sizing: border-box !important;
 
-      if (window.scrollY >= section.element.offsetTop - 140) {
-        current = section;
-      }
+  width: 100% !important;
+  max-width: 880px !important;
 
-    });
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 
-    navLinks.forEach(link => link.classList.remove("active"));
+/* ==========================================================================
+   HERO SECTION SPECIFIC STYLES
+   ========================================================================== */
+.hero-card {
+  background: linear-gradient(90deg, #f5a4cf, #efb4d8);
+  border: 4px solid #000;
+  box-shadow: 10px 10px 0 #000;
+  border-radius: 8px;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
 
-    const active = document.querySelector(
-      `.section-nav a[href="#${current.nav}"]`
-    );
+.hero-rainbow {
+  position: absolute;
+  top: clamp(-30px, -4vw, -60px);
+  left: clamp(-20px, -2vw, -120px);
+  width: clamp(80px, 14vw, 170px);
+  height: auto;
+  z-index: 10;
+}
 
-    if (active) {
-      active.classList.add("active");
+.hero-card h1 {
+  margin: 0;
+  color: #000;
+  font-family: "Arial Black", "Helvetica Neue", sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 0.85;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+  max-width: 900px;
+}
+
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 3px #000;
+  text-stroke: 3px #000;
+}
+
+/* ==========================================================================
+   AUTHORS CARD SPECIFIC STYLES
+   ========================================================================== */
+.authors-card {
+  background: white;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  
+  /* Flexbox configuration */
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  
+  /* Arina stays close to the left edge to leverage the expanded space */
+  padding-top: 1.2rem !important;
+  padding-bottom: 1.2rem !important;
+  padding-left: clamp(1rem, 3vw, 2rem) !important;  
+  padding-right: clamp(1rem, 3vw, 2rem) !important;
+  
+  /* Increased safe gap between author groups */
+  gap: clamp(0.8rem, 2vw, 1.6rem) !important; 
+
+ /* Individual author wrappers */
+  .author-item {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+    gap: 10px !important; 
+
+    span {
+      color: #000000 !important;
+      /* THE FIX: Forcing a smaller, sane font size so names finally fit */
+      font-size: 0.85rem !important; 
+      letter-spacing: 0.02em !important; /* Optional: slightly cleaner look */
     }
   }
 
-  window.addEventListener("scroll", updateActiveSection);
+  /* Author image settings */
+  .author-icon {
+    width: 36px !important;
+    height: 36px !important;
+    border: none !important;
+    outline: none !important;
+    display: block !important;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+}
 
-  updateActiveSection();
+@media (max-width: 600px) {
+  .authors-card {
+    flex-wrap: wrap !important;
+  }
+}
 
-});
+/* ==========================================================================
+   TOP NAVIGATION
+   ========================================================================== */
+
+.section-nav {
+  position: fixed;
+
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 1000;
+
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: calc(100% - 120px);
+  max-width: 1300px;
+
+  gap: clamp(0.4rem, 1.5vw, 1rem);
+  padding: clamp(0.6rem, 2vw, 1rem) clamp(0.75rem, 3vw, 2rem);
+
+  background: rgba(246, 242, 235, 0.95);
+  backdrop-filter: blur(8px);
+
+  border: 2px solid #000;
+  border-radius: 20px;
+  box-shadow: 6px 6px 0 #000;
+
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: clamp(140px, 22vw, 120px);
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: 120px;
+  }
+}
+
+.section-nav > * {
+  flex: 1 1 140px !important;
+  min-width: 0 !important;
+}
+
+.section-nav a {
+  display: flex !important;
+  flex: 1 1 0 !important;
+  height: clamp(50px, 8vw, 70px);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 #000;
+  background: white !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  line-height: 1.2;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.section-nav a.active {
+  transform: translateY(-2px);
+}
+
+/* data-active-nav wird per JS gesetzt, da Quarto die href zu vollen URLs umschreibt.
+   body-Präfix erhöht Spezifität über Bootstrap */
+body .section-nav a[data-active-nav="introduction"] {
+  background: #E40303 !important;
+  color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(228, 3, 3, 0.65) !important;
+  text-decoration: none !important;
+}
+
+body .section-nav a[data-active-nav="research-question"] {
+  background: #FF8C00 !important;
+  color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(255, 140, 0, 0.65) !important;
+  text-decoration: none !important;
+}
+
+body .section-nav a[data-active-nav="pipeline-overview"] {
+  background: #FFED00 !important;
+  color: black !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(255, 237, 0, 0.7) !important;
+  text-decoration: none !important;
+}
+
+body .section-nav a[data-active-nav="dataset-overview"] {
+  background: #008026 !important;
+  color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(0, 128, 38, 0.65) !important;
+  text-decoration: none !important;
+}
+
+body .section-nav a[data-active-nav="key-findings"] {
+  background: #004CFF !important;
+  color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(0, 76, 255, 0.65) !important;
+  text-decoration: none !important;
+}
+
+body .section-nav a[data-active-nav="conclusion"] {
+  background: #732982 !important;
+  color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(115, 41, 130, 0.65) !important;
+  text-decoration: none !important;
+}
+
+.section-nav a:hover {
+  transform: rotate(-1deg) translate(-4px, -4px);
+  box-shadow: 8px 8px 0 #000;
+}
+
+.section-nav p {
+  display: contents !important;
+}
+
+/* Pride Navigation Colors */
+
+.section-nav a:nth-of-type(1):hover {
+  background: #E40303 !important;
+  color: white !important;
+}
+
+.section-nav a:nth-of-type(2):hover {
+  background: #FF8C00 !important;
+  color: white !important;
+}
+
+.section-nav a:nth-of-type(3):hover {
+  background: #FFED00 !important;
+  color: black !important;
+}
+
+.section-nav a:nth-of-type(4):hover {
+  background: #008026 !important;
+  color: white !important;
+}
+
+.section-nav a:nth-of-type(5):hover {
+  background: #004CFF !important;
+  color: white !important;
+}
+
+.section-nav a:nth-of-type(6):hover {
+  background: #732982 !important;
+  color: white !important;
+}
+
+// =========================================================================
+// DOCUMENT HEADINGS (H1, H2, H3)
+// =========================================================================
+h1, h2, h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  color: #000000 !important;
+  text-transform: uppercase !important;
+  letter-spacing: -0.02em !important;
+}
+
+h1 {
+  display: inline-block;
+  background: white;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 #000;
+  padding: 10px clamp(14px, 3vw, 24px);
+  font-weight: 900 !important;
+  font-size: clamp(1.4rem, 4vw, 2rem) !important;
+  margin-top: 5rem !important;
+  margin-bottom: 2rem !important;
+  margin-left: 0 !important;
+}
+
+.hero-card h1 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+  font-size: clamp(2rem, 6vw, 4rem) !important;
+  line-height: 0.82 !important;
+}
+
+h2 {
+  display: inline-block;
+  background: #ffffff;
+  border: 3px solid #000;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 #000;
+  padding: 8px clamp(10px, 2vw, 16px);
+  font-weight: 800 !important;
+  font-size: clamp(1rem, 2.5vw, 1.2rem) !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+h3 {
+  font-weight: 700 !important;
+  font-size: 1.2rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+
+// 6. MAIN TEXT
+p {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.8;
+  max-width: 120ch;
+  color: #222;
+}
+
+// 1. ZITATE / CALLOUT BOXEN (Für wichtige Thesen oder Zitate)
+blockquote, .callout {
+  background-color: #ffffff !important;
+  border: 4px solid #000000 !important;
+  box-shadow: 6px 6px 0px #000000 !important;
+  padding: 1.5rem !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+// 2. DATENTABELLEN (Harter Magazin-Look statt Standard-Web)
+table, .table {
+  border-collapse: collapse !important;
+  border: 4px solid #000000 !important;
+  background-color: #ffffff !important;
+  
+  thead {
+    background-color: #D65f93 !important; // Pinker Tabellenkopf
+    color: #ffffff !important;
+    border-bottom: 4px solid #000000 !important;
+    th {
+      font-weight: 900 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+    }
+  }
+  
+  tbody tr {
+    border-bottom: 2px solid #000000 !important;
+    td {
+      color: #000000 !important;
+      font-weight: 500 !important;
+    }
+  }
+}
+
+// 3. CODE-BLÖCKE (Falls du Code im Report anzeigst)
+div.sourceCode {
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  background-color: #ffffff !important;
+}
+
+// 4. TEXT-MARKIERUNGEN / HIGHLIGHTS
+mark, .highlight {
+  background-color: #D65f93 !important;
+  color: #ffffff !important;
+  padding: 0 4px !important;
+  font-weight: 700 !important;
+}
+
+// =========================================================================
+// UNIFIED BRUTALIST SHADOW SYSTEM (Tables, Outputs & Callout Boxes)
+// =========================================================================
+
+#quarto-document-content {
+  // Target tables, code outputs, callouts, and blockquotes to look 100% identical
+  .dataframe,
+  table,
+  .callout,
+  blockquote,
+  .blockquote {
+    // Ensure the container doesn't chop off the outer shadow
+    overflow: visible !important; 
+    
+    // Forced identical thick brutalist frame and solid shadow structure everywhere
+    border: 3px solid #000000 !important;
+    box-shadow: 5px 5px 0px 0px #000000 !important; 
+    
+    // Structural layout adjustments
+    margin-right: 10px !important;
+    margin-bottom: 1.5rem !important;
+    background-color: #ffffff !important;
+  }
+
+  // Remove individual left-borders that Quarto default callouts often have
+  .callout, blockquote, .blockquote {
+    border-left: 3px solid #000000 !important; // Forces the left wall to match the 3px standard
+  }
+
+  // Remove borders and shadows from the outer wrapper divs entirely
+  .cell-output, 
+  .cell-output-display, 
+  .table-responsive {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  // Hide empty ghost containers that Quarto occasionally generates below outputs
+  .cell-output-display:empty,
+  div:empty {
+    display: none !important;
+  }
+}
+body {
+  background-image:
+    radial-gradient(#d8d8d8 1px, transparent 1px);
+
+  background-size: 24px 24px;
+}
+
+// Hide default Quarto title block
+
+#title-block-header {
+  display: none !important;
+}
+
+/* ==========================================================================
+   INTRODUCTION LAYOUT
+   ========================================================================== */
+
+.intro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr);
+  gap: 2rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .intro-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.intro-text {
+  background: #f5f5f5;
+  border: 3px solid #000;
+  border-radius: 16px;
+  box-shadow: 10px 10px 0 #000;
+
+  padding: clamp(2rem, 2.5vw, 3rem);
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+.intro-image {
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  width: 100%;
+}
+
+.intro-image img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+}
+
+/* ==========================================================================
+   RESEARCH QUESTION
+   ========================================================================== */
+
+.research-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+
+  background: #f5f5f5;
+  border: 3px solid #000;
+  border-radius: 20px;   /* Runde Ecken */
+  box-shadow: 10px 10px 0 #000;
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.research-card h2 {
+  display: inline-block;
+  background: #ff8c00;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 #000;
+  padding: 10px clamp(14px, 3vw, 24px);
+  margin-top: clamp(-3rem, -8vw, -5rem);
+  margin-bottom: 2rem;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.research-main {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.research-card ul {
+  margin-left: 1.5rem;
+}
+
+.research-card li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+.research-card blockquote {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 900;
+  line-height: 1.2;
+  background: #ffffff;
+  border: 3px solid #000;
+  border-radius: 20px;   /* Runde Ecken */
+  box-shadow: 8px 8px 0 #000;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   DATA SOURCE
+   ========================================================================== */
+
+.data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+
+  width: 100%;
+  margin-left: 0;
+}
+
+@media (max-width: 768px) {
+  .data-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.data-source-card,
+.data-collection-card {
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  height: 100%;
+}
+
+.source-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #666;
+  margin: 1.5rem 0 0.4rem 0;
+}
+
+.source-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+.source-value a {
+  color: #000;
+  text-decoration: none;
+  border-bottom: 3px solid #FFED00;
+}
+
+.source-value a:hover {
+  color: #004CFF;
+  border-bottom-color: #004CFF;
+}
+
+.data-source-card ul {
+  margin-top: 1rem;
+}
+
+.data-source-card li {
+  margin-bottom: 0.5rem;
+}
+/* ==========================================================================
+   PROJECT STRUCTURE
+   ========================================================================== */
+
+.structure-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.structure-card blockquote {
+  font-size: 1rem;
+  font-weight: 900;
+  border-radius: 10px;
+  background: white;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   PIPELINE OVERVIEW
+   ========================================================================== */
+
+.pipeline-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.pipeline-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem; /*Absatand*/
+
+  margin: 3rem 0;
+}
+
+.pipeline-step {
+  width: 100%;
+  max-width: 380px;
+
+  padding: 1rem clamp(1rem, 4vw, 2rem);
+
+  border: 3px solid #000;
+  border-radius: 20px;
+
+  box-shadow: 6px 6px 0 #000;
+
+  font-weight: 800;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+
+  text-align: center;
+  color: white !important; /* Schrift weiß */
+}
+
+.pipeline-step p {
+  color: white !important;
+  margin: 0;
+  text-align: center;
+}
+
+.pipeline-arrow {
+  font-size: 2rem;
+  font-weight: 900;
+
+  line-height: 1;
+  margin: -0.2rem 0; /* Pfeile näher an die Boxen */
+}
+
+/* Classic Pride Flag */
+
+.red {
+  background: #E50000;
+  color: white;
+}
+
+.orange {
+  background: #FF8D00;
+  color: white;
+}
+
+.yellow,
+.yellow p {
+  background: #FFEE00;
+  color: black !important;
+}
+
+.green {
+  background: #008121;
+  color: white;
+}
+
+.blue {
+  background: #004CFF;
+  color: white;
+}
+
+.purple {
+  background: #7F0081;
+  color: white;
+}
+
+/* Progress Pride Flag */
+
+.brown {
+  background: #613923;
+  color: white;
+}
+
+.light-blue {
+  background: #5BCEFA;
+  color: black;
+}
+
+.pink {
+  background: #F5A9B8;
+  color: black;
+}
+
+.white {
+  background: #FFFFFF;
+  color: black;
+}
+
+.intersex-yellow,
+.intersex-yellow p {
+  background: #FFD800;
+  color: black !important;
+}
+
+.pipeline-card blockquote {
+  font-size: clamp(1.05rem, 3.2vw, 1.4rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+
+/* ==========================================================================
+   DATA CLEANING + ENRICHMENT + REVIEW
+   ========================================================================== */
+
+.cleaning-card,
+.enrichment-card,
+.review-card {
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.cleaning-card blockquote,
+.enrichment-card blockquote,
+.review-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.pipeline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+
+  width: 100%;
+  margin-left: 0;
+  margin-bottom: 5rem;
+
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .pipeline-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   IDENTITY DETECTION
+   ========================================================================== */
+
+.identity-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.identity-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   RELATIONSHIP INFERENCE
+   ========================================================================== */
+
+.relationship-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.relationship-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   MANUAL REVIEW
+   ========================================================================== */
+
+.manual-review-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.manual-review-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   LOAD FINAL DATASET
+   ========================================================================== */
+
+.dataset-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.dataset-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   DATAFRAMES / TABLES
+   ========================================================================== */
+
+.table {
+  border: 4px solid #000 !important;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 10px 10px 0 #000;
+}
+
+.table thead th {
+  background: #d35f99 !important;
+  color: white !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-bottom: 4px solid #000 !important;
+}
+
+.table td,
+.table th {
+  border: 2px solid #000 !important;
+  padding: 1rem !important;
+}
+
+pre code {
+  background: transparent;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+details {
+  margin: 1rem 0 2rem 0;
+}
+
+summary {
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   DATASET OVERVIEW
+   ========================================================================== */
+
+.overview-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.overview-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   DATASET STATS
+   ========================================================================== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto 4rem auto;
+}
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  background: white;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 8px 8px 0 #000;
+  padding: 2rem;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.stat-value {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+
+  color: #000;
+}
+
+/* ==========================================================================
+   DISTRIBUTION OF LGBTQ+ IDENTITIES
+   ========================================================================== */
+
+.distribution-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.distribution-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   VISUALIZATION CARD
+   ========================================================================== */
+
+.viz-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.viz-card img {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Interaktive Plotly-Diagramme */
+
+.chart-frame {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.chart-frame iframe {
+  display: block;
+  width: 100%;
+  height: clamp(380px, 70vw, 750px);   
+  border: none;
+}
+
+/* ==========================================================================
+   KEY FINDINGS
+   ========================================================================== */
+
+.findings-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.findings-card h3 {
+  margin-top: 2rem;
+  font-weight: 800;
+}
+
+.findings-card blockquote {
+  font-size: clamp(1.05rem, 3.2vw, 1.4rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   INTERPRETATION OF RESULTS
+   ========================================================================== */
+
+.interpretation-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.interpretation-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   METHODOLOGICAL REFLECTION
+   ========================================================================== */
+
+
+/* ==========================================================================
+   METHODOLOGICAL REFLECTION
+   ========================================================================== */
+
+/* ==========================================================================
+   METHODOLOGICAL REFLECTION
+   ========================================================================== */
+
+.reflection-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.reflection-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+/* ==========================================================================
+   LIMITATIONS
+   ========================================================================== */
+
+.limitations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+
+  width: 100%;
+  margin-left: 0;
+  margin-bottom: 5rem;
+
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .limitations-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.limitation-card {
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.limitation-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+/* ==========================================================================
+   CONCLUSION
+   ========================================================================== */
+
+.conclusion-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.conclusion-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   REPRODUCIBILITY
+   ========================================================================== */
+
+.reproducibility-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.reproducibility-card blockquote {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 900;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 #000;
+
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   REFERENCES
+   ========================================================================== */
+
+.references-card {
+  width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+
+  background: white;
+  border: 3px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 #000;
+
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+/* ==========================================================================
+   BACK TO TOP BUTTON
+   ========================================================================== */
+
+.back-to-top {
+  position: fixed;
+
+  right: 30px;
+  bottom: 30px;
+
+  z-index: 9999;
+
+  text-decoration: none;
+}
+
+.back-to-top img {
+  width: 80px;
+  height: auto;
+
+  transition: transform 0.2s ease;
+}
+
+.back-to-top:hover img {
+  transform: translateY(-6px);
+}

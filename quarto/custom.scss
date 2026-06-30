@@ -23,8 +23,18 @@ main,
   background: transparent;
 }
 
+/* Override Quarto's default grid system so content spans the full width
+   instead of being trapped in the narrow "body" column */
+.page-columns {
+  grid-template-columns: minmax(1em, 1fr) [body-start] minmax(0, 1300px) [body-end] minmax(1em, 1fr) !important;
+}
+
+.page-columns > * {
+  grid-column: body !important;
+}
+
 #quarto-document-content {
-  max-width: 100%;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 1em;
 }
@@ -38,16 +48,6 @@ main,
    QUARTO GLOBAL LAYOUT OVERRIDE
    ========================================================================== */
 /* Force the global Quarto container to expand its max page grid limits */
-.column-body, 
-main.content, 
-#quarto-document-content,
-.page-columns,
-.quarto-container-fluid {
-  max-width: 1200px !important; 
-  width: 100% !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
 
 /* ==========================================================================
    SYNCHRONIZED CARD LAYOUT (HERO + AUTHORS)
@@ -56,10 +56,12 @@ main.content,
 .hero-card,
 .authors-card {
   box-sizing: border-box !important;
-  width: 1150px !important;     /* Enforced identical width */
-  max-width: 100% !important;
-  margin-left: auto !important;  /* Center alignment */
-  margin-right: auto !important; /* Center alignment */
+
+  width: 100% !important;
+  max-width: 880px !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* ==========================================================================
@@ -70,15 +72,16 @@ main.content,
   border: 4px solid #000;
   box-shadow: 10px 10px 0 #000;
   border-radius: 8px;
-  padding: 4rem;
+  padding: clamp(1.5rem, 5vw, 4rem);
   margin-bottom: 2rem;
+  overflow: hidden;
 }
 
 .hero-rainbow {
   position: absolute;
-  top: -60px;
-  left: -120px;
-  width: 170px;
+  top: clamp(-30px, -4vw, -60px);
+  left: clamp(-20px, -2vw, -120px);
+  width: clamp(80px, 14vw, 170px);
   height: auto;
   z-index: 10;
 }
@@ -88,7 +91,7 @@ main.content,
   color: #000;
   font-family: "Arial Black", "Helvetica Neue", sans-serif;
   font-weight: 900;
-  font-size: 5rem;
+  font-size: clamp(2.2rem, 7vw, 5rem);
   line-height: 0.85;
   letter-spacing: -0.08em;
   text-transform: uppercase;
@@ -122,11 +125,11 @@ main.content,
   /* Arina stays close to the left edge to leverage the expanded space */
   padding-top: 1.2rem !important;
   padding-bottom: 1.2rem !important;
-  padding-left: 2rem !important;  
-  padding-right: 2rem !important;
+  padding-left: clamp(1rem, 3vw, 2rem) !important;  
+  padding-right: clamp(1rem, 3vw, 2rem) !important;
   
   /* Increased safe gap between author groups */
-  gap: 1.6rem !important; 
+  gap: clamp(0.8rem, 2vw, 1.6rem) !important; 
 
  /* Individual author wrappers */
   .author-item {
@@ -155,6 +158,12 @@ main.content,
   }
 }
 
+@media (max-width: 600px) {
+  .authors-card {
+    flex-wrap: wrap !important;
+  }
+}
+
 /* ==========================================================================
    TOP NAVIGATION
    ========================================================================== */
@@ -162,7 +171,7 @@ main.content,
 .section-nav {
   position: fixed;
 
-  top: 20px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
 
@@ -170,14 +179,15 @@ main.content,
 
   display: flex !important;
   flex-direction: row !important;
-  flex-wrap: nowrap !important;
+  flex-wrap: wrap !important;
   align-items: center !important;
+  justify-content: center !important;
 
-  width: calc(100% - 60px);
-  max-width: 1600px;
+  width: calc(100% - 120px);
+  max-width: 1300px;
 
-  gap: 1rem;
-  padding: 1rem 2rem;
+  gap: clamp(0.4rem, 1.5vw, 1rem);
+  padding: clamp(0.6rem, 2vw, 1rem) clamp(0.75rem, 3vw, 2rem);
 
   background: rgba(246, 242, 235, 0.95);
   backdrop-filter: blur(8px);
@@ -190,18 +200,24 @@ main.content,
 }
 
 body {
-  padding-top: 120px;
+  padding-top: clamp(140px, 22vw, 120px);
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: 120px;
+  }
 }
 
 .section-nav > * {
-  flex: 1 1 0 !important;
+  flex: 1 1 140px !important;
   min-width: 0 !important;
 }
 
 .section-nav a {
   display: flex !important;
   flex: 1 1 0 !important;
-  height: 70px;
+  height: clamp(50px, 8vw, 70px);
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -214,7 +230,7 @@ body {
   text-decoration: none !important;
   font-weight: 800;
   text-transform: uppercase;
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
   line-height: 1.2;
   transition: transform 0.15s, box-shadow 0.15s;
 }
@@ -226,31 +242,37 @@ body {
 .section-nav a[href="#introduction"].active {
   background: #E40303 !important;
   color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(228, 3, 3, 0.65) !important;
 }
 
 .section-nav a[href="#research-question"].active {
   background: #FF8C00 !important;
   color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(255, 140, 0, 0.65) !important;
 }
 
 .section-nav a[href="#pipeline-overview"].active {
   background: #FFED00 !important;
   color: black !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(255, 237, 0, 0.7) !important;
 }
 
 .section-nav a[href="#dataset-overview"].active {
   background: #008026 !important;
   color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(0, 128, 38, 0.65) !important;
 }
 
 .section-nav a[href="#key-findings"].active {
   background: #004CFF !important;
   color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(0, 76, 255, 0.65) !important;
 }
 
 .section-nav a[href="#conclusion"].active {
   background: #732982 !important;
   color: white !important;
+  box-shadow: 4px 4px 0 #000, 0 0 18px 4px rgba(115, 41, 130, 0.65) !important;
 }
 
 .section-nav a:hover {
@@ -310,12 +332,12 @@ h1 {
   border: 3px solid #000;
   border-radius: 10px;
   box-shadow: 5px 5px 0 #000;
-  padding: 12px 24px;
+  padding: 10px clamp(14px, 3vw, 24px);
   font-weight: 900 !important;
-  font-size: 2rem !important;
+  font-size: clamp(1.4rem, 4vw, 2rem) !important;
   margin-top: 5rem !important;
   margin-bottom: 2rem !important;
-  margin-left: -300px !important;
+  margin-left: 0 !important;
 }
 
 .hero-card h1 {
@@ -325,7 +347,7 @@ h1 {
   padding: 0 !important;
   margin: 0 !important;
   display: block !important;
-  font-size: 4rem !important;
+  font-size: clamp(2rem, 6vw, 4rem) !important;
   line-height: 0.82 !important;
 }
 
@@ -335,9 +357,9 @@ h2 {
   border: 3px solid #000;
   border-radius: 8px;
   box-shadow: 4px 4px 0 #000;
-  padding: 8px 16px;
+  padding: 8px clamp(10px, 2vw, 16px);
   font-weight: 800 !important;
-  font-size: 1.2rem !important;
+  font-size: clamp(1rem, 2.5vw, 1.2rem) !important;
   margin-top: 2rem !important;
   margin-bottom: 1rem !important;
 }
@@ -352,7 +374,7 @@ h3 {
 
 // 6. MAIN TEXT
 p {
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
   line-height: 1.8;
   max-width: 120ch;
   color: #222;
@@ -473,13 +495,16 @@ body {
 
 .intro-layout {
   display: grid;
-  grid-template-columns: 1fr 240px;
-  gap: 3rem;
+  grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr);
+  gap: 2rem;
+  width: 100%;
+  align-items: stretch;
+}
 
-  width: calc(100% + 300px);
-  margin-left: -180px;
-
-  align-items: start;
+@media (max-width: 768px) {
+  .intro-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 .intro-text {
@@ -488,22 +513,27 @@ body {
   border-radius: 16px;
   box-shadow: 10px 10px 0 #000;
 
-  padding: 3.5rem;
+  padding: clamp(2rem, 2.5vw, 3rem);
   width: 100%;
+  max-width: none;
+  min-width: 0;
 }
 
 .intro-image {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: stretch;
+  width: 100%;
 }
 
 .intro-image img {
-  width: 280px;
+  width: 100%;
+  max-width: none;
   height: 100%;
   object-fit: cover;
 
   border: 3px solid #000;
-  border-radius: 20px;   /* Runde Ecken */
+  border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 }
 
@@ -512,10 +542,10 @@ body {
    ========================================================================== */
 
 .research-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 4rem;
@@ -524,7 +554,7 @@ body {
   border: 3px solid #000;
   border-radius: 20px;   /* Runde Ecken */
   box-shadow: 10px 10px 0 #000;
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .research-card h2 {
@@ -533,16 +563,16 @@ body {
   border: 3px solid #000;
   border-radius: 10px;
   box-shadow: 5px 5px 0 #000;
-  padding: 10px 24px;
-  margin-top: -5rem;
+  padding: 10px clamp(14px, 3vw, 24px);
+  margin-top: clamp(-3rem, -8vw, -5rem);
   margin-bottom: 2rem;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 900;
   text-transform: uppercase;
 }
 
 .research-main {
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 2rem;
@@ -557,7 +587,7 @@ body {
   font-size: 1.1rem;
 }
 .research-card blockquote {
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 900;
   line-height: 1.2;
   background: #ffffff;
@@ -574,11 +604,18 @@ body {
 
 .data-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
 
-  width: calc(100% + 300px);
-  margin-left: -150px;
+  width: 100%;
+  margin-left: 0;
+}
+
+@media (max-width: 768px) {
+  .data-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .data-source-card,
@@ -587,8 +624,8 @@ body {
   border: 3px solid #000;
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
-  padding: 3rem;
-  height: fit-content;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  height: 100%;
 }
 
 .source-label {
@@ -629,10 +666,10 @@ body {
    ========================================================================== */
 
 .structure-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -641,7 +678,7 @@ body {
   border: 3px solid #000;
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .structure-card blockquote {
@@ -660,10 +697,10 @@ body {
    ========================================================================== */
 
 .pipeline-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -673,7 +710,7 @@ body {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .pipeline-flow {
@@ -686,9 +723,10 @@ body {
 }
 
 .pipeline-step {
-  width: 380px;
+  width: 100%;
+  max-width: 380px;
 
-  padding: 1rem 2rem;
+  padding: 1rem clamp(1rem, 4vw, 2rem);
 
   border: 3px solid #000;
   border-radius: 20px;
@@ -696,7 +734,7 @@ body {
   box-shadow: 6px 6px 0 #000;
 
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
 
   text-align: center;
   color: white !important; /* Schrift weiß */
@@ -778,7 +816,7 @@ body {
 }
 
 .pipeline-card blockquote {
-  font-size: 1.4rem;
+  font-size: clamp(1.05rem, 3.2vw, 1.4rem);
   font-weight: 900;
 
   background: white;
@@ -802,13 +840,13 @@ body {
   border: 3px solid #000;
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .cleaning-card blockquote,
 .enrichment-card blockquote,
 .review-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -825,11 +863,18 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
 
-  width: calc(100% + 300px);
-  margin-left: -150px;
+  width: 100%;
+  margin-left: 0;
   margin-bottom: 5rem;
 
   align-items: start;
+}
+
+@media (max-width: 768px) {
+  .pipeline-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 /* ==========================================================================
@@ -837,10 +882,10 @@ body {
    ========================================================================== */
 
 .identity-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -850,11 +895,11 @@ body {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .identity-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -871,10 +916,10 @@ body {
    ========================================================================== */
 
 .relationship-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -884,11 +929,11 @@ body {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .relationship-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -905,10 +950,10 @@ body {
    ========================================================================== */
 
 .manual-review-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -918,11 +963,11 @@ body {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .manual-review-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -939,10 +984,10 @@ body {
    ========================================================================== */
 
 .dataset-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -952,11 +997,11 @@ body {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .dataset-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -1014,10 +1059,10 @@ summary {
    ========================================================================== */
 
 .overview-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -1027,11 +1072,11 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .overview-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -1053,6 +1098,19 @@ summary {
   gap: 2rem;
   max-width: 1200px;
   margin: 2rem auto 4rem auto;
+}
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .stat-card {
@@ -1078,7 +1136,7 @@ summary {
 }
 
 .stat-value {
-  font-size: 3rem;
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 900;
   line-height: 1;
 
@@ -1090,10 +1148,10 @@ summary {
    ========================================================================== */
 
 .distribution-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -1103,11 +1161,11 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .distribution-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -1124,10 +1182,10 @@ summary {
    ========================================================================== */
 
 .viz-card {
-  width: calc(100% + 600px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -300px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -1137,7 +1195,7 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .viz-card img {
@@ -1157,7 +1215,7 @@ summary {
 .chart-frame iframe {
   display: block;
   width: 100%;
-  height: 750px;   
+  height: clamp(380px, 70vw, 750px);   
   border: none;
 }
 
@@ -1166,10 +1224,10 @@ summary {
    ========================================================================== */
 
 .findings-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -1179,7 +1237,7 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .findings-card h3 {
@@ -1188,7 +1246,7 @@ summary {
 }
 
 .findings-card blockquote {
-  font-size: 1.4rem;
+  font-size: clamp(1.05rem, 3.2vw, 1.4rem);
   font-weight: 900;
 
   background: white;
@@ -1205,10 +1263,10 @@ summary {
    ========================================================================== */
 
 .interpretation-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -1218,11 +1276,11 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .interpretation-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -1238,43 +1296,20 @@ summary {
    METHODOLOGICAL REFLECTION
    ========================================================================== */
 
-.reflection-card {
-  width: calc(100% + 300px);
-  margin-left: -150px;
 
-  margin-left: -180px;
-  margin-right: 0;
-  margin-top: 1rem;
-  margin-bottom: 5rem;
-
-  background: white;
-  border: 3px solid #000;
-  border-radius: 20px;
-  box-shadow: 8px 8px 0 #000;
-
-  padding: 3rem;
-}
-
-.reflection-card blockquote {
-  font-size: 1.5rem;
-  font-weight: 900;
-  border-radius: 10px;
-  background: white;
-  border: 3px solid #000;
-  box-shadow: 5px 5px 0 #000;
-  padding: 1.5rem;
-  margin: 2rem 0;
-}
+/* ==========================================================================
+   METHODOLOGICAL REFLECTION
+   ========================================================================== */
 
 /* ==========================================================================
    METHODOLOGICAL REFLECTION
    ========================================================================== */
 
 .reflection-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -1284,11 +1319,11 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .reflection-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -1308,11 +1343,18 @@ summary {
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
 
-  width: calc(100% + 300px);
-  margin-left: -150px;
+  width: 100%;
+  margin-left: 0;
   margin-bottom: 5rem;
 
   align-items: start;
+}
+
+@media (max-width: 768px) {
+  .limitations-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .limitation-card {
@@ -1321,11 +1363,11 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .limitation-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -1341,10 +1383,10 @@ summary {
    ========================================================================== */
 
 .conclusion-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -1354,11 +1396,11 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .conclusion-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -1375,10 +1417,10 @@ summary {
    ========================================================================== */
 
 .reproducibility-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -1388,11 +1430,11 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 
 .reproducibility-card blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-weight: 900;
 
   background: white;
@@ -1409,10 +1451,10 @@ summary {
    ========================================================================== */
 
 .references-card {
-  width: calc(100% + 300px);
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
 
-  margin-left: -150px;
+  margin-left: 0;
   margin-right: 0;
   margin-top: 1rem;
   margin-bottom: 5rem;
@@ -1422,7 +1464,7 @@ summary {
   border-radius: 20px;
   box-shadow: 8px 8px 0 #000;
 
-  padding: 3rem;
+  padding: clamp(1.25rem, 5vw, 3rem);
 }
 /* ==========================================================================
    BACK TO TOP BUTTON
