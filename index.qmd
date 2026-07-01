@@ -215,7 +215,7 @@ IDENTITY DETECTION
 
 <div class="pipeline-arrow">↓</div>
 
-<!-- Просто красим этот белый бокс в синий цвет -->
+
 <div class="pipeline-step blue">
 RELATIONSHIP INFERENCE
 </div>
@@ -652,14 +652,13 @@ This **Sankey diagram** maps the structural distribution channels of LGBTQ+ repr
 <div class="viz-card">
 
 <p class="viz-description">
-  This **intersectional chord diagram** maps the multi-layered overlaps of LGBTQ+ identity classifications within individual characters. To decode the complexity of these overlapping data points, the visualization uses three distinct structural mechanisms:
-
+  This **circular network diagram** maps the multi-layered overlaps of LGBTQ+ identity classifications within individual characters. The visualization uses three distinct structural mechanisms:
 </p>
 
 <ul class="viz-description" style="margin-top: -10px; margin-bottom: 15px;">
-  <li><strong>Circular loops:</strong> Represent characters who carry only a single identity category, where the flow returns directly to its node of origin.</li>
-  <li><strong>Connecting lines:</strong> Represent dual-identity combinations, establishing a direct link between exactly two distinct labels.</li>
-  <li><strong>Internal dots:</strong> Denote complex intersectionality, tracking characters who simultaneously possess three or more concurrent identity classifications.</li>
+  <li><strong>Circular loops:</strong> Represent characters who carry only a single identity category, where the line returns directly to its node of origin.</li>
+  <li><strong>Connecting lines:</strong> Link exactly two distinct labels, representing <strong>17 characters</strong> with intersectional dual-identity combinations.</li>
+  <li><strong>Internal dots:</strong> Positioned inside the network, tracking <strong>2 characters</strong> with highly intersectional profiles of three or more concurrent identity classifications.</li>
 </ul>
 
 <div class="chart-frame" style="overflow: hidden; width: 100%; display: flex; justify-content: center;">
@@ -954,10 +953,30 @@ The workflow can be reproduced by executing the scripts in the following order:
 5. `merge_final_data.py`
    - Combines automatically classified records with manually reviewed entries to create the final dataset.
 
-6. `advanced_visualizations.py`
-   - Generates the visualizations used throughout the analysis.
+5. `merge_data.py`
+   - Combines automatically classified records with manually reviewed entries to create the baseline merged dataset, stored as `labeled_data.csv`.
 
-7. `report.qmd`
+5. merge_data.py
+   - Combines automatically classified records with manually reviewed entries to create the baseline merged dataset, stored as labeled_data.csv.
+
+5. `merge_data.py`
+   - Combines automatically classified records with manually reviewed entries to create the baseline merged dataset, stored as `labeled_data.csv`.
+
+6. Post-Merge Manual Refinement (Final Curation)
+   - Processed the `labeled_data.csv` file to resolve over-classification noise where characters were erroneously assigned conflicting tags (e.g., simultaneously labeled as gay, lesbian, and bisexual due to ambiguous source descriptions) to ensure clean, accurate node relationships for the network charts. The curated output is saved as `final_labeled_data.csv`.
+
+7. `repair_css.py`
+   - Resolves structural anomalies, restores strict semicolon delimiters within multi-label profiles, and repairs row alignment caused by spreadsheet exports on `final_labeled_data.csv`.
+
+8. Data Visualization Generation
+   - Execution of the individual standalone plotting scripts:
+     - `absolute_icon_bar.py`
+     - `top_5_bar_chart.py`
+     - `development_over_years_line.py`
+     - `network_sankey.py`
+     - `cooccurence_network.py`
+
+9. `report.qmd`
    - Produces the final report using Quarto.
 
 All required Python packages are listed in the `requirements.txt` file, allowing the computational environment to be recreated easily.

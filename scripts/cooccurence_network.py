@@ -42,17 +42,19 @@ for idx, row in df_clean.iterrows():
 label_list = sorted(list(all_labels))
 num_labels = len(label_list)
 
-# 3. Dynamic Linear Scaling for Line Widths (Honest proportional mapping)
+# 3. Dynamic Square Root Scaling for Line Widths
+# Balances small differences in lower ranges while preserving contrast for large categories
 all_counts = list(single_label_counts.values()) + list(pair_connections.values())
 max_count = max(all_counts) if all_counts else 1
 
-# Enforce base baseline width to preserve visibility of smaller categories
-MIN_WIDTH = 5
-MAX_WIDTH = 20
+MIN_WIDTH = 4   # Base width for the smallest categories
+MAX_WIDTH = 26  # Maximum width for the largest categories
 
 def get_linear_width(count):
-    # Proportional mapping to maintain exact data scale ratios
-    return MIN_WIDTH + (count / max_count) * (MAX_WIDTH - MIN_WIDTH)
+    if count <= 0:
+        return MIN_WIDTH
+    # Square root scaling provides a smooth, visible progression across all sizes
+    return MIN_WIDTH + (np.sqrt(count) / np.sqrt(max_count)) * (MAX_WIDTH - MIN_WIDTH)
 
 # 4. High-Contrast Pride Colors Map (HEX)
 COLOR_MAP = {
@@ -76,13 +78,13 @@ def hex_to_rgba(hex_str, alpha=0.35):
     b = int(hex_str[4:6], 16)
     return f"rgba({r}, {g}, {b}, {alpha})"
 
-# 5. Circular layout configuration for outer nodes
+# 5. Circular layout configuration for outer main nodes
 angles = np.linspace(0, 2 * np.pi, num_labels, endpoint=False)
 label_positions = {label_list[i]: (np.cos(angles[i]), np.sin(angles[i])) for i in range(num_labels)}
 
 fig = go.Figure()
 
-# 6. One loop per category for Single-Label characters (Linear width applied)
+# 6. Loop for Single-Label characters (Self-looping curves on the outer perimeter)
 for l, count in single_label_counts.items():
     lx, ly = label_positions[l]
     label_idx = label_list.index(l)
@@ -108,7 +110,7 @@ for l, count in single_label_counts.items():
         showlegend=False
     ))
 
-# 7. Aggregated 2-Label lines (Linear width applied)
+# 7. Aggregated 2-Label lines (Bezier-like curved lines connecting main categories)
 for (l1, l2), count in pair_connections.items():
     x0, y0 = label_positions[l1]
     x1, y1 = label_positions[l2]
@@ -129,13 +131,20 @@ for (l1, l2), count in pair_connections.items():
         showlegend=False
     ))
 
-# 8. 3+ Labels: Equidistant circular spread on inner ring (Fine 20% opacity)
+# 8. 3+ Labels: Intersectional characters positioned inside the inner circle area
 high_intersec_count = len(high_intersection_characters)
 
 for idx_high, char in enumerate(high_intersection_characters):
     custom_angle = (2 * np.pi / high_intersec_count) * idx_high
-    cx = 0.65 * np.cos(custom_angle)
-    cy = 0.65 * np.sin(custom_angle)
+    
+    # Characters with exactly 3 labels are pulled closer to the center for visual clarity (Radius 0.42)
+    if len(char['labels']) == 3:
+        current_radius = 0.42
+    else:
+        current_radius = 0.65
+        
+    cx = current_radius * np.cos(custom_angle)
+    cy = current_radius * np.sin(custom_angle)
     
     for l in char['labels']:
         lx, ly = label_positions[l]
@@ -143,21 +152,22 @@ for idx_high, char in enumerate(high_intersection_characters):
         fig.add_trace(go.Scatter(
             x=[cx, lx], y=[cy, ly],
             mode='lines',
-            line=dict(color=hex_to_rgba(base_color, alpha=0.20), width=1.5),
+            line=dict(color=hex_to_rgba(base_color, alpha=0.20), width=3),
             hoverinfo='skip',
             showlegend=False
         ))
         
+    # Enlarged black marker dots (Size 13) for enhanced readability and web interactivity
     fig.add_trace(go.Scatter(
         x=[cx], y=[cy],
         mode='markers',
-        marker=dict(size=8, color='#000000', line=dict(color='#ffffff', width=1)),
+        marker=dict(size=13, color='#000000', line=dict(color='#ffffff', width=1.5)),
         hoverinfo='text',
         text=f"<b>CHARACTER: {char['name'].upper()}</b><br>IDENTITIES: {', '.join(char['labels']).upper()}",
         showlegend=False
     ))
 
-# 9. Large outer category nodes (Solid 85% opacity, thick borders, ALL-CAPS labels)
+# 9. Large outer category nodes for identities (Solid placement with thick black borders)
 outer_x = [label_positions[l][0] for l in label_list]
 outer_y = [label_positions[l][1] for l in label_list]
 outer_colors = [hex_to_rgba(COLOR_MAP.get(l, '#94a3b8'), alpha=0.85) for l in label_list]
@@ -178,11 +188,9 @@ fig.add_trace(go.Scatter(
     showlegend=False
 ))
 
-# 10. Layout settings with strict canvas centering and squaring
+# 10. Layout settings for a perfectly squared and centered canvas bounding box
 fig.update_layout(
-    # Removed the title text to prevent duplication with Quarto header
     title=None, 
-    
     width=900,
     height=900,
     xaxis=dict(
@@ -213,12 +221,11 @@ fig.update_layout(
             weight='bold'
         )
     ),
-    # Reduced top margin from 80 to 10 since the title space is no longer needed
     margin=dict(l=0, r=0, t=10, b=0), 
     autosize=False
 )
 
-# Save and open
+# Save file and open interactively inside the browser
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 fig.write_html(OUTPUT_FILE, config={'displayModeBar': False})
 print(f"Network updated and successfully saved to: {os.path.abspath(OUTPUT_FILE)}")

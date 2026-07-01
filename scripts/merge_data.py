@@ -30,7 +30,7 @@ manual_file = os.path.join(
 
 final_file = os.path.join(
     processed_dir,
-    "final_labeled_data.csv"
+    "labeled_data.csv"
 )
 
 

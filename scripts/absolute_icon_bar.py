@@ -46,20 +46,14 @@ def generate_chart():
     # Load dataset
     df = pd.read_csv(INPUT_FILE)
 
-    # Clean and filter years (2020-2025)
-    df["Year_Clean"] = df["Year"].astype(str).str.extract(r"(\d{4})")
-    df["Year_Clean"] = pd.to_numeric(df["Year_Clean"], errors="coerce")
-
+    # Safe string conversion and split
     df_labels = df.copy()
     df_labels["Final_Label"] = df_labels["Final_Label"].astype(str).str.split(";")
     df_labels = df_labels.explode("Final_Label")
     df_labels["Final_Label"] = df_labels["Final_Label"].str.strip()
 
-    df_labels = df_labels[~df_labels["Final_Label"].str.contains("MANUAL", case=False, na=True)]
-    df_labels = df_labels.dropna(subset=["Year_Clean", "Final_Label"])
-    
-    min_year, max_year = 2020, 2025
-    df_labels = df_labels[(df_labels["Year_Clean"] >= min_year) & (df_labels["Year_Clean"] <= max_year)]
+    df_labels = df_labels.dropna(subset=["Final_Label"])
+    df_labels = df_labels[df_labels["Final_Label"] != 'nan']
 
     # Get absolute counts and sort
     df_plot = df_labels.groupby('Final_Label').size().reset_index(name='Count')
@@ -68,9 +62,11 @@ def generate_chart():
 
     fig = go.Figure()
 
-    # Original correct spacing values
+    # BALANCED MIDDLE GROUND
     ITEMS_PER_ROW = 5  
-    VERTICAL_STEP = 1.9  
+    VERTICAL_STEP = 1.9           # Restored original healthy row spacing
+    HEAD_OFFSET = 1.35            # Restored original clean head position
+    HORIZONTAL_COMPRESSION = 0.12 # Middle ground (not 0.15 and not 0.09)
 
     for x_idx, row in enumerate(df_plot.itertuples()):
         label = row.Final_Label
@@ -87,15 +83,14 @@ def generate_chart():
             row_num = i // ITEMS_PER_ROW
             col_num = i % ITEMS_PER_ROW
             
-            base_x = x_idx + (col_num - (ITEMS_PER_ROW - 1) / 2) * 0.15
+            base_x = x_idx + (col_num - (ITEMS_PER_ROW - 1) / 2) * HORIZONTAL_COMPRESSION
             base_y = row_num * VERTICAL_STEP
             
             x_body.append(base_x)
             y_body.append(base_y)
             
-            # FIXED: Removed the duplicate append line that caused double heads
             x_head.append(base_x)
-            y_head.append(base_y + 1.35)
+            y_head.append(base_y + HEAD_OFFSET)
 
         # 1. DRAW BODIES
         fig.add_trace(go.Scatter(
