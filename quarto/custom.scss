@@ -120,7 +120,7 @@ main,
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   align-items: center !important;
-  justify-content: center !important;
+  justify-content: space-between !important;
   
   /* Arina stays close to the left edge to leverage the expanded space */
   padding-top: 1.2rem !important;
@@ -141,7 +141,7 @@ main,
     span {
       color: #000000 !important;
       /* THE FIX: Forcing a smaller, sane font size so names finally fit */
-      font-size: 0.85rem !important; 
+      font-size: 1rem !important; 
       letter-spacing: 0.02em !important; /* Optional: slightly cleaner look */
     }
   }
@@ -282,6 +282,15 @@ body {
 
 .section-nav p {
   display: contents !important;
+}
+
+/* CORE FIX FOR QUARTO SCROLLSPY ACTIVE BUTTONS */
+h2, 
+h1, 
+div[id], 
+section[id],
+.quarto-section-depth1 {
+  scroll-margin-top: 140px !important; /* Drückt den mathematischen Erkennungspunkt unter die Navi */
 }
 
 /* Pride Navigation Colors */

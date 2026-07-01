@@ -11,6 +11,15 @@ format:
     toc: false
     code-fold: true
     code-summary: "Code anzeigen"
+    smooth-scroll: true
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  eval: false
+
+jupyter: python3
 
 resources:
   - assets/**
@@ -18,3 +27,6 @@ resources:
   - visualizations/**
   - plots/**
   - scrollspy.js
+
+header-includes: |
+  <meta name="quarto:offset" content="140">
