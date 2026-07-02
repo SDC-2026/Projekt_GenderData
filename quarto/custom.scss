@@ -284,15 +284,6 @@ body {
   display: contents !important;
 }
 
-/* CORE FIX FOR QUARTO SCROLLSPY ACTIVE BUTTONS */
-h2, 
-h1, 
-div[id], 
-section[id],
-.quarto-section-depth1 {
-  scroll-margin-top: 140px !important; /* Drückt den mathematischen Erkennungspunkt unter die Navi */
-}
-
 /* Pride Navigation Colors */
 
 .section-nav a:nth-of-type(1):hover {

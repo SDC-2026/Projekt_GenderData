@@ -18,6 +18,8 @@ execute:
 
 jupyter: python3
 ---
+
+
 <a href="#" class="back-to-top"
    onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
   <img src="assets/up-arrow.png" alt="Back to top">
@@ -1060,4 +1062,3 @@ Picrew Avatar Maker by bittelizard ↗
 </div>
 
 <script src="scrollspy.js"></script>
-

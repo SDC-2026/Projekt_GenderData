@@ -55,9 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     navLinks.forEach(link => link.classList.remove("active"));
 
-    const active = document.querySelector(
-      `.section-nav a[href="#${current.nav}"]`
-    );
+    const active = document.querySelector(`.section-nav a[href="#${current.nav}"]`);
 
     if (active) {
       active.classList.add("active");
