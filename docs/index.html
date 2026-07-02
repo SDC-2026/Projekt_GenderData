@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,10 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-174b244438792fdaeb75f01db7998b92.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4de021d0f12f7f6498add703bfdd6f46.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -168,7 +168,7 @@ LGBTQ+<br> <span class="outline-text">Representation</span><br> In Television Se
 <h1>Introduction</h1>
 <section id="introduction" class="intro-layout">
 <div class="intro-text">
-<p>LGBTQ+ representation in television and streaming media has become increasingly visible in recent years. Television series not only reflect social developments but also influence public perception of gender and sexuality. Because of this, analyzing LGBTQ+ representation in media is relevant for understanding broader cultural trends.</p>
+<p>LGBTQ+ representation in television and streaming media has become increasingly visible in recent years. Television series not only reflect social developments but also influence public perception of gender and sexuality. Because of this, analyzing LGBTQ+ representation in media is relevant for understanding broader cultural trends. However, previous studies suggest that increased visibility does not necessarily result in equal or authentic representation across all identities.</p>
 <p>This project investigates LGBTQ+ characters in dramatic television series from the 2020s. The project combines automated data extraction, data cleaning, keyword-based label detection, and manual review in order to build a structured dataset of LGBTQ+ television characters.</p>
 <p>The project also demonstrates how computational methods and reproducible data pipelines can be used for media and gender studies research.</p>
 </div>
@@ -177,12 +177,24 @@ LGBTQ+<br> <span class="outline-text">Representation</span><br> In Television Se
 </div>
 </section>
 </section>
+<section id="why-this-matters" class="level1">
+<h1>WHY THIS MATTERS</h1>
+<div class="why-card">
+<p>
+Television is more than entertainment. It shapes cultural norms, influences public attitudes, and contributes to how social identities are understood. For many LGBTQ+ people, television is one of the first places where identities become visible and socially recognizable.
+</p>
+<p>
+As LGBTQ+ representation has become increasingly visible in contemporary television, researchers have also highlighted that visibility remains uneven across different identities. While queer characters appear more frequently than in previous decades, cisgender and homosexual identities continue to dominate, whereas transgender and non-binary identities remain comparatively underrepresented. These findings demonstrate that measuring representation is not only about counting characters but also about understanding diversity and balance across identities.
+</p>
+</div>
+</section>
 <section id="research-question" class="level1">
 <h1>Research Question</h1>
 <div class="research-card">
 <p>
+</p><p>This project explores which gender identities are represented, how frequently they appear, and whether representation is distributed evenly or concentrated among a limited number of identities. By combining open data with quantitative analysis, the study provides a transparent overview of current representation patterns in contemporary television.</p>
 The central research question of this project is:
-</p>
+<p></p>
 <blockquote class="blockquote">
 Which LGBTQ+ identities are represented most frequently in dramatic television series of the 2020s?
 </blockquote>
@@ -393,7 +405,7 @@ For example:
 <p>
 became:
 </p>
-<div id="1663ca0c" class="cell" data-execution_count="1">
+<div id="7ea0b4ac" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -474,7 +486,7 @@ X and Y are lovers.</code></pre>
 The character is bisexual.
 The character identifies as non-binary.</code></pre>
 <p>could be automatically assigned to the corresponding category.</p>
-<div id="0caeb981" class="cell" data-execution_count="2">
+<div id="9d2fd180" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -503,7 +515,7 @@ Character A and Character B are lovers.
 
 Character X is dating Character Y.</code></pre>
 <p>Using the detected names and gender information, the script inferred potential LGBTQ+ identities based on the relationship context.</p>
-<div id="cff2b154" class="cell" data-execution_count="3">
+<div id="6690835f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
@@ -525,7 +537,7 @@ The relationship inference process was particularly useful for descriptions that
 <div class="manual-review-card">
 <p>Despite the automated classification process, some character descriptions remained ambiguous or lacked sufficient information for reliable labeling.</p>
 <p>When the system could not confidently assign a label, the character was marked as:</p>
-<div id="d36857ec" class="cell" data-execution_count="4">
+<div id="d890b285" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
@@ -559,7 +571,7 @@ Dataset used for the final analysis:
 <p>
 The table below shows the first rows of the dataset used throughout the analysis.
 </p>
-<div id="3bc3374d" class="cell" data-execution_count="5">
+<div id="2d4fffc9" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -620,7 +632,7 @@ The <code>Final_Label</code> column contains automatically or manually assigned 
 <p>
 The following Python code provides a basic overview of the dataset structure.
 </p>
-<div id="cf2da980" class="cell" data-execution_count="6">
+<div id="053d9511" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -642,7 +654,7 @@ Multiple identity labels were split into individual categories and counted separ
 <p>Because some characters were associated with multiple identity labels, the labels were separated and counted individually in the analysis.</p>
 <p>This approach provides a clearer overview of how frequently different LGBTQ+ identities appear across the television series included in the dataset.</p>
 <p>The following code splits multiple labels, removes unresolved entries, and calculates the total frequency of each identity category.</p>
-<div id="eb8575ff" class="cell" data-execution_count="7">
+<div id="cc89003f" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
@@ -738,7 +750,7 @@ This <strong>circular network diagram</strong> maps the multi-layered overlaps o
 <h1>Key Findings</h1>
 <div class="findings-card">
 <p>
-The analysis revealed several important patterns regarding LGBTQ+ representation in dramatic television series of the 2020s.
+The analysis shows that representation has become more diverse over recent years, yet visibility remains concentrated among a relatively small number of identities. These findings align with previous research demonstrating that, despite clear progress in LGBTQ+ visibility, certain gender identities continue to receive considerably less representation than others.
 </p>
 <blockquote class="blockquote">
 Three key findings emerged from the dataset and visualizations.
@@ -783,6 +795,17 @@ This suggests that LGBTQ+ representation has expanded, but diversity within LGBT
 Overall, the findings indicate growing LGBTQ+ visibility in television while also highlighting continuing disparities between different identity groups.
 </blockquote>
 </div>
+<section id="beyond-visibility" class="level1">
+<h1>BEYOND VISIBILITY</h1>
+<div class="why-card">
+<p>
+Representation is not only about how many LGBTQ+ characters appear on screen, but also about how they are portrayed. Positive representation requires characters to have meaningful relationships, personal development, and identities that extend beyond stereotypes.
+</p>
+<p>
+Research on lesbian characters in television found that many portrayals still focus on young, white, cisgender women and continue to rely on recurring homonegative tropes, while friendships and personal storylines often remain underdeveloped. These findings highlight that authentic representation depends not only on visibility, but also on diversity, complexity, and the quality of character development.
+</p>
+</div>
+</section>
 <section id="interpretation-of-results" class="level1">
 <h1>Interpretation of Results</h1>
 <div class="interpretation-card">
@@ -921,7 +944,7 @@ provide insufficient information for reliable automatic classification and often
 <h1>Conclusion</h1>
 <div class="conclusion-card">
 <p>
-This project explored LGBTQ+ representation in dramatic television series from the 2020s using computational data analysis methods.
+Representation is not solely a matter of visibility but also of diversity, balance, and inclusion. By examining gender identities across television series released between 2020 and 2025, this project contributes to a broader understanding of how contemporary media reflects social change. The results support existing research while providing an open-data perspective on representation patterns in modern television.
 </p>
 <blockquote class="blockquote">
 The project demonstrates how computational approaches can support research in media studies and gender studies.
@@ -1080,6 +1103,24 @@ Visual Assets
 </p>
 <p class="source-value">
 <a href="https://picrew.me/en/image_maker/2127217/" target="_blank"> Picrew Avatar Maker by bittelizard ↗ </a>
+</p>
+<p class="source-label">
+Research Literature
+</p>
+<p class="source-value">
+<a href="https://doi.org/10.1007/s12119-025-10361-0" target="_blank"> Higueras-Ruiz, M.-J., &amp; González-Corisco, M. (2025). <em>LGBTQ+ Representation in American Fiction Series: Analysis of Archetypes in Queer Characters on the Streaming Platform Max.</em> <em>Sexuality &amp; Culture</em>. ↗ </a>
+</p>
+<p class="source-value">
+<a href="https://link.springer.com/content/pdf/10.1007/s12119-025-10361-0.pdf" target="_blank"> PDF Version ↗ </a>
+</p>
+<p class="source-value">
+<a href="https://www.proquest.com/openview/3175a61cb48ffe822c40ae7145f72275/1?cbl=2026366&amp;diss=y&amp;pq-origsite=gscholar" target="_blank"> Trivette, E. R. M. (2023). <em>The Views of LGBTQ+ Individuals on LGBTQ+ Television Media.</em> Doctoral Thesis, University of Birmingham. ↗ </a>
+</p>
+<p class="source-value">
+<a href="https://www.proquest.com/openview/3175a61cb48ffe822c40ae7145f72275/1?cbl=2026366&amp;diss=y&amp;pq-origsite=gscholar" target="_blank"> Thomson, K. (2021). <em>An Analysis of LGBTQ+ Representation in Television and Film.</em> ↗ </a>
+</p>
+<p class="source-value">
+<a href="https://doi.org/10.1080/10894160.2019.1678935" target="_blank"> Parker, K. M., Sadika, B., Sameen, D., Morrison, T. G., &amp; Morrison, M. A. (2019). <em>Humanizing Lesbian Characters on Television: Exploring Their Characterization and Interpersonal Relationships.</em> <em>Journal of Lesbian Studies</em>, 23(4), 486–507. ↗ </a>
 </p>
 </div>
 <script src="scrollspy.js"></script>

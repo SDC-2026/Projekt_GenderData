@@ -54,7 +54,7 @@ In Television Series
 
 <div class="intro-text">
 
-LGBTQ+ representation in television and streaming media has become increasingly visible in recent years. Television series not only reflect social developments but also influence public perception of gender and sexuality. Because of this, analyzing LGBTQ+ representation in media is relevant for understanding broader cultural trends.
+LGBTQ+ representation in television and streaming media has become increasingly visible in recent years. Television series not only reflect social developments but also influence public perception of gender and sexuality. Because of this, analyzing LGBTQ+ representation in media is relevant for understanding broader cultural trends. However, previous studies suggest that increased visibility does not necessarily result in equal or authentic representation across all identities.
 
 This project investigates LGBTQ+ characters in dramatic television series from the 2020s. The project combines automated data extraction, data cleaning, keyword-based label detection, and manual review in order to build a structured dataset of LGBTQ+ television characters.
 
@@ -67,10 +67,25 @@ The project also demonstrates how computational methods and reproducible data pi
 
 </section>
 
+# WHY THIS MATTERS {#why-this-matters}
+<div class="why-card">
+
+<p>
+Television is more than entertainment. It shapes cultural norms, influences public attitudes, and contributes to how social identities are understood. For many LGBTQ+ people, television is one of the first places where identities become visible and socially recognizable.
+</p>
+
+<p>
+As LGBTQ+ representation has become increasingly visible in contemporary television, researchers have also highlighted that visibility remains uneven across different identities. While queer characters appear more frequently than in previous decades, cisgender and homosexual identities continue to dominate, whereas transgender and non-binary identities remain comparatively underrepresented. These findings demonstrate that measuring representation is not only about counting characters but also about understanding diversity and balance across identities.
+</p>
+
+</div>
+
 # Research Question {#research-question}
 <div class="research-card">
 
 <p>
+This project explores which gender identities are represented, how frequently they appear, and whether representation is distributed evenly or concentrated among a limited number of identities. By combining open data with quantitative analysis, the study provides a transparent overview of current representation patterns in contemporary television.
+
 The central research question of this project is:
 </p>
 
@@ -680,7 +695,7 @@ This **Sankey diagram** maps the structural distribution channels of LGBTQ+ repr
 <div class="findings-card">
 
 <p>
-The analysis revealed several important patterns regarding LGBTQ+ representation in dramatic television series of the 2020s.
+The analysis shows that representation has become more diverse over recent years, yet visibility remains concentrated among a relatively small number of identities. These findings align with previous research demonstrating that, despite clear progress in LGBTQ+ visibility, certain gender identities continue to receive considerably less representation than others.
 </p>
 
 <blockquote>
@@ -724,6 +739,20 @@ This suggests that LGBTQ+ representation has expanded, but diversity within LGBT
 <blockquote>
 Overall, the findings indicate growing LGBTQ+ visibility in television while also highlighting continuing disparities between different identity groups.
 </blockquote>
+
+</div>
+
+# BEYOND VISIBILITY {#beyond-visibility}
+
+<div class="why-card">
+
+<p>
+Representation is not only about how many LGBTQ+ characters appear on screen, but also about how they are portrayed. Positive representation requires characters to have meaningful relationships, personal development, and identities that extend beyond stereotypes.
+</p>
+
+<p>
+Research on lesbian characters in television found that many portrayals still focus on young, white, cisgender women and continue to rely on recurring homonegative tropes, while friendships and personal storylines often remain underdeveloped. These findings highlight that authentic representation depends not only on visibility, but also on diversity, complexity, and the quality of character development.
+</p>
 
 </div>
 
@@ -888,7 +917,7 @@ provide insufficient information for reliable automatic classification and often
 <div class="conclusion-card">
 
 <p>
-This project explored LGBTQ+ representation in dramatic television series from the 2020s using computational data analysis methods.
+Representation is not solely a matter of visibility but also of diversity, balance, and inclusion. By examining gender identities across television series released between 2020 and 2025, this project contributes to a broader understanding of how contemporary media reflects social change. The results support existing research while providing an open-data perspective on representation patterns in modern television.
 </p>
 
 <blockquote>
@@ -1056,6 +1085,38 @@ Python Programming Language ↗
 <p class="source-value">
 <a href="https://picrew.me/en/image_maker/2127217/" target="_blank">
 Picrew Avatar Maker by bittelizard ↗
+</a>
+</p>
+
+<p class="source-label">Research Literature</p>
+
+<p class="source-value">
+<a href="https://doi.org/10.1007/s12119-025-10361-0" target="_blank">
+Higueras-Ruiz, M.-J., &amp; González-Corisco, M. (2025). <em>LGBTQ+ Representation in American Fiction Series: Analysis of Archetypes in Queer Characters on the Streaming Platform Max.</em> <em>Sexuality &amp; Culture</em>. ↗
+</a>
+</p>
+
+<p class="source-value">
+<a href="https://link.springer.com/content/pdf/10.1007/s12119-025-10361-0.pdf" target="_blank">
+PDF Version ↗
+</a>
+</p>
+
+<p class="source-value">
+<a href="https://www.proquest.com/openview/3175a61cb48ffe822c40ae7145f72275/1?cbl=2026366&diss=y&pq-origsite=gscholar" target="_blank">
+Trivette, E. R. M. (2023). <em>The Views of LGBTQ+ Individuals on LGBTQ+ Television Media.</em> Doctoral Thesis, University of Birmingham. ↗
+</a>
+</p>
+
+<p class="source-value">
+<a href="https://www.proquest.com/openview/3175a61cb48ffe822c40ae7145f72275/1?cbl=2026366&diss=y&pq-origsite=gscholar" target="_blank">
+Thomson, K. (2021). <em>An Analysis of LGBTQ+ Representation in Television and Film.</em> ↗
+</a>
+</p>
+
+<p class="source-value">
+<a href="https://doi.org/10.1080/10894160.2019.1678935" target="_blank">
+Parker, K. M., Sadika, B., Sameen, D., Morrison, T. G., &amp; Morrison, M. A. (2019). <em>Humanizing Lesbian Characters on Television: Exploring Their Characterization and Interpersonal Relationships.</em> <em>Journal of Lesbian Studies</em>, 23(4), 486–507. ↗
 </a>
 </p>
 
