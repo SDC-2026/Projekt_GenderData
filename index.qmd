@@ -468,7 +468,6 @@ The relationship inference process was particularly useful for descriptions that
 </div>
 
 # Manual Review {#manual-review}
-# Manual Review {#manual-review}
 <div class="manual-review-card">
 
 <p>

@@ -419,7 +419,7 @@ For example:
 <p>
 became:
 </p>
-<div id="90531b23" class="cell" data-execution_count="1">
+<div id="b9f1e3cd" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -517,7 +517,7 @@ Asexual
 The character is bisexual.
 The character identifies as non-binary.</code></pre>
 <p>could be automatically assigned to the corresponding category.</p>
-<div id="16d30285" class="cell" data-execution_count="2">
+<div id="8c2bad9e" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -551,7 +551,7 @@ Character A and Character B are lovers.
 
 Character X is dating Character Y.</code></pre>
 <p>Using the detected names and gender information, the script inferred potential LGBTQ+ identities based on the relationship context.</p>
-<div id="77a06b6d" class="cell" data-execution_count="3">
+<div id="98a3aa46" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
@@ -568,9 +568,6 @@ Character X is dating Character Y.</code></pre>
 The relationship inference process was particularly useful for descriptions that focused on relationships rather than explicitly mentioning sexual orientation or gender identity.
 </blockquote>
 </div>
-</section>
-<section id="manual-review" class="level1">
-<h1>Manual Review</h1>
 </section>
 <section id="manual-review" class="level1">
 <h1>Manual Review</h1>
@@ -599,7 +596,7 @@ Removing conflicting classifications caused by ambiguous descriptions.
 Reviewing the final dataset before generating the visualizations.
 </li>
 </ul>
-<div id="d4b58e96" class="cell" data-execution_count="4">
+<div id="128963c9" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
@@ -634,7 +631,7 @@ Dataset used for the final analysis:
 <p>
 The table below shows the first rows of the dataset used throughout the analysis.
 </p>
-<div id="ccb72b5f" class="cell" data-execution_count="5">
+<div id="0469ccbe" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -768,7 +765,7 @@ The <code>Final_Label</code> column contains the curated identity labels generat
 <p>
 The following Python code provides a quick overview of the final dataset.
 </p>
-<div id="9235ae95" class="cell" data-execution_count="6">
+<div id="9553c750" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -803,7 +800,7 @@ Columns: 7
 <p>
 </p><p>The following code extracts the <code>Final_Label</code> column, separates multiple labels, removes unresolved entries, and calculates the frequency of each LGBTQ+ identity.</p>
 <p></p>
-<div id="c4920c01" class="cell" data-execution_count="7">
+<div id="86047d4a" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
