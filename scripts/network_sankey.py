@@ -3,10 +3,12 @@ import numpy as np
 import plotly.graph_objects as go
 import os
 
+print("SCRIPT RUNNING...")
+
 # Path configuration for runtime flexibility across different IDEs
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) if '__file__' in locals() else '.'
 INPUT_FILE = os.path.join(BASE_DIR, 'data', 'processed', 'final_labeled_data.csv')
-OUTPUT_DIR = os.path.join(BASE_DIR, 'plots')
+OUTPUT_DIR = os.path.join(BASE_DIR, 'docs', 'plots')
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'sankey_diagram.html')
 
 # Fallback to local directory if the file is missing from the processed folder
@@ -15,12 +17,6 @@ if not os.path.exists(INPUT_FILE):
 
 # Distinct color palette restored to HEX for dynamic alpha control
 COLOR_MAP = {
-    # Platform Types (Gatekeepers)
-    'Streaming': '#312e81',
-    'Cable': '#451a03',
-    'Broadcast': '#064e3b',
-    'Other / Independent': '#1e293b',
-
     # Major Networks
     'Netflix': '#e50914',
     'HBO': '#000000',
@@ -56,9 +52,6 @@ COLOR_MAP = {
 }
 
 def hex_to_rgba(hex_str, alpha=0.35):
-    """
-    Converts hexadecimal color (HEX) to RGBA format with specified opacity.
-    """
     hex_str = hex_str.lstrip('#')
     if len(hex_str) == 3:
         hex_str = ''.join([c*2 for c in hex_str])
@@ -66,42 +59,6 @@ def hex_to_rgba(hex_str, alpha=0.35):
     g = int(hex_str[2:4], 16)
     b = int(hex_str[4:6], 16)
     return f"rgba({r}, {g}, {b}, {alpha})"
-
-def map_network_to_platform(network):
-    if pd.isna(network):
-        return 'Unknown'
-    network_clean = str(network).strip()
-    
-    streaming = [
-        'Netflix', 'Apple TV+', 'Amazon Prime', 'Amazon Prime Video', 'Disney+', 
-        'Hulu', 'HBO Max', 'Max', 'Paramount+', 'Peacock', 'YouTube', 'Globoplay', 
-        'Rakuten Viki', 'Tencent Video', 'Line TV', 'Watcha', 'Crave', 'Stan', 
-        'CBS All Access', 'Atresplayer Premium', 'Viki, WeTV, AbemaTV', 'TV Asahi, Viki', 
-        'Fuji Television, Viki, GagaOOLala', 'Rakuten TV, Viki, GagaOOLala'
-    ]
-    cable = [
-        'HBO', 'Showtime', 'Starz', 'FX', 'Channel 4', 'Sky Atlantic', 'AMC', 
-        'Syfy', 'USA Syfy', 'Sky Atlantic, Starz', 'HBO; Sky Atlantic'
-    ]
-    broadcast = [
-        'Fox', 'ABC', 'NBC', 'CBS', 'The CW', 'BBC', 'ZDF', 'ITV', 'Rai 1', 
-        'NHK General TV', 'Global', 'Freeform', 'BBC One', 'BBC One HBO', 
-        'BBC One, HBO', 'BBC iPlayer', 'Alibi', 'Global Network', 'Tencent Video, Line TV',
-        'One 31; Line TV', 'One 31', 'One 31 iQIYI', 'TV Tokyo', 'TV Tokyo, Tencent Video, Crunchyroll',
-        'HRT 1, HRTi, YouTube', 'TV Asahi'
-    ]
-    
-    for s in streaming:
-        if s.lower() in network_clean.lower():
-            return 'Streaming'
-    for c in cable:
-        if c.lower() in network_clean.lower():
-            return 'Cable'
-    for b in broadcast:
-        if b.lower() in network_clean.lower():
-            return 'Broadcast'
-            
-    return 'Other / Independent'
 
 def simplify_identity(label):
     if pd.isna(label):
@@ -146,23 +103,22 @@ def generate_sankey():
     print(f"Loaded {len(df)} records for visualization analysis.")
     
     df['Simplified_Label'] = df['Final_Label'].apply(simplify_identity)
-    df['Platform_Type'] = df['Network'].apply(map_network_to_platform)
     
     top_n = 10
     top_networks = df['Network'].value_counts().nlargest(top_n).index
     df['Network_Grouped'] = df['Network'].apply(lambda x: x if x in top_networks else 'Other Networks')
 
-    # Define Flow A: Platform -> Network
-    flow_a = df.groupby(['Platform_Type', 'Network_Grouped']).size().reset_index(name='value')
-    flow_a.columns = ['source_label', 'target_label', 'value']
+    # 1. Aggregate and sort flows alphabetically to ensure stable node mapping
+    flows = df.groupby(['Network_Grouped', 'Simplified_Label']).size().reset_index(name='value')
+    flows = flows.sort_values(by=['Network_Grouped', 'Simplified_Label'])
+    flows.columns = ['source_label', 'target_label', 'value']
 
-    # Define Flow B: Network -> Simplified Identity
-    flow_b = df.groupby(['Network_Grouped', 'Simplified_Label']).size().reset_index(name='value')
-    flow_b.columns = ['source_label', 'target_label', 'value']
+    # 2. Extract stable unique nodes sorted alphabetically
+    # This gives Plotly a predictable index while letting the layout algorithm balance sizes
+    sources_order = sorted(flows['source_label'].unique())
+    targets_order = sorted(flows['target_label'].unique())
+    all_nodes = sources_order + targets_order
 
-    flows = pd.concat([flow_a, flow_b], ignore_index=True)
-
-    all_nodes = list(pd.concat([flows['source_label'], flows['target_label']]).unique())
     node_indices = {node: idx for idx, node in enumerate(all_nodes)}
 
     sources = flows['source_label'].map(node_indices).tolist()
@@ -171,7 +127,6 @@ def generate_sankey():
 
     sorted_keys = sorted(COLOR_MAP.keys(), key=len, reverse=True)
 
-    # Nodes receive a higher opacity (0.85) for solid neobrutalist structure
     node_colors = []
     for node in all_nodes:
         base_color = '#94a3b8'
@@ -181,7 +136,6 @@ def generate_sankey():
                 break
         node_colors.append(hex_to_rgba(base_color, alpha=0.85))
 
-    # Links receive a soft opacity (0.35) to remain beautifully semi-transparent
     link_colors = []
     for _, row in flows.iterrows():
         source_node = row['source_label']
@@ -192,14 +146,15 @@ def generate_sankey():
                 break
         link_colors.append(hex_to_rgba(base_color, alpha=0.35))
 
-    # Build interactive Sankey visualization
+    # Construct interactive visualization utilizing dynamic balancing
     fig = go.Figure(data=[go.Sankey(
         valueformat="d",
+        arrangement='snap',  # Restores default dynamic calculation to prevent overlaps
         textfont=dict(family='"Helvetica Neue", Helvetica, Arial, sans-serif', size=13, color='#000000', weight='bold'),
         node=dict(
-            pad=20,
+            pad=22,          # Increased padding to strictly separate block spaces
             thickness=25,
-            line=dict(color="#000000", width=3),  # Bold neobrutalist outline
+            line=dict(color="#000000", width=3),
             label=[label.upper() for label in all_nodes],
             color=node_colors,
             hovertemplate='<b>CATEGORY: %{label}</b><br>TOTAL CONNECTIONS: %{value}<extra></extra>'
@@ -209,41 +164,30 @@ def generate_sankey():
             target=targets,
             value=values,
             color=link_colors,
-            line=dict(color="rgba(0,0,0,0.1)", width=1),  # Discrete separating border
+            line=dict(color="rgba(0,0,0,0.1)", width=1),
             hovertemplate='<b>FLOW: %{source.label} → %{target.label}</b><br>TOTAL CHARACTERS: %{value}<extra></extra>'
         )
     )])
 
-    # Configure layout with transparent background and crisp fonts
     fig.update_layout(
-        # Removed text but kept original padding and height to restore proportions
         title=None,
-        
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(
-            family='"Helvetica Neue", Helvetica, Arial, sans-serif',
-            size=12,
-            color='#000000'
-        ),
-        hoverlabel=dict(
-            bgcolor='#ffffff',
-            bordercolor='#000000',
-            font=dict(
-                family='"Helvetica Neue", Helvetica, Arial, sans-serif',
-                size=13,
-                color='#000000',
-                weight='bold'
-            )
-        ),
+        font=dict(family='"Helvetica Neue", Helvetica, Arial, sans-serif', size=12, color='#000000'),
+        hoverlabel=dict(bgcolor='#ffffff', bordercolor='#000000', font=dict(family='"Helvetica Neue", Helvetica, Arial, sans-serif', size=13, color='#000000', weight='bold')),
         height=700,
-        margin=dict(l=20, r=20, t=80, b=20)
+        margin=dict(l=20, r=20, t=40, b=20)
     )
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    fig.write_html(OUTPUT_FILE, config={'displayModeBar': False})
+    fig.write_html(
+        OUTPUT_FILE, 
+        config={'displayModeBar': False},
+        include_plotlyjs='cdn',
+        full_html=False
+    )
     print(f"Sankey diagram successfully saved to: {os.path.abspath(OUTPUT_FILE)}")
-    fig.show()
+    fig.show()  # Local browser preview call retained
 
 if __name__ == "__main__":
     generate_sankey()

@@ -12,6 +12,7 @@ format:
     code-fold: true
     code-summary: "Code anzeigen"
     smooth-scroll: true
+    anchor-sections: false
 
 execute:
   echo: true
