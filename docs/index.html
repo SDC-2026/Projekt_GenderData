@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,9 +71,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-4de021d0f12f7f6498add703bfdd6f46.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -184,8 +183,17 @@ LGBTQ+<br> <span class="outline-text">Representation</span><br> In Television Se
 Television is more than entertainment. It shapes cultural norms, influences public attitudes, and contributes to how social identities are understood. For many LGBTQ+ people, television is one of the first places where identities become visible and socially recognizable.
 </p>
 <p>
-As LGBTQ+ representation has become increasingly visible in contemporary television, researchers have also highlighted that visibility remains uneven across different identities. While queer characters appear more frequently than in previous decades, cisgender and homosexual identities continue to dominate, whereas transgender and non-binary identities remain comparatively underrepresented. These findings demonstrate that measuring representation is not only about counting characters but also about understanding diversity and balance across identities.
+As LGBTQ+ representation has become increasingly visible in contemporary television, researchers have also highlighted that <strong>visibility remains uneven</strong> across different identities. While queer characters appear more frequently than in previous decades, cisgender and homosexual identities continue to dominate, whereas transgender and non-binary identities remain comparatively underrepresented. These findings demonstrate that measuring representation is not only about counting characters but also about understanding diversity and balance across identities.
 </p>
+<p>
+To contextualize these imbalances, media studies increasingly draw upon the concept of <strong>intersectionality</strong>, a theoretical framework famously articulated by Kimberlé Crenshaw. This approach posits that social categories such as gender, sexuality, race, and class do not exist in isolation but interact to form interconnected systems of identity.
+</p>
+<p>
+When media productions fail to account for these multi-layered realities, they often resort to restrictive narrative patterns. As media scholar Larry Gross observed, television rarely presents portrayals that challenge or expand existing expectations; instead, it frequently utilizes popular stereotypes as a <strong>shorthand code</strong>, flattening multi-layered lived experiences into easily recognizable, simplified types.
+</p>
+<blockquote class="blockquote">
+Applying this theoretical lens to media analysis means looking <strong>beyond single, isolated labels</strong>. It raises the question of whether contemporary television reflects these multi-layered realities or whether representation strategies continue to rely primarily on simplified, distinct categories.
+</blockquote>
 </div>
 </section>
 <section id="research-question" class="level1">
@@ -199,17 +207,17 @@ The central research question of this project is:
 Which LGBTQ+ identities are represented most frequently in dramatic television series of the 2020s?
 </blockquote>
 <p>
-Additional questions include:
+Additional sub-questions include:
 </p>
 <ul>
 <li>
-Which identities appear most often?
+Which identity categories show the lowest visibility or remain underrepresented in comparison?
 </li>
 <li>
-Which identities are underrepresented?
+To what extent does the representation reflect multi-layered or intersecting identity profiles?
 </li>
 <li>
-How effective is automatic identity classification using text-based methods?
+How effective is automatic identity classification when using text-based methods on this dataset?
 </li>
 </ul>
 </div>
@@ -405,7 +413,7 @@ For example:
 <p>
 became:
 </p>
-<div id="7ea0b4ac" class="cell" data-execution_count="1">
+<div id="ac7a4742" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -486,7 +494,7 @@ X and Y are lovers.</code></pre>
 The character is bisexual.
 The character identifies as non-binary.</code></pre>
 <p>could be automatically assigned to the corresponding category.</p>
-<div id="9d2fd180" class="cell" data-execution_count="2">
+<div id="6c216763" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -515,7 +523,7 @@ Character A and Character B are lovers.
 
 Character X is dating Character Y.</code></pre>
 <p>Using the detected names and gender information, the script inferred potential LGBTQ+ identities based on the relationship context.</p>
-<div id="6690835f" class="cell" data-execution_count="3">
+<div id="10a114f6" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
@@ -537,7 +545,7 @@ The relationship inference process was particularly useful for descriptions that
 <div class="manual-review-card">
 <p>Despite the automated classification process, some character descriptions remained ambiguous or lacked sufficient information for reliable labeling.</p>
 <p>When the system could not confidently assign a label, the character was marked as:</p>
-<div id="d890b285" class="cell" data-execution_count="4">
+<div id="3337d1a0" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
@@ -571,7 +579,7 @@ Dataset used for the final analysis:
 <p>
 The table below shows the first rows of the dataset used throughout the analysis.
 </p>
-<div id="2d4fffc9" class="cell" data-execution_count="5">
+<div id="1300f7bd" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -632,7 +640,7 @@ The <code>Final_Label</code> column contains automatically or manually assigned 
 <p>
 The following Python code provides a basic overview of the dataset structure.
 </p>
-<div id="053d9511" class="cell" data-execution_count="6">
+<div id="6ad89866" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -654,7 +662,7 @@ Multiple identity labels were split into individual categories and counted separ
 <p>Because some characters were associated with multiple identity labels, the labels were separated and counted individually in the analysis.</p>
 <p>This approach provides a clearer overview of how frequently different LGBTQ+ identities appear across the television series included in the dataset.</p>
 <p>The following code splits multiple labels, removes unresolved entries, and calculates the total frequency of each identity category.</p>
-<div id="cc89003f" class="cell" data-execution_count="7">
+<div id="ebc0ed96" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
@@ -717,8 +725,8 @@ This visualization tracks the annual percentage share of identity groups from 20
 <h1>Representation Flow: From Distributor to Queer Identity</h1>
 <div class="viz-card">
 <p class="viz-description">
-This <strong>Sankey diagram</strong> maps the structural distribution channels of LGBTQ+ representation across contemporary media ecosystems. By tracing the flow from primary distribution models through specific networks and platforms, the visualization reveals which distribution corridors funnel the highest volume of diverse character identities into the final dataset.
-</p>
+</p><p>This <strong>Sankey diagram</strong> maps the structural distribution of LGBTQ+ representation across major media networks and platforms. By tracing the direct flow from specific networks to simplified identity categories, the visualization reveals which media ecosystems generate the highest volume of diverse character identities within the dataset.</p>
+<p></p>
 <div class="chart-frame">
 <p><iframe src="plots/sankey_diagram.html" loading="lazy" allowfullscreen="" style="width: 100%; height: 750px; border: none;"> </iframe></p>
 </div>
@@ -750,49 +758,43 @@ This <strong>circular network diagram</strong> maps the multi-layered overlaps o
 <h1>Key Findings</h1>
 <div class="findings-card">
 <p>
-The analysis shows that representation has become more diverse over recent years, yet visibility remains concentrated among a relatively small number of identities. These findings align with previous research demonstrating that, despite clear progress in LGBTQ+ visibility, certain gender identities continue to receive considerably less representation than others.
-</p>
-<blockquote class="blockquote">
 Three key findings emerged from the dataset and visualizations.
-</blockquote>
-<h3 class="anchored" data-anchor-id="key-findings">
+</p>
+<h3 data-anchor-id="key-findings">
 <ol type="1">
-<li>Gay and Lesbian Representation Dominates
+<li>Dominance of Gay Representation and the Volume Gap
 </li></ol></h3>
 
 <p>
-The majority of characters identified in the dataset were classified as either Gay or Lesbian. These two categories account for the largest share of LGBTQ+ representation across the analyzed television series.
+The empirical distribution reveals a distinct concentration within the dataset, characterized by a significant volume of cis-male representation. Characters classified as Gay constitute the absolute majority of the sample (270+ instances), notably outnumbering Lesbian characters (~155 instances)—not to mention the limited visibility of all other remaining identity groups combined.
 </p>
 <p>
-This suggests that television productions continue to focus primarily on identities that have historically received the greatest visibility within mainstream media.
+This quantitative divergence indicates an industry tendency where television production ecosystems consistently allocate higher visibility to established, cis-male narrative frameworks rather than distributing representation evenly across the queer spectrum.
 </p>
-<h3 class="anchored">
+<h3>
 <ol start="2" type="1">
-<li>Representation Increased Throughout the 2020s
+<li>Low Visibility of Gender Diversity and and Non-Monosexual Identities
 </li></ol></h3>
 
 <p>
-The temporal visualizations indicate a general increase in the number of LGBTQ+ characters represented over the years.
+Beyond the primary gay and lesbian categories, the data exhibits a sharp drop in character counts, illustrating the clear differences in visibility across the wider LGBTQ+ spectrum. While Bisexual characters maintain a visible secondary baseline (~65 instances), gender-diverse identities such as Transgender (~25 instances) and Non-Binary (~15 instances) occupy a marginal fraction of the overall dataset.
 </p>
 <p>
-Streaming platforms and international productions appear to contribute significantly to this development, resulting in greater LGBTQ+ visibility in contemporary television.
+This structural decline—further underlined by the minimal presence of Asexual, Genderfluid, and Intersex individuals—demonstrates that contemporary media environments frequently prioritize binary orientations over more complex non-binary gender identities and attractions directed toward multiple genders.
 </p>
-<h3 class="anchored">
+<h3>
 <ol start="3" type="1">
-<li>Uneven Representation Across Identity Groups
+<li>Intersectionality and Overlapping Identity Labels
 </li></ol></h3>
 
 <p>
-While Gay and Lesbian identities were strongly represented, other LGBTQ+ identities appeared considerably less frequently.
+The network analysis provides empirical evidence that television narratives predominantly isolate identity classifications into distinct, single-axis categories. Within the entire sample, a total of 17 characters are mapped with a dual-identity combination, and only 2 characters present profiles containing three or more concurrent labels.
 </p>
 <p>
-Categories such as Non-binary, Intersex, Genderfluid, and Asexual accounted for only a small proportion of the dataset.
-</p>
-<p>
-This suggests that LGBTQ+ representation has expanded, but diversity within LGBTQ+ representation remains uneven.
+The data shows that television characters are rarely allowed to be multi-dimensional. Mainstream media production continues to isolate queer identities into simplified, separate boxes rather than representing the complex, intersectional realities of real life.
 </p>
 <blockquote class="blockquote">
-Overall, the findings indicate growing LGBTQ+ visibility in television while also highlighting continuing disparities between different identity groups.
+Overall, the findings show high visibility for a few dominant groups, but very limited representation for gender-diverse and intersectional characters.
 </blockquote>
 </div>
 <section id="beyond-visibility" class="level1">
@@ -809,50 +811,27 @@ Research on lesbian characters in television found that many portrayals still fo
 <section id="interpretation-of-results" class="level1">
 <h1>Interpretation of Results</h1>
 <div class="interpretation-card">
+<section id="centralized-representation-structure" class="level3">
+<h3 data-anchor-id="centralized-representation-structure">Centralized Representation Structure</h3>
 <p>
-The visualization shows that gay and lesbian characters represent the largest proportion of LGBTQ+ identities within the dataset.
+The distribution of characters across the analyzed platforms highlights a <strong>highly centralized representation structure</strong>. Although digital media environments host a wide variety of series, the data indicates that expansive production space does not automatically lead to an even distribution across the queer spectrum.
+</p>
+</section>
+<section id="creative-and-commercial-constraints" class="level3">
+<h3 data-anchor-id="creative-and-commercial-constraints">Creative and Commercial Constraints</h3>
+<p>
+This persistent concentration suggests that contemporary television productions may still operate under specific constraints. To appeal to broad, global audiences, character design appears to lean heavily toward <strong>established, more socially visible identities</strong>, potentially to mitigate narrative or financial risks.
+</p>
+</section>
+<section id="the-single-axis-framework" class="level3">
+<h3 data-anchor-id="the-single-axis-framework">The Single-Axis Framework</h3>
+<p>
+Furthermore, the lack of overlapping labels indicates that character development continues to favor <strong>simplified, single-axis frameworks</strong>. Even within modern production environments, identity markers are predominantly isolated into distinct categories rather than integrated into multi-dimensional, intersectional profiles.
 </p>
 <blockquote class="blockquote">
-Gay and lesbian identities account for the majority of LGBTQ+ character representations in dramatic television series of the 2020s.
+In short, the results suggest that while modern television infrastructure allows for a high volume of visibility, representation strategies remain characterized by a strong focus on a few prominent groups and simplified, isolated character profiles.
 </blockquote>
-<p>
-This suggests that television series continue to focus primarily on gay and lesbian representation, while other LGBTQ+ identities appear less frequently.
-</p>
-<p>
-Identities such as:
-</p>
-<ul>
-<li>
-Non-binary
-</li>
-<li>
-Intersex
-</li>
-<li>
-Genderfluid
-</li>
-<li>
-Asexual
-</li>
-</ul>
-<p>
-appear significantly less often in comparison.
-</p>
-<p>
-One possible explanation is that mainstream television productions still rely more heavily on identities that are already more socially visible and widely represented in media culture.
-</p>
-<p>
-The dataset also indicates that streaming platforms such as Netflix, HBO, Hulu, and Amazon Prime Video contribute strongly to LGBTQ+ representation in television series.
-</p>
-<p>
-Many of the analyzed series originated from streaming services rather than traditional television networks.
-</p>
-<p>
-Another important observation is that several characters were associated with multiple identity categories, demonstrating that LGBTQ+ identities are often complex and cannot always be reduced to a single label.
-</p>
-<p>
-Overall, the analysis suggests that LGBTQ+ visibility in television has increased during the 2020s, but representation remains uneven across different identity groups.
-</p>
+</section>
 </div>
 </section>
 <section id="methodological-reflection" class="level1">
@@ -1020,14 +999,6 @@ Overall, the project demonstrates how computational approaches can be applied to
 <ul>
 <li>Combines automatically classified records with manually reviewed entries to create the baseline merged dataset, stored as <code>labeled_data.csv</code>.</li>
 </ul></li>
-<li>merge_data.py
-<ul>
-<li>Combines automatically classified records with manually reviewed entries to create the baseline merged dataset, stored as labeled_data.csv.</li>
-</ul></li>
-<li><code>merge_data.py</code>
-<ul>
-<li>Combines automatically classified records with manually reviewed entries to create the baseline merged dataset, stored as <code>labeled_data.csv</code>.</li>
-</ul></li>
 <li>Post-Merge Manual Refinement (Final Curation)
 <ul>
 <li>Processed the <code>labeled_data.csv</code> file to resolve over-classification noise where characters were erroneously assigned conflicting tags (e.g., simultaneously labeled as gay, lesbian, and bisexual due to ambiguous source descriptions) to ensure clean, accurate node relationships for the network charts. The curated output is saved as <code>final_labeled_data.csv</code>.</li>
@@ -1108,6 +1079,12 @@ Visual Assets
 Research Literature
 </p>
 <p class="source-value">
+<a href="https://doi.org/10.1300/J082v21n01_04" target="_blank"> Gross, L. (1991). <em>Out of the Mainstream: Sexual Minorities and the Mass Media.</em> <em>Journal of Homosexuality</em>. ↗ </a>
+</p>
+<p class="source-value">
+<a href="https://www.jstor.org/stable/1229039" target="_blank"> Crenshaw, K. (1989). <em>Demarginalizing the Intersection of Race and Sex: A Black Feminist Critique of Antidiscrimination Doctrine, Feminist Theory and Antiracist Politics.</em> <em>University of Chicago Legal Forum</em>, 1989(1). ↗ </a>
+</p>
+<p class="source-value">
 <a href="https://doi.org/10.1007/s12119-025-10361-0" target="_blank"> Higueras-Ruiz, M.-J., &amp; González-Corisco, M. (2025). <em>LGBTQ+ Representation in American Fiction Series: Analysis of Archetypes in Queer Characters on the Streaming Platform Max.</em> <em>Sexuality &amp; Culture</em>. ↗ </a>
 </p>
 <p class="source-value">
@@ -1136,13 +1113,6 @@ Research Literature
  <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
