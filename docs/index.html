@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-4de021d0f12f7f6498add703bfdd6f46.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -104,6 +104,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <meta name="quarto:offset" content="140">
 
 
@@ -300,9 +303,15 @@ Projekt_GenderData/
 
 ├── visualizations/
 
+├── plots/
+
+├── assets/
+
 ├── quarto/
 
-├── requirements.txt
+├── docs/
+
+├── index.qmd
 
 └── README.md</code></pre>
 </div>
@@ -397,13 +406,10 @@ Removal of Wikipedia citation markers such as [1]
 Removal of bracketed information such as (season 2)
 </li>
 <li>
-Cleaning and normalization of character names
+Standardizing character names
 </li>
 <li>
-Standardization of text formatting
-</li>
-<li>
-Removal of unnecessary whitespace
+Cleaning whitespace and formatting
 </li>
 </ul>
 <p>
@@ -413,7 +419,7 @@ For example:
 <p>
 became:
 </p>
-<div id="ac7a4742" class="cell" data-execution_count="1">
+<div id="90531b23" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -423,22 +429,23 @@ became:
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> re.sub(<span class="vs">r"</span><span class="ch">\[</span><span class="dv">.</span><span class="op">*?</span><span class="ch">\]</span><span class="vs">"</span>, <span class="st">""</span>, name)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> re.sub(<span class="vs">r"</span><span class="ch">\(</span><span class="dv">.</span><span class="op">*?</span><span class="ch">\)</span><span class="vs">"</span>, <span class="st">""</span>, name)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>TK Strand </code></pre>
+</div>
 </div>
 </div>
 <div class="enrichment-card">
 <p>
-After cleaning the dataset, the next step involved enriching the data with LGBTQ+ identity labels.
+After cleaning the dataset, the next step was to enrich each character with LGBTQ+ identity labels.
 </p>
 <blockquote class="blockquote">
-The project used a rule-based text classification approach implemented in Python.
+A rule-based Python script analyzed the <code>Notes</code> column using predefined keywords and regular expressions.
 </blockquote>
 <p>
-The script analyzed the content of the <code>Notes</code> column and searched for keywords and relationship descriptions associated with LGBTQ+ identities.
-</p>
-<p>
-Regular expressions (regex) were used to detect patterns such as:
+The script searched for identity-related terms such as:
 </p>
 <ul>
 <li>
@@ -467,46 +474,65 @@ asexual
 </li>
 </ul>
 <p>
-For example:
-</p>
-<pre><code>Rachel and Dana are in a romantic relationship.
-X and Y are lovers.</code></pre>
+</p><p>Characters with matching terms were automatically assigned one or more identity labels for further analysis.</p>
+<p></p>
 </div>
 </div>
 </section>
 <section id="identity-detection" class="level1">
 <h1>Identity Detection</h1>
 <div class="identity-card">
-<p>After cleaning and preparing the dataset, the next step involved automatically identifying LGBTQ+ identities.</p>
-<p>The project used a rule-based classification system implemented in Python. Character descriptions contained in the <code>Notes</code> column were analyzed using keyword matching and regular expressions (regex).</p>
-<p>The system searched for explicit references to LGBTQ+ identities such as:</p>
+<p>After the dataset had been cleaned, LGBTQ+ identities were detected automatically using a rule-based approach.</p>
+<blockquote class="blockquote">
+<p>The script searched the <code>Notes</code> column for predefined keywords using regular expressions (regex).</p>
+</blockquote>
+<p>
+</p><p>The following identities were detected automatically:</p>
+<p></p>
 <ul>
-<li>Gay</li>
-<li>Lesbian</li>
-<li>Bisexual</li>
-<li>Transgender</li>
-<li>Non-binary</li>
-<li>Pansexual</li>
-<li>Asexual</li>
+<li>
+Gay
+</li>
+<li>
+Lesbian
+</li>
+<li>
+Bisexual
+</li>
+<li>
+Transgender
+</li>
+<li>
+Non-binary
+</li>
+<li>
+Pansexual
+</li>
+<li>
+Asexual
+</li>
 </ul>
-<p>For example, descriptions containing terms such as:</p>
+<p>Example:</p>
 <pre class="text"><code>The character is gay.
 The character is bisexual.
 The character identifies as non-binary.</code></pre>
 <p>could be automatically assigned to the corresponding category.</p>
-<div id="6c216763" class="cell" data-execution_count="2">
+<div id="16d30285" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"The character is bisexual."</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> re.search(<span class="vs">r"</span><span class="dv">\b</span><span class="vs">bisexual</span><span class="dv">\b</span><span class="vs">"</span>, text.lower()):</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Bisexual"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"The character is bisexual."</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> re.search(<span class="vs">r"</span><span class="dv">\b</span><span class="vs">bisexual</span><span class="dv">\b</span><span class="vs">"</span>, text.lower()):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Bisexual"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bisexual</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-The detection process was implemented through predefined keyword patterns and regular expressions. This approach allowed a large portion of the dataset to be classified automatically before manual review became necessary.
+Characters with matching keywords were automatically assigned the corresponding identity labels before the manual review stage.
 </blockquote>
 <p>The automatic classification stage significantly reduced the amount of manual work required during the later phases of the project.</p>
 </div>
@@ -514,27 +540,30 @@ The detection process was implemented through predefined keyword patterns and re
 <section id="relationship-inference" class="level1">
 <h1>Relationship Inference</h1>
 <div class="relationship-card">
-<p>Not all LGBTQ+ identities were explicitly stated in the character descriptions.</p>
-<p>To improve the classification process, an additional relationship inference step was implemented.</p>
-<p>The system analyzed relationship-related phrases such as:</p>
+<p>Some characters did not explicitly state an LGBTQ+ identity.</p>
+<blockquote class="blockquote">
+<p>The script therefore analyzed relationship descriptions to infer additional identity labels.</p>
+</blockquote>
+<p>Example:</p>
 <pre class="text"><code>Rachel and Dana are in a romantic relationship.
 
 Character A and Character B are lovers.
 
 Character X is dating Character Y.</code></pre>
 <p>Using the detected names and gender information, the script inferred potential LGBTQ+ identities based on the relationship context.</p>
-<div id="10a114f6" class="cell" data-execution_count="3">
+<div id="77a06b6d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>partner_genders <span class="op">=</span> [<span class="st">"female"</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> character_gender <span class="op">==</span> <span class="st">"female"</span> <span class="kw">and</span> <span class="st">"female"</span> <span class="kw">in</span> partner_genders:</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Lesbian"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>partner_genders <span class="op">=</span> [<span class="st">"female"</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> character_gender <span class="op">==</span> <span class="st">"female"</span> <span class="kw">and</span> <span class="st">"female"</span> <span class="kw">in</span> partner_genders:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Lesbian"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lesbian</code></pre>
 </div>
-<p>For example, when two female characters were identified as being romantically involved, the system could infer a Lesbian label. Similarly, relationships between two male characters could contribute to a Gay classification.</p>
-<p>This additional inference step increased the number of automatically classified characters and reduced the number of entries that required manual review.</p>
+</div>
 <blockquote class="blockquote">
 The relationship inference process was particularly useful for descriptions that focused on relationships rather than explicitly mentioning sexual orientation or gender identity.
 </blockquote>
@@ -542,22 +571,48 @@ The relationship inference process was particularly useful for descriptions that
 </section>
 <section id="manual-review" class="level1">
 <h1>Manual Review</h1>
+</section>
+<section id="manual-review" class="level1">
+<h1>Manual Review</h1>
 <div class="manual-review-card">
-<p>Despite the automated classification process, some character descriptions remained ambiguous or lacked sufficient information for reliable labeling.</p>
-<p>When the system could not confidently assign a label, the character was marked as:</p>
-<div id="3337d1a0" class="cell" data-execution_count="4">
+<p>
+Although most identities were assigned automatically, several records required manual verification at different stages of the pipeline.
+</p>
+<blockquote class="blockquote">
+Manual review was performed whenever automatic classification was incomplete, ambiguous, or produced conflicting labels.
+</blockquote>
+<p>The manual review included:</p>
+<ul>
+<li>
+Checking entries marked as <code>[MANUAL_REVIEW_REQUIRED]</code>.
+</li>
+<li>
+Looking up additional information on Wikipedia and other reliable sources.
+</li>
+<li>
+Correcting missing or incorrect identity labels.
+</li>
+<li>
+Removing conflicting classifications caused by ambiguous descriptions.
+</li>
+<li>
+Reviewing the final dataset before generating the visualizations.
+</li>
+</ul>
+<div id="d4b58e96" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> found_labels:</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"[MANUAL_REVIEW_REQUIRED]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> found_labels:</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"[MANUAL_REVIEW_REQUIRED]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[MANUAL_REVIEW_REQUIRED]</code></pre>
 </div>
-<p>These entries were exported into a separate review file and manually inspected.</p>
-<p>During this step, additional information from the original source material was used to assign the most appropriate LGBTQ+ identity label.</p>
+</div>
 <blockquote class="blockquote">
-The manual review stage served as a quality assurance mechanism and helped improve the overall accuracy of the dataset.
+The reviewed records were merged with the automatically classified data to produce the final dataset used for the analysis.
 </blockquote>
 <p>After the review process was completed, the manually labeled records were merged with the automatically classified entries to create the final dataset used for analysis and visualization.</p>
 <p>This combination of automated processing and manual validation resulted in a more complete and reliable dataset.</p>
@@ -567,7 +622,7 @@ The manual review stage served as a quality assurance mechanism and helped impro
 <h1>Load Final Dataset</h1>
 <div class="dataset-card">
 <p>
-After completing the automatic labeling and manual review process, the final dataset was loaded for analysis and visualization.
+After multiple enrichment, review, and validation steps, the final curated dataset was loaded for analysis and visualization.
 </p>
 <blockquote class="blockquote">
 The final dataset combines automatically classified entries with manually reviewed records.
@@ -579,20 +634,93 @@ Dataset used for the final analysis:
 <p>
 The table below shows the first rows of the dataset used throughout the analysis.
 </p>
-<div id="1300f7bd" class="cell" data-execution_count="5">
+<div id="ccb72b5f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/processed/final_labeled_data.csv"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    engine<span class="op">=</span><span class="st">"python"</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/processed/final_labeled_data.csv"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    engine<span class="op">=</span><span class="st">"python"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">﻿Year</th>
+<th data-quarto-table-cell-role="th">Series</th>
+<th data-quarto-table-cell-role="th">Network</th>
+<th data-quarto-table-cell-role="th">Character</th>
+<th data-quarto-table-cell-role="th">Actor</th>
+<th data-quarto-table-cell-role="th">Notes</th>
+<th data-quarto-table-cell-role="th">Final_Label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2020–2025</td>
+<td>9-1-1: Lone Star</td>
+<td>Fox</td>
+<td>TK Strand</td>
+<td>Ronen Rubinstein</td>
+<td>TK is a gay paramedic who was formerly a firef...</td>
+<td>Gay</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2020–2025</td>
+<td>9-1-1: Lone Star</td>
+<td>Fox</td>
+<td>Carlos Reyes</td>
+<td>Rafael L. Silva</td>
+<td>Carlos is gay and a policeman. He is married t...</td>
+<td>Gay</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2020–2025</td>
+<td>9-1-1: Lone Star</td>
+<td>Fox</td>
+<td>Paul Strickland</td>
+<td>Brian Michael Smith</td>
+<td>Paul is a trans man and a firefighter.[3]</td>
+<td>Transgender</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2020–2025</td>
+<td>9-1-1: Lone Star</td>
+<td>Fox</td>
+<td>Nancy Gillian</td>
+<td>Brianna Baker</td>
+<td>Nancy is a bisexual woman and a paramedic.</td>
+<td>Bisexual</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2020–</td>
+<td>Alice in Borderland</td>
+<td>Netflix</td>
+<td>Hikari Kuina</td>
+<td>Aya Asahina</td>
+<td>Kuina is a transgender woman and skilled fight...</td>
+<td>Transgender</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -600,16 +728,16 @@ The table below shows the first rows of the dataset used throughout the analysis
 <h1>Dataset Overview</h1>
 <div class="overview-card">
 <p>
-After data cleaning, enrichment, and manual review, the final dataset was prepared for analysis.
+After data extraction, cleaning, enrichment, and several rounds of manual validation, the final dataset was prepared for analysis.
 </p>
 <blockquote class="blockquote">
-The dataset contains LGBTQ+ characters from dramatic television series released during the 2020s.
+The final dataset contains curated LGBTQ+ characters from dramatic television series released between 2020 and 2025.
 </blockquote>
 <p>
-Each row represents a single television character together with contextual information about the series and the detected LGBTQ+ identity label.
+Each row represents one television character together with information about the series, actor, source notes, and the final identity labels assigned through the pipeline.
 </p>
 <p>
-The final dataset includes the following variables:
+The final dataset contains the following variables:
 </p>
 <ul>
 <li>
@@ -635,62 +763,143 @@ Final_Label
 </li>
 </ul>
 <p>
-The <code>Final_Label</code> column contains automatically or manually assigned LGBTQ+ identity categories.
+The <code>Final_Label</code> column contains the curated identity labels generated through automatic detection, relationship inference, and manual review.
 </p>
 <p>
-The following Python code provides a basic overview of the dataset structure.
+The following Python code provides a quick overview of the final dataset.
 </p>
-<div id="6ad89866" class="cell" data-execution_count="6">
+<div id="9235ae95" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columns: </span><span class="sc">{</span><span class="bu">len</span>(df.columns)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> df.columns:</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"•"</span>, col)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columns: </span><span class="sc">{</span><span class="bu">len</span>(df.columns)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> df.columns:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"•"</span>, col)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 566
+Columns: 7
+• ﻿Year
+• Series
+• Network
+• Character
+• Actor
+• Notes
+• Final_Label</code></pre>
+</div>
 </div>
 </div>
 </section>
 <section id="distribution-of-lgbtq-identities" class="level1">
 <h1>Distribution of LGBTQ+ Identities</h1>
 <div class="distribution-card">
+<p>
+</p><p>To analyze LGBTQ+ representation, the identity labels contained in the final dataset were summarized and counted.</p>
+<p></p>
 <blockquote class="blockquote">
-Multiple identity labels were split into individual categories and counted separately to provide a clearer overview of LGBTQ+ representation.
+<p>Characters with multiple identity labels contribute to each corresponding identity category.</p>
 </blockquote>
-<p>The following visualization shows the distribution of LGBTQ+ identity labels within the final dataset.</p>
-<p>Because some characters were associated with multiple identity labels, the labels were separated and counted individually in the analysis.</p>
-<p>This approach provides a clearer overview of how frequently different LGBTQ+ identities appear across the television series included in the dataset.</p>
-<p>The following code splits multiple labels, removes unresolved entries, and calculates the total frequency of each identity category.</p>
-<div id="ebc0ed96" class="cell" data-execution_count="7">
+<p>
+</p><p>The following code extracts the <code>Final_Label</code> column, separates multiple labels, removes unresolved entries, and calculates the frequency of each LGBTQ+ identity.</p>
+<p></p>
+<div id="c4920c01" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Final_Label"</span>]</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    .dropna()</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    .astype(<span class="bu">str</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">str</span>.split(<span class="st">";"</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    .explode()</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">str</span>.strip()</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> labels[</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">!=</span> <span class="st">"[MANUAL_REVIEW_REQUIRED]"</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> labels.value_counts()</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>counts_df <span class="op">=</span> (</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    counts</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"index"</span>: <span class="st">"Identity"</span>,</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Final_Label"</span>: <span class="st">"Count"</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>counts_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Final_Label"</span>]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    .dropna()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    .astype(<span class="bu">str</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">str</span>.split(<span class="st">";"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    .explode()</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">str</span>.strip()</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> labels[</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">!=</span> <span class="st">"[MANUAL_REVIEW_REQUIRED]"</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> labels.value_counts()</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>counts_df <span class="op">=</span> (</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    counts</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"index"</span>: <span class="st">"Identity"</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Final_Label"</span>: <span class="st">"Count"</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>counts_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Count</th>
+<th data-quarto-table-cell-role="th">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Gay</td>
+<td>272</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Lesbian</td>
+<td>156</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Bisexual</td>
+<td>64</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Queer</td>
+<td>31</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Transgender</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Pansexual</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Non-binary</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Asexual</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Genderfluid</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Intersex</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -797,17 +1006,6 @@ The data shows that television characters are rarely allowed to be multi-dimensi
 Overall, the findings show high visibility for a few dominant groups, but very limited representation for gender-diverse and intersectional characters.
 </blockquote>
 </div>
-<section id="beyond-visibility" class="level1">
-<h1>BEYOND VISIBILITY</h1>
-<div class="why-card">
-<p>
-Representation is not only about how many LGBTQ+ characters appear on screen, but also about how they are portrayed. Positive representation requires characters to have meaningful relationships, personal development, and identities that extend beyond stereotypes.
-</p>
-<p>
-Research on lesbian characters in television found that many portrayals still focus on young, white, cisgender women and continue to rely on recurring homonegative tropes, while friendships and personal storylines often remain underdeveloped. These findings highlight that authentic representation depends not only on visibility, but also on diversity, complexity, and the quality of character development.
-</p>
-</div>
-</section>
 <section id="interpretation-of-results" class="level1">
 <h1>Interpretation of Results</h1>
 <div class="interpretation-card">
@@ -971,45 +1169,58 @@ Overall, the project demonstrates how computational approaches can be applied to
 <section id="reproducibility" class="level1">
 <h1>Reproducibility</h1>
 <div class="reproducibility-card">
-<p>One of the main objectives of this project was to ensure that the entire workflow could be reproduced by other researchers.</p>
-<p>The project follows a structured data pipeline that transforms raw Wikipedia data into a cleaned, enriched, and analyzed dataset. All processing steps were implemented in Python and documented within the GitHub repository.</p>
-<p>The workflow can be reproduced by executing the scripts in the following order:</p>
+<p>One of the main objectives of this project was to ensure that the complete workflow could be reproduced by other researchers.</p>
+<p>The project follows a structured pipeline that transforms raw Wikipedia data into a curated dataset and the visualizations presented in this report. All processing steps were implemented in Python and documented within the GitHub repository.</p>
+<p>The workflow can be reproduced by executing the following steps in order:</p>
 <ol type="1">
 <li><code>data_extraction.py</code>
 <ul>
-<li>Extracts the original table from Wikipedia and stores it as a CSV file.</li>
+<li>Extracts the Wikipedia table and stores it as a structured CSV dataset.</li>
 </ul></li>
 <li><code>data_enrichment.py</code>
 <ul>
-<li>Performs the initial LGBTQ+ identity detection based on predefined keyword patterns.</li>
+<li>Detects explicit LGBTQ+ identity labels using keyword matching and regular expressions.</li>
+<li>Creates the initial labeled dataset.</li>
+<li>Marks unresolved records for manual review.</li>
 </ul></li>
 <li><code>data_enrichment_plus.py</code>
 <ul>
-<li>Applies additional enrichment methods, including relationship inference and gender-based classification.</li>
+<li>Applies additional enrichment rules.</li>
+<li>Infers identity labels from relationship descriptions and contextual information.</li>
+<li>Improves the automatic classification before manual review.</li>
+<li>Saves the verified labels as manual_review_completed.csv.</li>
 </ul></li>
-<li><code>manual_review_needed.csv</code>
+<li><strong>Manual Review</strong>
 <ul>
-<li>Contains entries that could not be classified automatically and therefore required manual validation.</li>
-</ul></li>
-<li><code>merge_final_data.py</code>
-<ul>
-<li>Combines automatically classified records with manually reviewed entries to create the final dataset.</li>
+<li>Records that could not be classified automatically were manually reviewed.</li>
+<li>Identity labels were verified using the original Wikipedia pages.</li>
+<li>The corrected labels were saved for the merge step.</li>
+<li>Ambiguous, incomplete, and conflicting classifications were manually verified using the original Wikipedia entries and corrected where necessary.</li>
 </ul></li>
 <li><code>merge_data.py</code>
 <ul>
-<li>Combines automatically classified records with manually reviewed entries to create the baseline merged dataset, stored as <code>labeled_data.csv</code>.</li>
+<li>Merges the automatically classified records with the manually reviewed data into a single dataset.</li>
 </ul></li>
-<li>Post-Merge Manual Refinement (Final Curation)
+<li><strong>Dataset Curation</strong>
 <ul>
-<li>Processed the <code>labeled_data.csv</code> file to resolve over-classification noise where characters were erroneously assigned conflicting tags (e.g., simultaneously labeled as gay, lesbian, and bisexual due to ambiguous source descriptions) to ensure clean, accurate node relationships for the network charts. The curated output is saved as <code>final_labeled_data.csv</code>.</li>
+<li>Performs a final manual inspection.</li>
+<li>Removes conflicting identity labels.</li>
+<li>Creates <code>final_labeled_data.csv</code>.</li>
 </ul></li>
-<li><code>repair_css.py</code>
+<li><code>repair_csv.py</code>
 <ul>
-<li>Resolves structural anomalies, restores strict semicolon delimiters within multi-label profiles, and repairs row alignment caused by spreadsheet exports on <code>final_labeled_data.csv</code>.</li>
+<li>Repairs formatting issues introduced during spreadsheet editing.</li>
+<li>Restores semicolon delimiters in the <code>Final_Label</code>.</li>
+<li>Ensures the dataset can be processed correctly by the visualization scripts.</li>
 </ul></li>
-<li>Data Visualization Generation
+<li><strong>Final Validation</strong>
 <ul>
-<li>Execution of the individual standalone plotting scripts:
+<li>The repaired dataset was reviewed once more to verify the correctness of identity labels, ensure formatting consistency.</li>
+<li>Confirms that all visualization scripts produce the expected results.</li>
+</ul></li>
+<li><strong>Visualization Scripts</strong>
+<ul>
+<li>Generates the figures used throughout the report:
 <ul>
 <li><code>absolute_icon_bar.py</code></li>
 <li><code>top_5_bar_chart.py</code></li>
@@ -1018,16 +1229,15 @@ Overall, the project demonstrates how computational approaches can be applied to
 <li><code>cooccurence_network.py</code></li>
 </ul></li>
 </ul></li>
-<li><code>report.qmd</code>
-<ul>
-<li>Produces the final report using Quarto.</li>
-</ul></li>
+<li><code>report.qmd</code></li>
 </ol>
-<p>All required Python packages are listed in the <code>requirements.txt</code> file, allowing the computational environment to be recreated easily.</p>
-<p>The final dataset used for analysis is stored as:</p>
+<ul>
+<li>Produces the final Quarto report.</li>
+</ul>
+<p>All required Python packages are listed in <code>requirements.txt</code>, allowing the computational environment to be recreated.</p>
+<p>The final dataset used throughout the analysis is stored as:</p>
 <pre class="text"><code>data/processed/final_labeled_data.csv</code></pre>
-<p>The complete project is managed using Git and GitHub, which enables version control, collaboration, and transparency throughout the development process.</p>
-<p>By combining Python scripts, structured datasets, version control through GitHub, and Quarto reporting, the project provides a transparent and reproducible workflow from data collection to final analysis.</p>
+<p>The project is managed using Git and GitHub, ensuring version control, collaboration, transparency, and reproducibility throughout the entire workflow.</p>
 </div>
 </section>
 <section id="references" class="level1">

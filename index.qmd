@@ -14,7 +14,7 @@ execute:
   echo: true
   warning: false
   message: false
-  eval: false
+  eval: true
 
 jupyter: python3
 ---
@@ -201,9 +201,15 @@ Projekt_GenderData/
 
 ├── visualizations/
 
+├── plots/
+
+├── assets/
+
 ├── quarto/
 
-├── requirements.txt
+├── docs/
+
+├── index.qmd
 
 └── README.md
 ```
@@ -309,9 +315,8 @@ The following preprocessing steps were performed:
 <ul>
   <li>Removal of Wikipedia citation markers such as [1]</li>
   <li>Removal of bracketed information such as (season 2)</li>
-  <li>Cleaning and normalization of character names</li>
-  <li>Standardization of text formatting</li>
-  <li>Removal of unnecessary whitespace</li>
+  <li>Standardizing character names</li>
+  <li>Cleaning whitespace and formatting</li>
 </ul>
 
 <p>
@@ -332,6 +337,7 @@ name = "TK Strand[1] (season 2)"
 name = re.sub(r"\[.*?\]", "", name)
 name = re.sub(r"\(.*?\)", "", name)
 
+
 print(name)
 ```
 </div>
@@ -339,19 +345,15 @@ print(name)
 <div class="enrichment-card">
 
 <p>
-After cleaning the dataset, the next step involved enriching the data with LGBTQ+ identity labels.
+After cleaning the dataset, the next step was to enrich each character with LGBTQ+ identity labels.
 </p>
 
 <blockquote>
-The project used a rule-based text classification approach implemented in Python.
+A rule-based Python script analyzed the <code>Notes</code> column using predefined keywords and regular expressions.
 </blockquote>
 
 <p>
-The script analyzed the content of the <code>Notes</code> column and searched for keywords and relationship descriptions associated with LGBTQ+ identities.
-</p>
-
-<p>
-Regular expressions (regex) were used to detect patterns such as:
+The script searched for identity-related terms such as:
 </p>
 
 <ul>
@@ -366,12 +368,10 @@ Regular expressions (regex) were used to detect patterns such as:
 </ul>
 
 <p>
-For example:
+
+Characters with matching terms were automatically assigned one or more identity labels for further analysis.
+
 </p>
-
-<pre><code>Rachel and Dana are in a romantic relationship.
-X and Y are lovers.</code></pre>
-
 </div>
 
 </div>
@@ -379,21 +379,31 @@ X and Y are lovers.</code></pre>
 # Identity Detection {#identity-detection}
 <div class="identity-card">
 
-After cleaning and preparing the dataset, the next step involved automatically identifying LGBTQ+ identities.
+After the dataset had been cleaned, LGBTQ+ identities were detected automatically using a rule-based approach.
 
-The project used a rule-based classification system implemented in Python. Character descriptions contained in the `Notes` column were analyzed using keyword matching and regular expressions (regex).
+<blockquote>
 
-The system searched for explicit references to LGBTQ+ identities such as:
+The script searched the <code>Notes</code> column for predefined keywords using regular expressions (regex).
 
-- Gay
-- Lesbian
-- Bisexual
-- Transgender
-- Non-binary
-- Pansexual
-- Asexual
+</blockquote>
 
-For example, descriptions containing terms such as:
+<p>
+
+The following identities were detected automatically:
+
+</p>
+
+<ul>
+  <li>Gay</li>
+  <li>Lesbian</li>
+  <li>Bisexual</li>
+  <li>Transgender</li>
+  <li>Non-binary</li>
+  <li>Pansexual</li>
+  <li>Asexual</li>
+</ul>
+
+Example:
 
 ```text
 The character is gay.
@@ -413,7 +423,7 @@ if re.search(r"\bbisexual\b", text.lower()):
 ```
 
 <blockquote>
-The detection process was implemented through predefined keyword patterns and regular expressions. This approach allowed a large portion of the dataset to be classified automatically before manual review became necessary.
+Characters with matching keywords were automatically assigned the corresponding identity labels before the manual review stage.
 </blockquote>
 
 The automatic classification stage significantly reduced the amount of manual work required during the later phases of the project.
@@ -422,11 +432,15 @@ The automatic classification stage significantly reduced the amount of manual wo
 # Relationship Inference {#relationship-inference}
 <div class="relationship-card">
 
-Not all LGBTQ+ identities were explicitly stated in the character descriptions.
+Some characters did not explicitly state an LGBTQ+ identity.
 
-To improve the classification process, an additional relationship inference step was implemented.
+<blockquote>
 
-The system analyzed relationship-related phrases such as:
+The script therefore analyzed relationship descriptions to infer additional identity labels.
+
+</blockquote>
+
+Example:
 
 ```text
 Rachel and Dana are in a romantic relationship.
@@ -446,9 +460,6 @@ if character_gender == "female" and "female" in partner_genders:
     print("Lesbian")
 ```
 
-For example, when two female characters were identified as being romantically involved, the system could infer a Lesbian label. Similarly, relationships between two male characters could contribute to a Gay classification.
-
-This additional inference step increased the number of automatically classified characters and reduced the number of entries that required manual review.
 
 <blockquote>
 The relationship inference process was particularly useful for descriptions that focused on relationships rather than explicitly mentioning sexual orientation or gender identity.
@@ -457,11 +468,26 @@ The relationship inference process was particularly useful for descriptions that
 </div>
 
 # Manual Review {#manual-review}
+# Manual Review {#manual-review}
 <div class="manual-review-card">
 
-Despite the automated classification process, some character descriptions remained ambiguous or lacked sufficient information for reliable labeling.
+<p>
+Although most identities were assigned automatically, several records required manual verification at different stages of the pipeline.
+</p>
 
-When the system could not confidently assign a label, the character was marked as:
+<blockquote>
+Manual review was performed whenever automatic classification was incomplete, ambiguous, or produced conflicting labels.
+</blockquote>
+
+The manual review included:
+
+<ul>
+  <li>Checking entries marked as <code>[MANUAL_REVIEW_REQUIRED]</code>.</li>
+  <li>Looking up additional information on Wikipedia and other reliable sources.</li>
+  <li>Correcting missing or incorrect identity labels.</li>
+  <li>Removing conflicting classifications caused by ambiguous descriptions.</li>
+  <li>Reviewing the final dataset before generating the visualizations.</li>
+</ul>
 
 ```{python}
 found_labels = []
@@ -470,12 +496,8 @@ if not found_labels:
     print("[MANUAL_REVIEW_REQUIRED]")
 ```
 
-These entries were exported into a separate review file and manually inspected.
-
-During this step, additional information from the original source material was used to assign the most appropriate LGBTQ+ identity label.
-
 <blockquote>
-The manual review stage served as a quality assurance mechanism and helped improve the overall accuracy of the dataset.
+The reviewed records were merged with the automatically classified data to produce the final dataset used for the analysis.
 </blockquote>
 
 After the review process was completed, the manually labeled records were merged with the automatically classified entries to create the final dataset used for analysis and visualization.
@@ -488,7 +510,7 @@ This combination of automated processing and manual validation resulted in a mor
 <div class="dataset-card">
 
 <p>
-After completing the automatic labeling and manual review process, the final dataset was loaded for analysis and visualization.
+After multiple enrichment, review, and validation steps, the final curated dataset was loaded for analysis and visualization.
 </p>
 
 <blockquote>
@@ -524,19 +546,19 @@ df.head()
 <div class="overview-card">
 
 <p>
-After data cleaning, enrichment, and manual review, the final dataset was prepared for analysis.
+After data extraction, cleaning, enrichment, and several rounds of manual validation, the final dataset was prepared for analysis.
 </p>
 
 <blockquote>
-The dataset contains LGBTQ+ characters from dramatic television series released during the 2020s.
+The final dataset contains curated LGBTQ+ characters from dramatic television series released between 2020 and 2025.
 </blockquote>
 
 <p>
-Each row represents a single television character together with contextual information about the series and the detected LGBTQ+ identity label.
+Each row represents one television character together with information about the series, actor, source notes, and the final identity labels assigned through the pipeline.
 </p>
 
 <p>
-The final dataset includes the following variables:
+The final dataset contains the following variables:
 </p>
 
 <ul>
@@ -550,11 +572,11 @@ The final dataset includes the following variables:
 </ul>
 
 <p>
-The <code>Final_Label</code> column contains automatically or manually assigned LGBTQ+ identity categories.
+The <code>Final_Label</code> column contains the curated identity labels generated through automatic detection, relationship inference, and manual review.
 </p>
 
 <p>
-The following Python code provides a basic overview of the dataset structure.
+The following Python code provides a quick overview of the final dataset.
 </p>
 
 ```{python}
@@ -570,17 +592,23 @@ for col in df.columns:
 
 <div class="distribution-card">
 
+<p>
+
+To analyze LGBTQ+ representation, the identity labels contained in the final dataset were summarized and counted.
+
+</p>
+
 <blockquote>
-Multiple identity labels were split into individual categories and counted separately to provide a clearer overview of LGBTQ+ representation.
+
+Characters with multiple identity labels contribute to each corresponding identity category.
+
 </blockquote>
 
-The following visualization shows the distribution of LGBTQ+ identity labels within the final dataset.
+<p>
 
-Because some characters were associated with multiple identity labels, the labels were separated and counted individually in the analysis.
+The following code extracts the <code>Final_Label</code> column, separates multiple labels, removes unresolved entries, and calculates the frequency of each LGBTQ+ identity.
 
-This approach provides a clearer overview of how frequently different LGBTQ+ identities appear across the television series included in the dataset.
-
-The following code splits multiple labels, removes unresolved entries, and calculates the total frequency of each identity category.
+</p>
 
 ```{python}
 labels = (
@@ -750,19 +778,6 @@ Overall, the findings show high visibility for a few dominant groups, but very l
 
 </div>
 
-# BEYOND VISIBILITY {#beyond-visibility}
-
-<div class="why-card">
-
-<p>
-Representation is not only about how many LGBTQ+ characters appear on screen, but also about how they are portrayed. Positive representation requires characters to have meaningful relationships, personal development, and identities that extend beyond stereotypes.
-</p>
-
-<p>
-Research on lesbian characters in television found that many portrayals still focus on young, white, cisgender women and continue to rely on recurring homonegative tropes, while friendships and personal storylines often remain underdeveloped. These findings highlight that authentic representation depends not only on visibility, but also on diversity, complexity, and the quality of character development.
-</p>
-
-</div>
 
 # Interpretation of Results {#interpretation-of-results}
 
@@ -941,60 +956,72 @@ Overall, the project demonstrates how computational approaches can be applied to
 
 
 # Reproducibility {#reproducibility}
+
 <div class="reproducibility-card">
 
-One of the main objectives of this project was to ensure that the entire workflow could be reproduced by other researchers.
+One of the main objectives of this project was to ensure that the complete workflow could be reproduced by other researchers.
 
-The project follows a structured data pipeline that transforms raw Wikipedia data into a cleaned, enriched, and analyzed dataset. All processing steps were implemented in Python and documented within the GitHub repository.
+The project follows a structured pipeline that transforms raw Wikipedia data into a curated dataset and the visualizations presented in this report. All processing steps were implemented in Python and documented within the GitHub repository.
 
-The workflow can be reproduced by executing the scripts in the following order:
+The workflow can be reproduced by executing the following steps in order:
 
 1. `data_extraction.py`
-   - Extracts the original table from Wikipedia and stores it as a CSV file.
+   - Extracts the Wikipedia table and stores it as a structured CSV dataset.
 
 2. `data_enrichment.py`
-   - Performs the initial LGBTQ+ identity detection based on predefined keyword patterns.
+   - Detects explicit LGBTQ+ identity labels using keyword matching and regular expressions.
+   - Creates the initial labeled dataset.
+   - Marks unresolved records for manual review.
 
 3. `data_enrichment_plus.py`
-   - Applies additional enrichment methods, including relationship inference and gender-based classification.
+   - Applies additional enrichment rules.
+   - Infers identity labels from relationship descriptions and contextual information.
+   - Improves the automatic classification before manual review.
+   - Saves the verified labels as manual_review_completed.csv.
 
-4. `manual_review_needed.csv`
-   - Contains entries that could not be classified automatically and therefore required manual validation.
-
-5. `merge_final_data.py`
-   - Combines automatically classified records with manually reviewed entries to create the final dataset.
+4. **Manual Review**
+   - Records that could not be classified automatically were manually reviewed.
+   - Identity labels were verified using the original Wikipedia pages.
+   - The corrected labels were saved for the merge step.
+   - Ambiguous, incomplete, and conflicting classifications were manually verified using the original Wikipedia entries and corrected where necessary.
 
 5. `merge_data.py`
-   - Combines automatically classified records with manually reviewed entries to create the baseline merged dataset, stored as `labeled_data.csv`.
+   - Merges the automatically classified records with the manually reviewed data into a single dataset.
 
-6. Post-Merge Manual Refinement (Final Curation)
-   - Processed the `labeled_data.csv` file to resolve over-classification noise where characters were erroneously assigned conflicting tags (e.g., simultaneously labeled as gay, lesbian, and bisexual due to ambiguous source descriptions) to ensure clean, accurate node relationships for the network charts. The curated output is saved as `final_labeled_data.csv`.
+6. **Dataset Curation**
+   - Performs a final manual inspection.
+   - Removes conflicting identity labels.
+   - Creates `final_labeled_data.csv`.
 
-7. `repair_css.py`
-   - Resolves structural anomalies, restores strict semicolon delimiters within multi-label profiles, and repairs row alignment caused by spreadsheet exports on `final_labeled_data.csv`.
+7. `repair_csv.py`
+   - Repairs formatting issues introduced during spreadsheet editing.
+   - Restores semicolon delimiters in the `Final_Label`.
+   - Ensures the dataset can be processed correctly by the visualization scripts.
 
-8. Data Visualization Generation
-   - Execution of the individual standalone plotting scripts:
+8. **Final Validation**
+   - The repaired dataset was reviewed once more to verify the correctness of identity labels, ensure formatting consistency.
+   - Confirms that all visualization scripts produce the expected results.
+
+9. **Visualization Scripts**
+   - Generates the figures used throughout the report:
      - `absolute_icon_bar.py`
      - `top_5_bar_chart.py`
      - `development_over_years_line.py`
      - `network_sankey.py`
      - `cooccurence_network.py`
 
-9. `report.qmd`
-   - Produces the final report using Quarto.
+10. `report.qmd`
+   - Produces the final Quarto report.
 
-All required Python packages are listed in the `requirements.txt` file, allowing the computational environment to be recreated easily.
+All required Python packages are listed in `requirements.txt`, allowing the computational environment to be recreated.
 
-The final dataset used for analysis is stored as:
+The final dataset used throughout the analysis is stored as:
 
 ```text
 data/processed/final_labeled_data.csv
 ```
 
-The complete project is managed using Git and GitHub, which enables version control, collaboration, and transparency throughout the development process.
-
-By combining Python scripts, structured datasets, version control through GitHub, and Quarto reporting, the project provides a transparent and reproducible workflow from data collection to final analysis.
+The project is managed using Git and GitHub, ensuring version control, collaboration, transparency, and reproducibility throughout the entire workflow.
 
 </div>
 
