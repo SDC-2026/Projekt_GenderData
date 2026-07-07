@@ -267,18 +267,24 @@ MANUAL REVIEW
 <div class="pipeline-arrow">↓</div>
 
 <div class="pipeline-step brown">
-FINAL DATASET
+MERGE & CURATION
 </div>
 
 <div class="pipeline-arrow">↓</div>
 
 <div class="pipeline-step pink">
-VISUALIZATIONS
+FINAL DATASET
 </div>
 
 <div class="pipeline-arrow">↓</div>
 
 <div class="pipeline-step light-blue">
+VISUALIZATIONS
+</div>
+
+<div class="pipeline-arrow">↓</div>
+
+<div class="pipeline-step intersex-yellow">
 QUARTO REPORT
 </div>
 
