@@ -425,7 +425,7 @@ For example:
 <p>
 became:
 </p>
-<div id="dbbf7d8e" class="cell" data-execution_count="1">
+<div id="a27dd07b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -523,7 +523,7 @@ Asexual
 The character is bisexual.
 The character identifies as non-binary.</code></pre>
 <p>could be automatically assigned to the corresponding category.</p>
-<div id="b8ff7dc3" class="cell" data-execution_count="2">
+<div id="e7a1e3bd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -557,7 +557,7 @@ Character A and Character B are lovers.
 
 Character X is dating Character Y.</code></pre>
 <p>Using the detected names and gender information, the script inferred potential LGBTQ+ identities based on the relationship context.</p>
-<div id="71b868b9" class="cell" data-execution_count="3">
+<div id="0d978abe" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>character_gender <span class="op">=</span> <span class="st">"female"</span></span>
@@ -602,7 +602,7 @@ Removing conflicting classifications caused by ambiguous descriptions.
 Reviewing the final dataset before generating the visualizations.
 </li>
 </ul>
-<div id="108edb24" class="cell" data-execution_count="4">
+<div id="a6d65660" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>found_labels <span class="op">=</span> []</span>
@@ -637,7 +637,7 @@ Dataset used for the final analysis:
 <p>
 The table below shows the first rows of the dataset used throughout the analysis.
 </p>
-<div id="31eeb397" class="cell" data-execution_count="5">
+<div id="a479cbc2" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -651,7 +651,7 @@ The table below shows the first rows of the dataset used throughout the analysis
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
 
@@ -771,7 +771,7 @@ The <code>Final_Label</code> column contains the curated identity labels generat
 <p>
 The following Python code provides a quick overview of the final dataset.
 </p>
-<div id="5f902993" class="cell" data-execution_count="6">
+<div id="2022c83a" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -806,7 +806,7 @@ Columns: 7
 <p>
 </p><p>The following code extracts the <code>Final_Label</code> column, separates multiple labels, removes unresolved entries, and calculates the frequency of each LGBTQ+ identity.</p>
 <p></p>
-<div id="a919ddf9" class="cell" data-execution_count="7">
+<div id="0398320e" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> (</span>
@@ -835,7 +835,7 @@ Columns: 7
 <span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>counts_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
 
@@ -912,7 +912,7 @@ Columns: 7
 <p class="viz-description">
 This <strong>pictogram bar chart</strong> displays the absolute number of unique characters documented within the dataset over the last five years. Because an individual character may possess multiple intersecting identities (e.g., both Transgender and Lesbian), each specific label is counted independently toward the total volume of its respective category. The individual columns are organized in descending order to illustrate the overall frequency of tracked classifications across the entire sample.
 </p>
-<p><iframe src="plots/identity_pictogram_v2.html" loading="lazy" allowfullscreen="" scrolling="no" style="width: 100%; height: 600px; border: none; display: block;"> </iframe></p>
+<p><iframe src="plots/identity_pictogram_v2.html" loading="lazy" allowfullscreen="" scrolling="no" style="width: 100%; height: 650px; border: none; display: block;"> <!-- HIER ERHÖHT --> </iframe></p>
 </div>
 </section>
 <section id="top-5-tv-series-chart" class="level1">
