@@ -85,7 +85,7 @@ def generate_chart():
         color='Final_Label',
         orientation='h',
         title=None,
-        labels={series_col: 'TV SERIES', 'Count': 'NUMBER OF CHARACTERS', 'Final_Label': 'IDENTITY'},
+        labels={series_col: 'TV SERIES', 'Count': 'NUMBER OF IDENTITY LABELS', 'Final_Label': 'IDENTITY'},
         color_discrete_map=PRIDE_COLORS,
         category_orders={
             series_col: list(series_totals),
@@ -98,9 +98,7 @@ def generate_chart():
         marker=dict(
             line=dict(color='#000000', width=2)
         ),
-        hovertemplate=(
-            "<b>CHARACTERS: %{x}</b><extra></extra>"
-        )
+        hovertemplate="<b>LABELS: %{x}</b><extra></extra>"
     )
 
     # BRUTALIST WEBSITE COHESION LAYOUT
@@ -115,7 +113,7 @@ def generate_chart():
         ),
         
         xaxis=dict(
-            title=dict(text='NUMBER OF CHARACTERS', font=dict(weight='bold', size=14)),
+            title=dict(text='NUMBER OF IDENTITY LABELS', font=dict(weight='bold', size=14)),
             showgrid=False,
             showline=True,
             linecolor='#000000',
@@ -153,7 +151,6 @@ def generate_chart():
         ),
         
         height=500,
-        # Reduced top margin from 90 to 25
         margin=dict(l=150, r=40, t=25, b=60),
         barmode='stack'
     )
