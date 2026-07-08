@@ -135,13 +135,15 @@ for (l1, l2), count in pair_connections.items():
 high_intersec_count = len(high_intersection_characters)
 
 for idx_high, char in enumerate(high_intersection_characters):
+    # Basis-Winkel
     custom_angle = (2 * np.pi / high_intersec_count) * idx_high
     
-    # Characters with exactly 3 labels are pulled closer to the center for visual clarity (Radius 0.42)
-    if len(char['labels']) == 3:
-        current_radius = 0.42
-    else:
-        current_radius = 0.65
+    # KORREKTUR 1: Nicht auf gleicher Höhe (Winkel um ca. 20 Grad verschoben)
+    # Rechts (idx_high=0) geht leicht nach unten, Links (idx_high=1) leicht nach oben
+    custom_angle -= 0.35 
+    
+    # KORREKTUR 2: BLIЖЕ zum Zentrum (Radius drastisch verringert von 0.55/0.65 auf 0.25)
+    current_radius = 0.25
         
     cx = current_radius * np.cos(custom_angle)
     cy = current_radius * np.sin(custom_angle)
