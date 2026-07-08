@@ -1523,3 +1523,7 @@ summary {
 .back-to-top:hover img {
   transform: translateY(-6px);
 }
+
+html {
+  scroll-padding-top: 140px; /* Das ist der richtige Weg für den Puffer! */
+}

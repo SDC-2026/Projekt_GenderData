@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   const navLinks = document.querySelectorAll(".section-nav a");
 
   // Zuordnung deiner Navigation zu den Abschnitten
@@ -42,16 +41,21 @@ document.addEventListener("DOMContentLoaded", () => {
     .filter(s => s.element);
 
   function updateActiveSection() {
-
     let current = sectionElements[0];
+    
+    // Offset-Wert für deine fixierte Navigation (z. B. 160px Puffer)
+    const offset = 160; 
 
-    sectionElements.forEach(section => {
-
-      if (window.scrollY >= section.element.offsetTop - 140) {
+    for (const section of sectionElements) {
+      const rect = section.element.getBoundingClientRect();
+      // Wenn die Oberkante der Sektion den Pufferbereich erreicht hat
+      if (rect.top <= offset) {
         current = section;
+      } else {
+        // Da die Sektionen sortiert sind, können wir abbrechen, sobald eine Sektion unterhalb des Puffers liegt
+        break;
       }
-
-    });
+    }
 
     navLinks.forEach(link => link.classList.remove("active"));
 
@@ -64,8 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Lauscht sowohl auf dem Fenster als auch auf dem Quarto-Hauptcontainer, falls Quarto intern scrollt
   window.addEventListener("scroll", updateActiveSection);
+  const quartoContent = document.getElementById("quarto-content");
+  if (quartoContent) {
+    quartoContent.addEventListener("scroll", updateActiveSection);
+  }
 
+  // Initialer Aufruf
   updateActiveSection();
-
 });
